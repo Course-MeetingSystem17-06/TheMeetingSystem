@@ -3,7 +3,7 @@
 !/WebContent/
 /WebContent/META-INF/
 /WebContent/styles/
-/WebContent/WEB-INF/
+/WebContent/WEB-INF/lib/
 
 *.DS_Store
 !/.gitignore
