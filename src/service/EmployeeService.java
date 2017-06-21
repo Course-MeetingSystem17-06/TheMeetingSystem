@@ -38,7 +38,17 @@ public class EmployeeService {
 	public Employee getLoginedEmployee(){
 		return loginedEmployee;
 	}
-	
+
+//	注册功能，如果账号名存在，注册失败，返回0，否则注册成功，返回1
+	public int regist(Employee employee){
+		int flag=0;
+		Employee e=dao.selectByUsername(employee.getUsername());
+		if(e==null){
+			flag=1;
+			dao.insert(employee);
+		}
+		return flag;
+	}
 /*//	编写代码测试类中方法
 	public static void main(String[] args) {
 		EmployeeService service =new EmployeeService();

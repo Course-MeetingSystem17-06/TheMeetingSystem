@@ -1,17 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>Login</display-name>
-  <welcome-file-list>
-    <welcome-file>login.jsp</welcome-file>
-  </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>LoginServlet</display-name>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>servlet.LoginServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
-  </servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>Login</display-name>
+	<welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<description></description>
+		<display-name>LoginServlet</display-name>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>servlet.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/LoginServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>RegistServlet</display-name>
+		<servlet-name>RegistServlet</servlet-name>
+		<servlet-class>servlet.RegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegistServlet</servlet-name>
+		<url-pattern>/RegistServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ViewAllDepartmentsServlet</display-name>
+		<servlet-name>ViewAllDepartmentsServlet</servlet-name>
+		<servlet-class>servlet.ViewAllDepartmentsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewAllDepartmentsServlet</servlet-name>
+		<url-pattern>/ViewAllDepartmentsServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>ValidateUsernameServlet</display-name>
+		<servlet-name>ValidateUsernameServlet</servlet-name>
+		<servlet-class>servlet.ValidateUsernameServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ValidateUsernameServlet</servlet-name>
+		<url-pattern>/ValidateUsernameServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

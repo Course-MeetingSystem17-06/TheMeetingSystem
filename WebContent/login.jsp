@@ -1,7 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
 
@@ -21,32 +22,34 @@
 				<legend>登录信息</legend>
 				<tr>
 					<td>提示信息：</td>
-					<td><font color="red">${requestScope.msg}</font></td>
+					<td><font color="red">${requestScope.msg}</font>
+					</td>
 				</tr>
 				<table class="formtable" style="width: 50%">
 					<tr>
 						<td>账号名:</td>
-						<td><input id="accountname" name="username" type="text" /></td>
+						<td><input id="accountname" name="username" type="text" />
+						</td>
 					</tr>
 					<tr>
 						<td>密码:</td>
-						<td><input id="new" name="pwd" type="password" /></td>
+						<td><input id="new" name="pwd" type="password" />
+						</td>
 					</tr>
 					<tr>
-					 <td>
-					  <select id="timelength" name="timelength">
-					    <option value="0">每次需要登入</option>
-					    <option value="10">10天内</option>
-					    <option value="30">30天内</option>
-					  </select>
-					</td> 
+						<td><select id="timelength" name="timelength">
+								<option value="0">每次需要登入</option>
+								<option value="10">10天内</option>
+								<option value="30">30天内</option>
+						</select></td>
 					</tr>
 					<tr>
 						<td colspan="2" class="command"><input type="submit"
 							value="登录" class="clickbutton" /> <input type="button"
 							value="返回" class="clickbutton" onclick="window.history.back();" />
 							<input type="button" value="注册" class="clickbutton"
-							onclick="window.location.href='ViewDepartmentServlet?code=regist'" /></td>
+							onclick="window.location.href='ViewAllDepartmentsServlet?code=regist'" />
+						</td>
 					</tr>
 				</table>
 			</fieldset>

@@ -26,6 +26,7 @@ public class ConnectionFactory {
 	public static void closeConnection(){
 		if(conn!=null){
 		try {
+			System.out.println("Connection close!");
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

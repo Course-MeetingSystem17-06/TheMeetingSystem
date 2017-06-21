@@ -76,10 +76,10 @@ public class Employee {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getdepartment() {
+	public String getDepartment() {
 		return department;
 	}
-	public void setdepartment(String department) {
+	public void setDepartment(String department) {
 		this.department = department;
 	}
 	public String getEmail() {
