@@ -53,8 +53,17 @@ public class LoginServlet extends HttpServlet {
 //			获得会话对象
 			HttpSession session=request.getSession();
 //			把登录成功的员工姓名保存到会话中
-			session.setAttribute("employeename", service.getLoginedEmployee().getEmployeename());	
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			session.setAttribute("employeename", service.getLoginedEmployee().getEmployeename());
+			
+// 			根据角色跳转到不同页面
+//			1、管理员   2、普通员工
+			String role = service.getLoginedEmployee().getRole();
+			if (role.equals("1")) {
+				request.getRequestDispatcher("adminindex.jsp").forward(request, response);
+			}
+			if (role.equals("2")) {
+				request.getRequestDispatcher("employeeindex.jsp").forward(request, response);
+			}
 		}else{
 			if(flag==0){
 				request.setAttribute("msg", "正在审核，请耐心等待。");
@@ -69,8 +78,6 @@ public class LoginServlet extends HttpServlet {
 			}
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
-		
-		
 	}
 
 }
