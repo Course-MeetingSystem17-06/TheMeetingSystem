@@ -31,7 +31,7 @@
 		<div class="sidebar-menugroup">
 			<div class="sidebar-grouptitle">人员管理</div>
 			<ul class="sidebar-menu">
-				<li class="sidebar-menuitem"><a href="01.html" target="main">部门管理</a>
+				<li class="sidebar-menuitem"><a href="ViewAllDepartmentsServlet?code=viewalldepartments" target="main">部门管理</a>
 				</li>
 				<li class="sidebar-menuitem active"><a
 					href="ViewAllEmployeesServlet?code=approve" target="main">注册审批</a>
@@ -44,7 +44,7 @@
 		<div class="sidebar-menugroup">
 			<div class="sidebar-grouptitle">会议预定</div>
 			<ul class="sidebar-menu">
-				<li class="sidebar-menuitem"><a href="01.html" target="main">添加会议室</a>
+				<li class="sidebar-menuitem"><a href="addmeetingroom.jsp" target="main">添加会议室</a>
 				</li>
 				<li class="sidebar-menuitem"><a href="01.html" target="main">查看会议室</a>
 				</li>
