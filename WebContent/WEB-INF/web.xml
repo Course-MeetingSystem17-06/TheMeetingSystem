@@ -74,4 +74,15 @@
     <servlet-name>AddDeleteDepartmentServlet</servlet-name>
     <url-pattern>/AddDeleteDepartmentServlet</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <description></description>
+    <display-name>MeetingroomServlet</display-name>
+    <servlet-name>MeetingroomServlet</servlet-name>
+    <servlet-class>servlet.MeetingroomServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MeetingroomServlet</servlet-name>
+    <url-pattern>/MeetingroomServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -6,13 +6,18 @@
 <head>
 <title>CoolMeeting会议管理系统</title>
 <link rel="stylesheet" href="styles/common.css" />
+<script type="text/javascript">
+function getRemark(){
+	alert(document.getElementById("roomremark").value);
+}
+</script>
 </head>
 <body>
 
 
 	<div class="page-content">
 		<div class="content-nav">会议预定 > 添加会议室</div>
-		<form>
+		<form name="form1" action="MeetingroomServlet" method="post">
 			<fieldset>
 				<legend>会议室信息</legend>
 				<tr>
@@ -28,19 +33,19 @@
 					</tr>
 					<tr>
 						<td>会议室名称:</td>
-						<td><input id="capacity" name="capacity" type="text"
+						<td><input id="roomname" name="roomname" type="text"
 							placeholder="例如：第一会议室" maxlength="20" value="${param.capacity}" />
 						</td>
 					</tr>
 					<tr>
 						<td>最多容纳人数：</td>
-						<td><input id="roomcapacity" name="roomcapacity" type="text"
+						<td><input id="roommax" name="roommax" type="text"
 							placeholder="填写一个正整数" value="${param.roomcapacity}" />
 						</td>
 					</tr>
 					<tr>
 						<td>当前状态：</td>
-						<td><input type="radio" id="status" name="status"
+						<td><input type="radio" id="roomstate" name="roomstate"
 							checked="checked" value="1" /><label for="status">启用</label> <input
 							type="radio" id="status" name="status" /><label for="status"
 							value="0">停用</label> <input type="radio" id="status"
@@ -49,9 +54,9 @@
 					</tr>
 					<tr>
 						<td>备注：</td>
-						<td><textarea id="description" neme="descripation"
+						<td><textarea id="roomremark" neme="roomremark"
 								maxlength="200" rows="5" cols="60" placeholder="200字以内的文字描述"
-								value="${param.description}"></textarea>
+								onchange="getRemark()"></textarea><input id="roomremark_value" name="roomremark_value" display="none"/>
 						</td>
 					</tr>
 					<tr>

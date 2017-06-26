@@ -49,25 +49,28 @@ public class MeetingroomServlet extends HttpServlet {
 		// 设置请求的编码格式保证中文编码正确
 		request.setCharacterEncoding("utf-8");
 
-		// 或许注册页面填写的请求参数
-		String roomnumber = request.getParameter("MeetingRoom_number");
-		String roomname = request.getParameter("MeetingRoom_name");
-		String roommax = request.getParameter("MeetingRoom_max");
-		String roomstate = request.getParameter("MeetingRoom_state");
-		String roomremark = request.getParameter("MeetingRoom_remark");
+		// 获取添加会议室页面填写的请求参数
+		String roomnumber = request.getParameter("roomnumber");
+		String roomname = request.getParameter("roomname");
+		String roommax = request.getParameter("roommax");
+		String roomstate = request.getParameter("roomstate");
+		String roomremark = request.getParameter("roomremark");
 
-		Meetingroom meetingroom = new Meetingroom(roomnumber, roomname, roommax,
-				roomstate, roomremark);
+		Meetingroom meetingroom = new Meetingroom(roomnumber, roomname,
+				roommax, roomstate, roomremark);
 		MeetingroomService service = new MeetingroomService();
 		int flag = service.regist(meetingroom);
 
 		if (flag == 1) {
-			request.setAttribute("msg", "注册成功，正在审核。");
-			request.getRequestDispatcher("login.jsp")
-					.forward(request, response);
+			request.setAttribute("msg", "添加成功。");
+			request.getRequestDispatcher("addmeetingroom.jsp").forward(request,
+					response);
+
 		} else {
-			request.setAttribute("msg", "用户名已存在，请重新注册。");
+			request.setAttribute("msg", "门牌号重复，请确认后重新添加会议室。");
 			MeetingroomDAO dao = new MeetingroomDAO();
+			request.getRequestDispatcher("addmeetingroom.jsp").forward(request,
+					response);
 			/*
 			 * List<Department> departmentsList=dao.selectAll();
 			 * request.setAttribute("departmentsList", departmentsList);
