@@ -26,19 +26,17 @@
 						<li class="notification current"><div class="nav-header">
 								<a href="ViewAllEmployeesServlet?code=approve" target="main"><span>最新通知!!</span><i
 									class="icon"></i> </a>
-							</div>
-						</li>
+							</div></li>
 						<li class="reserve"><div class="nav-header">
 								<a href="javascript:;" data-src="my_info.html" class="clearfix"><span>我的预定</span><i
 									class="icon"></i> </a>
-							</div>
-						</li>
+							</div></li>
 						<li class="my-meeting">
 							<div class="nav-header">
 								<a href="javascript:;" class="clearfix"><span>我的会议</span><i
 									class="icon"></i> </a>
-							</div></li>
-
+							</div>
+						</li>
 					</ul>
 				</div>
 				<div class="content">

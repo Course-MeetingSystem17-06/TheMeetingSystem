@@ -19,7 +19,7 @@
 				<div class="top-light"></div>
 				<h1 class="logo"></h1>
 				<ul class="main-nav">
-					<li class="current" data-src="personal.jsp"><a
+					<li class="current" data-src="personal_index.jsp"><a
 						href="javascript:;">个人中心</a></li>
 					<li data-src="static/ticket/index.html"><a href="javascript:;">人员管理</a>
 					</li>

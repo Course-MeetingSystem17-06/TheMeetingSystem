@@ -17,12 +17,12 @@
 		
 		
 		
-	<frameset cols="260,*" id="frame">
+	<frameset cols="182,*" id="frame">
 		<frame src="personal.jsp" name="leftFrame" noresize="noresize"
-			marginwidth="110px" marginheight="0" frameborder="0" scrolling="auto"
-			target="main" />
-		<frame src="01.html" name="main" marginwidth="50px"
-			marginheight="40px" frameborder="0" scrolling="auto" target="_self" />
+			marginwidth="0px" marginheight="0" frameborder="0" scrolling="auto"
+			/>
+		<frame src="01.html" name="main" marginwidth="0px"
+			marginheight="40px" frameborder="0" scrolling="auto" />
 	</frameset>
 	
 	

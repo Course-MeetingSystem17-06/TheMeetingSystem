@@ -1,4 +1,4 @@
-$(".nav").on("click","li",function(){
+/*$(".nav").on("click","li",function(){
 	$(this).siblings().removeClass("current");
 	var hasChild = !!$(this).find(".subnav").size();
 	if(hasChild){
@@ -23,4 +23,17 @@ $(".nav").on("click","li",function(e){
 	$(".nav>li").css({"borderColor":"#dbe9f1"});
 	$(".nav>.current").prev().css({"borderColor":"#7ac47f"});
 	return false;
+});
+*/
+
+$(".nav").on("click","li",function(){
+	$(this).siblings().removeClass("current");
+	var hasChild = !!$(this).find(".subnav").size();
+	if(hasChild){
+		$(this).toggleClass("hasChild");
+	}
+	$(this).addClass("current");
+	
+	$(".nav>li").css({"borderColor":"#dbe9f1"});
+	$(".nav>.current").prev().css({"borderColor":"#7ac47f"});
 });
