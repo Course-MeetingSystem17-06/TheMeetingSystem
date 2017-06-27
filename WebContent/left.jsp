@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="sidebar-menugroup">
                     <div class="sidebar-grouptitle">人员管理</div>
                     <ul class="sidebar-menu">
-                        <li class="sidebar-menuitem"><a href="01.html"  target="main">部门管理</a></li>
+                        <li class="sidebar-menuitem"><a href=ViewAllDepartmentsServlet?code=viewalldepartments  target="main">部门管理</a></li>
                         <li class="sidebar-menuitem"><a href="01.html" target="main">注册审批</a></li>
                         <li class="sidebar-menuitem"><a href="01.html" target="main">搜索员工</a></li>
                     </ul>
