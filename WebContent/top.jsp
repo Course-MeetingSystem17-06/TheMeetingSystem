@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="header-quicklink">
             <%String employeename=(String)session.getAttribute("employeename"); %>
                 欢迎您，<strong><%=employeename%></strong>
-                <a href="#">[修改密码]</a>
+                <a onclick="window.parent.location.href='LoginServlet?code=exit'">[退出]</a>
             </div>
         </div>
 </body>

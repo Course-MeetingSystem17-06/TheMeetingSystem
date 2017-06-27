@@ -1,12 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 	<display-name>Login</display-name>
 	<welcome-file-list>
 		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>filter.CharacterEncodingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>LoginedFilter</filter-name>
+		<filter-class>filter.LoginedFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginedFilter</filter-name>
+		<url-pattern>/adminindex.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginedFilter</filter-name>
+		<url-pattern>/employeeindex.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>LoginCookieFilter</filter-name>
+		<filter-class>filter.LoginCookieFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginCookieFilter</filter-name>
+		<url-pattern>/login.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
 	<servlet>
 		<description></description>
 		<display-name>LoginServlet</display-name>
@@ -37,7 +81,6 @@
 		<servlet-name>ViewAllDepartmentsServlet</servlet-name>
 		<url-pattern>/ViewAllDepartmentsServlet</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<description></description>
 		<display-name>ValidateUsernameServlet</display-name>
@@ -58,7 +101,6 @@
 		<servlet-name>ViewAllEmployeesServlet</servlet-name>
 		<url-pattern>/ViewAllEmployeesServlet</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<description></description>
 		<display-name>ApproveServlet</display-name>
@@ -69,7 +111,6 @@
 		<servlet-name>ApproveServlet</servlet-name>
 		<url-pattern>/ApproveServlet</url-pattern>
 	</servlet-mapping>
-	
 		<servlet>
 		<description></description>
 		<display-name>SearchEmployeesServlet</display-name>
@@ -79,5 +120,47 @@
 	<servlet-mapping>
 		<servlet-name>SearchEmployeesServlet</servlet-name>
 		<url-pattern>/SearchEmployeesServlet</url-pattern>
+	<servlet>
+		<description></description>
+		<display-name>AddDeleteDepartmentServlet</display-name>
+		<servlet-name>AddDeleteDepartmentServlet</servlet-name>
+		<servlet-class>servlet.AddDeleteDepartmentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddDeleteDepartmentServlet</servlet-name>
+		<url-pattern>/AddDeleteDepartmentServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>AddMeetingroomServlet</display-name>
+		<servlet-name>AddMeetingroomServlet</servlet-name>
+		<servlet-class>servlet.AddMeetingroomServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddMeetingroomServlet</servlet-name>
+		<url-pattern>/AddMeetingroomServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>ViewAllMeetingRoomsServlet</display-name>
+		<servlet-name>ViewAllMeetingRoomsServlet</servlet-name>
+		<servlet-class>servlet.ViewAllMeetingRoomsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewAllMeetingRoomsServlet</servlet-name>
+		<url-pattern>/ViewAllMeetingRoomsServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>UpdateMeetingRoomServlet</display-name>
+		<servlet-name>UpdateMeetingRoomServlet</servlet-name>
+		<servlet-class>servlet.UpdateMeetingRoomServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateMeetingRoomServlet</servlet-name>
+		<url-pattern>/UpdateMeetingRoomServlet</url-pattern>
 	</servlet-mapping>
 </web-app>
