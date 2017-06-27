@@ -111,6 +111,15 @@
 		<servlet-name>ApproveServlet</servlet-name>
 		<url-pattern>/ApproveServlet</url-pattern>
 	</servlet-mapping>
+		<servlet>
+		<description></description>
+		<display-name>SearchEmployeesServlet</display-name>
+		<servlet-name>SearchEmployeesServlet</servlet-name>
+		<servlet-class>servlet.SearchEmployeesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchEmployeesServlet</servlet-name>
+		<url-pattern>/SearchEmployeesServlet</url-pattern>
 	<servlet>
 		<description></description>
 		<display-name>AddDeleteDepartmentServlet</display-name>
