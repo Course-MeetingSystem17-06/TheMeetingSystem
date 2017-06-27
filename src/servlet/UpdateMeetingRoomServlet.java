@@ -47,12 +47,12 @@ public class UpdateMeetingRoomServlet extends HttpServlet {
 			String roomnumber = request.getParameter("roomnumber");
 			String roomname = request.getParameter("roomname");
 			String roommax = request.getParameter("roommax");
-			String roomstate = request.getParameter("roomstate");
+			String roomstate = request.getParameter("status");
 			String roomremark = request.getParameter("roomremark_value");
 
 			Meetingroom meetingroom = new Meetingroom(roomnumber, roomname,
 					roommax, roomstate, roomremark);
-			meetingroom.setRoomid(Integer.getInteger(roomid));
+			meetingroom.setRoomid(Integer.parseInt(roomid));
 			MeetingroomService service = new MeetingroomService();
 			int flag = service.update(meetingroom);
 
