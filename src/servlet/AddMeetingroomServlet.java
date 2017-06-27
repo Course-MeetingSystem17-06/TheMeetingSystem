@@ -17,13 +17,13 @@ import dao.MeetingroomDAO;
 /**
  * Servlet implementation class MeetingroomServlet
  */
-public class MeetingroomServlet extends HttpServlet {
+public class AddMeetingroomServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public MeetingroomServlet() {
+	public AddMeetingroomServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -54,7 +54,7 @@ public class MeetingroomServlet extends HttpServlet {
 		String roomname = request.getParameter("roomname");
 		String roommax = request.getParameter("roommax");
 		String roomstate = request.getParameter("roomstate");
-		String roomremark = request.getParameter("roomremark");
+		String roomremark = request.getParameter("roomremark_value");
 
 		Meetingroom meetingroom = new Meetingroom(roomnumber, roomname,
 				roommax, roomstate, roomremark);
@@ -68,7 +68,6 @@ public class MeetingroomServlet extends HttpServlet {
 
 		} else {
 			request.setAttribute("msg", "门牌号重复，请确认后重新添加会议室。");
-			MeetingroomDAO dao = new MeetingroomDAO();
 			request.getRequestDispatcher("addmeetingroom.jsp").forward(request,
 					response);
 			/*
