@@ -111,7 +111,7 @@
 		<servlet-name>ApproveServlet</servlet-name>
 		<url-pattern>/ApproveServlet</url-pattern>
 	</servlet-mapping>
-		<servlet>
+	<servlet>
 		<description></description>
 		<display-name>SearchEmployeesServlet</display-name>
 		<servlet-name>SearchEmployeesServlet</servlet-name>
@@ -120,6 +120,8 @@
 	<servlet-mapping>
 		<servlet-name>SearchEmployeesServlet</servlet-name>
 		<url-pattern>/SearchEmployeesServlet</url-pattern>
+	</servlet-mapping>
+
 	<servlet>
 		<description></description>
 		<display-name>AddDeleteDepartmentServlet</display-name>
@@ -163,7 +165,7 @@
 		<servlet-name>UpdateMeetingRoomServlet</servlet-name>
 		<url-pattern>/UpdateMeetingRoomServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<description></description>
 		<display-name>ViewAllServlet</display-name>
@@ -173,5 +175,27 @@
 	<servlet-mapping>
 		<servlet-name>ViewAllServlet</servlet-name>
 		<url-pattern>/ViewAllServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>SearchMeetingsServlet</display-name>
+		<servlet-name>SearchMeetingsServlet</servlet-name>
+		<servlet-class>servlet.SearchMeetingsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchMeetingsServlet</servlet-name>
+		<url-pattern>/SearchMeetingsServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>UpdateMeetingServlet</display-name>
+		<servlet-name>UpdateMeetingServlet</servlet-name>
+		<servlet-class>servlet.UpdateMeetingServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateMeetingServlet</servlet-name>
+		<url-pattern>/UpdateMeetingServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

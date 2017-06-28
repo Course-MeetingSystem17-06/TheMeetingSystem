@@ -12,6 +12,7 @@ public class ConnectionFactory {
 	public static Connection getConnection(){
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/meeting?useUnicode=true&characterEncoding=utf8","root","123456");
 			System.out.println("Connection Success!");
 		} catch (ClassNotFoundException e) {
 				e.printStackTrace();
