@@ -26,12 +26,17 @@ public class ApproveServlet extends HttpServlet {
 		EmployeeDAO dao = new EmployeeDAO();
 		if(oper!=null&&oper.equals("yes")){
 			dao.updateStatus(employeeid,"1");
+			request.getRequestDispatcher("ViewAllEmployeesServlet?code=approve").forward(request, response);
 		}
 		
 		if(oper!=null&&oper.equals("no")){
 			dao.updateStatus(employeeid,"2");
+			request.getRequestDispatcher("ViewAllEmployeesServlet?code=approve").forward(request, response);
 		}
-		request.getRequestDispatcher("ViewAllEmployeesServlet?code=approve").forward(request, response);
 		
+		if (oper != null && oper.equals("close")) {
+			dao.updateStatus(employeeid, "2");
+			request.getRequestDispatcher("SearchEmployeesServlet").forward(request, response);
+		}
 	}
 }

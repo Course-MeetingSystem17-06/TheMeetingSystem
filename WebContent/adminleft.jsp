@@ -36,7 +36,7 @@
 				<li class="sidebar-menuitem active"><a
 					href="ViewAllEmployeesServlet?code=approve" target="main">注册审批</a>
 				</li>
-				<li class="sidebar-menuitem"><a href="01.html" target="main">搜索员工</a>
+				<li class="sidebar-menuitem active"><a href="SearchEmployeesServlet" target="main">搜索员工</a>
 				</li>
 			</ul>
 		</div>
