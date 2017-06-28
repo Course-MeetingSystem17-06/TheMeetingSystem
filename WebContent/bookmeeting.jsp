@@ -87,7 +87,7 @@
 		DepartmentDAO departmentdao = new DepartmentDAO();		
 		List<Department> DepartmentsList = departmentdao.selectAll();
 		clearList(selEmployees);
-		var departmentname = selDepartments.options[selDepartments.selectedIndex].value;
+		var departmentid = selDepartments.options[selDepartments.selectedIndex].value;
 		var employees;
 		for (var department in DepartmentsList){
 			if (department.departmentname == departmentname){

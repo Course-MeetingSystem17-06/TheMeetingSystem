@@ -24,7 +24,6 @@ public class ViewAllMeetingRoomsServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String code = request.getParameter("code");
-
 		MeetingroomDAO dao = new MeetingroomDAO();
 		List<Meetingroom> meetingroomsList = dao.selectAllMeetingroom();
 		request.setAttribute("meetingroomsList", meetingroomsList);

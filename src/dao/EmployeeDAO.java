@@ -76,8 +76,10 @@ public class EmployeeDAO {
 		 return employee;
 	 }
 	 //根据所属部门查询人员
-	 public Employee selectBydepartment(String department){
+	 public List<Employee> selectBydepartment(String department){
+		 int i=0;
 		 conn=ConnectionFactory.getConnection();
+		 List<Employee> employees = new ArrayList<Employee>();
 		 Employee employee=null;	
 		 try {
 			 PreparedStatement st=null;
@@ -96,13 +98,14 @@ public class EmployeeDAO {
 				employee.setDepartment(rs.getString("Employee_department"));
 				employee.setPassword(rs.getString("Employee_password"));
 				employee.setRole(rs.getString("Employee_limit"));
+				employees.add(employee);
 			}
 		 } catch (SQLException e) {
 			    e.printStackTrace();
 		}finally{
 			ConnectionFactory.closeConnection();
 		}
-		 return employee;
+		 return employees;
 	 }
 	 
 //	向表employee中插入记录，其中status和role使用默认值
