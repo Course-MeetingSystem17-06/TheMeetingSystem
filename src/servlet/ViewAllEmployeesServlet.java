@@ -26,7 +26,6 @@ public class ViewAllEmployeesServlet extends HttpServlet {
 
 		EmployeeDAO dao = new EmployeeDAO();
 		List<Employee> employeesList = dao.selectAllEmployee();
-		List<Employee> employees = dao.selectBydepartment(department);
 		request.setAttribute("employeesList", employeesList);
 
 		if (code != null & code.equals("approve")) {
