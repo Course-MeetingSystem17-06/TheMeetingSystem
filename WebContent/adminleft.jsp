@@ -48,7 +48,7 @@
 				</li>
 				<li class="sidebar-menuitem"><a href="ViewAllMeetingRoomsServlet?code=viewallmeetingrooms" target="main">查看会议室</a>
 				</li>
-				<li class="sidebar-menuitem"><a href="bookmeeting.jsp" target="main">预定会议</a>
+				<li class="sidebar-menuitem"><a href="ViewAllServlet?code=bookmeeting" target="main">预定会议</a>
 				</li>
 
 			</ul>

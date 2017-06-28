@@ -75,6 +75,35 @@ public class EmployeeDAO {
 		}
 		 return employee;
 	 }
+	 //根据所属部门查询人员
+	 public Employee selectBydepartment(String department){
+		 conn=ConnectionFactory.getConnection();
+		 Employee employee=null;	
+		 try {
+			 PreparedStatement st=null;
+			String sql="select * from employee where Employee_department='"+department+"'";
+	 		st = conn.prepareStatement(sql);
+			ResultSet rs =st.executeQuery(sql);
+			if(rs.next()==true){
+				employee=new Employee();
+				employee.setEmployeeid(rs.getInt("Employee_ID"));
+				employee.setEmployeename(rs.getString("Employee_name"));
+				System.out.println("DAO_selectByUsername: "+ rs.getString("Employee_name"));
+				employee.setUsername(rs.getString("Employee_username"));
+				employee.setPhone(rs.getString("Employee_telenumber"));
+				employee.setEmail(rs.getString("Employee_Email"));
+				employee.setStatus(rs.getString("Employee_state"));
+				employee.setDepartment(rs.getString("Employee_department"));
+				employee.setPassword(rs.getString("Employee_password"));
+				employee.setRole(rs.getString("Employee_limit"));
+			}
+		 } catch (SQLException e) {
+			    e.printStackTrace();
+		}finally{
+			ConnectionFactory.closeConnection();
+		}
+		 return employee;
+	 }
 	 
 //	向表employee中插入记录，其中status和role使用默认值
 	  public void insert(Employee employee){

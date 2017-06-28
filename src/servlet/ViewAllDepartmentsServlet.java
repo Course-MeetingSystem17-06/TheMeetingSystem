@@ -44,9 +44,9 @@ public class ViewAllDepartmentsServlet extends HttpServlet {
 		
 		DepartmentDAO dao=new DepartmentDAO();
 		
-		List<Department> departmentsList=dao.selectAll();
-		request.setAttribute("departmentsList", departmentsList);
-		System.out.println("111");
+		List<Department> DepartmentsList=dao.selectAll();
+		request.setAttribute("departmentsList", DepartmentsList);
+		//System.out.println("111");
 		String code=request.getParameter("code");
 		
 		if(code!=null&&code.equals("regist")){
