@@ -7,17 +7,29 @@
 <title>CoolMeeting会议管理系统</title>
 <link rel="stylesheet" href="styles/common03.css" />
 <script type="text/javascript">
+	window.onload = function() {
+		var type = "${requestScope.pagetype}";
+		if (type == "mybooked") {
+			document.getElementById("form1").action = "UpdateMeetingServlet?code=cancel&meetingid=${requestScope.meetingid}&meetingname=${requestScope.name}";
+		} else {
+			document.getElementById("form1").action = "UpdateMeetingServlet?code=update&meetingid=${requestScope.meetingid}";
+		}
+	};
 	function back() {
-		window.location.href = "SearchMeetingsServlet";
+		var type = "${requestScope.pagetype}";
+		var user = "${requestScope.user}";
+		if (type == "mybooked") {
+			window.location.href = "ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&user="+user;
+		} else {
+			window.location.href = "SearchMeetingsServlet";
+		}
 	}
 </script>
 </head>
 <body>
 	<div class="page-content">
 		<div class="content-nav">会议预定 > 修改会议预定</div>
-		<form name="form1"
-			action="UpdateMeetingServlet?code=update&meetingid=${requestScope.meetingid}"
-			method="post">
+		<form id="form1" 　name="form1" action="" method="post">
 			<fieldset>
 				<legend>会议信息</legend>
 				<tr>
@@ -27,7 +39,7 @@
 				<table class="formtable" style="width: 50%">
 					<tr>
 						<td>会议名称:</td>
-						<td><font>${requestScope.name}</font>
+						<td><font id="a111">${requestScope.name}</font>
 						</td>
 					</tr>
 					<tr>
@@ -48,12 +60,17 @@
 					<tr>
 						<td>备注：</td>
 						<td><textarea id="illustrate" name="illustrate"
-								maxlength="200" rows="5" cols="60" placeholder="200字以内的文字描述"">${requestScope.illustrate}</textarea></td>
+								maxlength="200" rows="5" cols="60" placeholder="200字以内的文字描述"">${requestScope.illustrate}</textarea>
+						</td>
 					</tr>
 					<tr>
-						<td colspan="2" class="command"><input type="submit"
-							value="确认修改" class="clickbutton" /> <input type=button
-							value="返回" class="clickbutton" onclick="back()" />
+						<td colspan="2" class="command"><c:if
+								test="${requestScope.pagetype eq 'mybooked'}">
+								<input type="submit" value="撤销会议" class="clickbutton" />
+							</c:if> <c:if test="${requestScope.pagetype ne 'mybooked'}">
+								<input type="submit" value="确认修改" class="clickbutton" />
+							</c:if> <input type="button" value="返回" class="clickbutton"
+							onclick="back()" />
 						</td>
 					</tr>
 				</table>

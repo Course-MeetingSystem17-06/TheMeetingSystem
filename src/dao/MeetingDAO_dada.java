@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import util.ConnectionFactory;
@@ -65,7 +65,7 @@ public class MeetingDAO_dada {
 						+ meetingbookdatestart + "' and '" + meetingbookdateend
 						+ "'";
 			}
-			sql = "select * from meeting where Meeting_state<>'-1'" + bookdatesql + namesql
+			sql = "select * from meeting where Meeting_state='1'" + bookdatesql + namesql
 			+ roomnamesql + bookersql + meetingdatestartsql
 			+ meetingdateendsql;
 			st = conn.prepareStatement(sql);
@@ -143,7 +143,7 @@ public class MeetingDAO_dada {
 						+ meetingbookdatestart + "' and '" + meetingbookdateend
 						+ "'";
 			}
-			sql = "select * from meeting where Meeting_state<>'-1'" + bookdatesql + namesql
+			sql = "select * from meeting where Meeting_state='1'" + bookdatesql + namesql
 					+ roomnamesql + bookersql + meetingdatestartsql
 					+ meetingdateendsql + " limit " + start + " ," + count;
 			st = conn.prepareStatement(sql);
@@ -193,6 +193,7 @@ public class MeetingDAO_dada {
 				meeting.setMeetingbooker(rs.getString("Meeting_booker"));
 				meeting.setMeetingstate(rs.getString("Meeting_state"));
 				meeting.setMeetingbookdate(rs.getDate("Meeting_bookdate"));
+				Date a = meeting.getMeetingendtime();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -202,7 +203,7 @@ public class MeetingDAO_dada {
 		}
 		return meeting;
 	}
-
+//	更新会议说明信息
 	public void updateMeetingIllustrate(String meetingid, String illustrate) {
 		try {
 			PreparedStatement st = null;
@@ -213,6 +214,19 @@ public class MeetingDAO_dada {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			ConnectionFactory.closeConnection();
+		}
+	}
+	//取消会议
+	public void cancelMeetingById(String meetingid, String reason){
+		try{
+			PreparedStatement st = null;
+			String sql = "update meeting set Meeting_state='2' , Meeting_cancelreason='" + reason + "' where Meeting_ID='" + meetingid + "'";
+			st = conn.prepareStatement(sql);
+			st.executeUpdate();
+		}catch (SQLException e){
+			e.printStackTrace();
+		}finally{
 			ConnectionFactory.closeConnection();
 		}
 	}

@@ -1,6 +1,6 @@
 package vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Meeting_dada {
 	private Integer meetingid;
@@ -13,6 +13,7 @@ public class Meeting_dada {
 	private String meetingbooker;
 	private String meetingstate="1";
 	private Date meetingbookdate;
+	private String meetingcancelreason;
 	
 	public Meeting_dada() {
 		super();
@@ -22,7 +23,7 @@ public class Meeting_dada {
 			String meetingparticipatenumber,Date meetingstarttime,
 			Date meetingendtime,String meetingillustrate,
 			String meetingbooker,String meetingstate,
-			Date meetingbookdate){
+			Date meetingbookdate, String meetingcancelreason){
 		this.meetingroomname = meetingroomname;
 		this.meetingparticipatenumber = meetingparticipatenumber;
 		this.meetingstarttime = meetingstarttime;
@@ -31,6 +32,7 @@ public class Meeting_dada {
 		this.meetingbooker = meetingbooker;
 		this.meetingstate = meetingstate;
 		this.meetingbookdate = meetingbookdate;
+		this.setMeetingcancelreason(meetingcancelreason);
 	}
 
 	public Integer getMeetingid() {
@@ -111,6 +113,14 @@ public class Meeting_dada {
 
 	public Date getMeetingbookdate() {
 		return meetingbookdate;
+	}
+
+	public void setMeetingcancelreason(String meetingcancelreason) {
+		this.meetingcancelreason = meetingcancelreason;
+	}
+
+	public String getMeetingcancelreason() {
+		return meetingcancelreason;
 	}
 	
 }

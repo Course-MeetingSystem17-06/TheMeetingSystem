@@ -6,14 +6,13 @@
 <title>CoolMeeting会议管理系统</title>
 <link rel="stylesheet" href="styles/common03.css" />
 <script type="text/javascript">
-	function getRemark() {
-		var message = document.getElementById("roomremark").value;
-		document.getElementById("roomremark_value").value = message;
-	}
+	/* 	function getRemark() {
+	 var message = document.getElementById("roomremark").value;
+	 document.getElementById("roomremark_value").value = message;
+	 } */
 </script>
 </head>
 <body>
-
 	<div class="page-content">
 		<div class="content-nav">会议预定 > 查看会议室</div>
 		<table class="listtable">
@@ -36,7 +35,6 @@
 				</tr>
 			</c:forEach>
 		</table>
-	</div>
 	</div>
 </body>
 </html>

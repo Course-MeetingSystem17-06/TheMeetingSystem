@@ -19,7 +19,6 @@
 		<dispatcher>ERROR</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-
 	<filter>
 		<filter-name>LoginedFilter</filter-name>
 		<filter-class>filter.LoginedFilter</filter-class>
@@ -38,7 +37,6 @@
 		<dispatcher>INCLUDE</dispatcher>
 		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
-
 	<filter>
 		<filter-name>LoginCookieFilter</filter-name>
 		<filter-class>filter.LoginCookieFilter</filter-class>
@@ -121,7 +119,6 @@
 		<servlet-name>SearchEmployeesServlet</servlet-name>
 		<url-pattern>/SearchEmployeesServlet</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<description></description>
 		<display-name>AddDeleteDepartmentServlet</display-name>
@@ -132,7 +129,6 @@
 		<servlet-name>AddDeleteDepartmentServlet</servlet-name>
 		<url-pattern>/AddDeleteDepartmentServlet</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<description></description>
 		<display-name>AddMeetingroomServlet</display-name>
@@ -143,7 +139,6 @@
 		<servlet-name>AddMeetingroomServlet</servlet-name>
 		<url-pattern>/AddMeetingroomServlet</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<description></description>
 		<display-name>ViewAllMeetingRoomsServlet</display-name>
@@ -154,7 +149,6 @@
 		<servlet-name>ViewAllMeetingRoomsServlet</servlet-name>
 		<url-pattern>/ViewAllMeetingRoomsServlet</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<description></description>
 		<display-name>UpdateMeetingRoomServlet</display-name>
@@ -165,7 +159,6 @@
 		<servlet-name>UpdateMeetingRoomServlet</servlet-name>
 		<url-pattern>/UpdateMeetingRoomServlet</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<description></description>
 		<display-name>ViewAllServlet</display-name>
@@ -176,7 +169,6 @@
 		<servlet-name>ViewAllServlet</servlet-name>
 		<url-pattern>/ViewAllServlet</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<description></description>
 		<display-name>SearchMeetingsServlet</display-name>
@@ -187,7 +179,6 @@
 		<servlet-name>SearchMeetingsServlet</servlet-name>
 		<url-pattern>/SearchMeetingsServlet</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<description></description>
 		<display-name>UpdateMeetingServlet</display-name>
@@ -197,5 +188,15 @@
 	<servlet-mapping>
 		<servlet-name>UpdateMeetingServlet</servlet-name>
 		<url-pattern>/UpdateMeetingServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ViewMyBookedMeetingsServlet</display-name>
+		<servlet-name>ViewMyBookedMeetingsServlet</servlet-name>
+		<servlet-class>servlet.ViewMyBookedMeetingsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewMyBookedMeetingsServlet</servlet-name>
+		<url-pattern>/ViewMyBookedMeetingsServlet</url-pattern>
 	</servlet-mapping>
 </web-app>
