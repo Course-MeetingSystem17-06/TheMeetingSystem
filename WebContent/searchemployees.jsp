@@ -23,7 +23,7 @@
 </head>
 <body>
 	<div class="page-content">
-		<div class="content-nav">会议预定 >搜索员工</div>
+		<div class="content-nav">人员管理 >搜索员工</div>
 		<form method="post" action="SearchEmployeesServlet">
 			<fieldset>
 				<legend>搜索员工</legend>

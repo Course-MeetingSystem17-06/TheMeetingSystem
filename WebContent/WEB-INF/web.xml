@@ -187,4 +187,26 @@
 		<servlet-name>SelectEmployeesOfDeptServlet_647</servlet-name>
 		<url-pattern>/SelectEmployeesOfDeptServlet_647</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>SearchMeetingsServlet</display-name>
+		<servlet-name>SearchMeetingsServlet</servlet-name>
+		<servlet-class>servlet.SearchMeetingsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchMeetingsServlet</servlet-name>
+		<url-pattern>/SearchMeetingsServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>UpdateMeetingServlet</display-name>
+		<servlet-name>UpdateMeetingServlet</servlet-name>
+		<servlet-class>servlet.UpdateMeetingServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateMeetingServlet</servlet-name>
+		<url-pattern>/UpdateMeetingServlet</url-pattern>
+
+	</servlet-mapping>
 </web-app>

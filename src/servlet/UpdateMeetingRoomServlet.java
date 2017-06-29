@@ -62,8 +62,8 @@ public class UpdateMeetingRoomServlet extends HttpServlet {
 						response);
 
 			} else {
-				request.setAttribute("msg", "门牌号重复，请确认后重新添加会议室。");
-				request.getRequestDispatcher("addmeetingroom.jsp").forward(request,
+				request.setAttribute("msg", "门牌号重复，请确认后重新提交。");
+				request.getRequestDispatcher("UpdateMeetingRoomServlet?code=detail&roomid="+roomid).forward(request,
 						response);
 			}
 		}
