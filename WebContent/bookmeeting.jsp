@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*,vo.*" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
 <head>
 <title>CoolMeeting会议管理系统</title>
@@ -42,7 +43,12 @@
 	height: 225px;
 }
 </style>
+<script language="javascript" type="text/javascript"
+	src="My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
+	function aa() {
+		alert("111");
+	}
 	function employee(employeeid, employeename) {
 		this.employeeid = employeeid;
 		this.employeename = employeename;
@@ -72,7 +78,7 @@
 		selEmployees = document.getElementById("selEmployees");
 		selSelectedEmployees = document.getElementById("selSelectedEmployees");
 
-		for ( var i = 0; i < data.length; i++) {
+		for ( var i = 0; i < 8; i++) {//长度
 			var dep = document.createElement("option");
 			dep.value = data[i].departmentid;
 			dep.text = data[i].departmentname;
@@ -82,27 +88,117 @@
 		fillEmployees();
 	}
 
-	function fillEmployees() {
-		/////////////////
-		DepartmentDAO departmentdao = new DepartmentDAO();		
-		List<Department> DepartmentsList = departmentdao.selectAll();
+	/////////////////////////////////////////
+	function showEmployees() {
+		//alert("d");
+		createXMLHttpRequest();
+
+		var deptid = document.getElementById("selDepartments").value;
+		var deptid1 = encodeURI(encodeURI(deptid));
+		var url = "SelectEmployeesOfDeptServlet_647?departmentid=" + deptid1
+				+ "";
+		xmlHttp.open("GET", url, true);
+		xmlHttp.onreadystatechange = callback;
+		xmlHttp.send(null);
+	}
+
+	function callback() {
+		clearEmployees();
+		var selEmployees = document.getElementById("selEmployees");
+		if (xmlHttp.readyState == 4) {
+			if (xmlHttp.status == 200) {
+
+				//alert(xmlHttp.responseXML);
+				var elements = xmlHttp.responseXML
+						.getElementsByTagName("option");
+				//alert(elements[0].getElementsByTagName("value")[0].firstChild.nodeValue);
+				for ( var i = 0; i < elements.length; i++) {
+					var value = elements[i].getElementsByTagName("value")[0].firstChild.nodeValue;
+					var text = elements[i].getElementsByTagName("text")[0].firstChild.nodeValue;
+					selEmployees.options.add(new Option(text, value));
+				}
+			}
+		}
+
+	}
+	function createXMLHttpRequest() {
+		if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		} else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+		}
+	}
+	function clearEmployees() {
+		document.getElementById("selEmployees").options.length = 0;
+	}
+	function selectEmployees() {
+		for ( var i = 0; i < document.getElementById("selEmployees").options.length; i++) {
+			if (document.getElementById("selEmployees").options[i].selected) {
+				addEmployee(document.getElementById("selEmployees").options[i]);
+				document.getElementById("selEmployees").options[i].selected = false;
+			}
+		}
+	}
+	function deSelectEmployees() {
+		var elementsToRemoved = new Array();
+		var options = document.getElementById("selSelectedEmployees").options;
+		for ( var i = 0; i < options.length; i++) {
+			if (options[i].selected) {
+				elementsToRemoved.push(options[i]);
+			}
+		}
+		for (i = 0; i < elementsToRemoved.length; i++) {
+			document.getElementById("selSelectedEmployees").removeChild(
+					elementsToRemoved[i]);
+		}
+	}
+	function addEmployee(optEmployee) {
+		var options = document.getElementById("selSelectedEmployees").options;
+		var i = 0;
+		var insertIndex = -1;
+		while (i < options.length) {
+			if (optEmployee.value == options[i].value) {
+				return;
+			} else if (optEmployee.value < options[i].value) {
+				insertIndex = i;
+				break;
+			}
+			i++;
+		}
+		var opt = document.createElement("option");
+		opt.value = optEmployee.value;
+		opt.text = optEmployee.text;
+
+		if (insertIndex == -1) {
+			document.getElementById("selSelectedEmployees").appendChild(opt);
+		} else {
+			document.getElementById("selSelectedEmployees").insertBefore(opt,
+					options[insertIndex]);
+		}
+	}
+	/*function fillEmployees() {
+	
+		DepartmentDAO
+		departmentdao = new DepartmentDAO();
+		List<Department>
+		DepartmentsList = departmentdao.selectAll();
 		clearList(selEmployees);
 		var departmentid = selDepartments.options[selDepartments.selectedIndex].value;
 		var employees;
-		for (var department in DepartmentsList){
-			if (department.departmentname == departmentname){
-				employees=selectBydepartment(department.departmentname);
+		for ( var department in DepartmentsList) {
+			if (department.departmentname == departmentname) {
+				employees = selectBydepartment(department.departmentname);
 				break;
 			}
 		}
-		for (var employee in employees) {
+		for ( var employee in employees) {
 			var emp = document.createElement("option");
 			emp.value = employees[i].employeeid;
 			emp.text = employees[i].employeename;
 			selEmployees.appendChild(emp);
-		}		
-		
-		/*for ( var i = 0; i < data.length; i++) {
+		}
+
+		for ( var i = 0; i < data.length; i++) {
 			if (departmentid == data[i].departmentid) {
 				employees = data[i].employees;
 				break;
@@ -113,9 +209,9 @@
 			emp.value = employees[i].employeeid;
 			emp.text = employees[i].employeename;
 			selEmployees.appendChild(emp);
-		}*/
-		////////////////////////////////////////
-	}
+		}
+
+	}onload="body_load()"
 
 	function clearList(list) {
 		while (list.childElementCount > 0) {
@@ -167,37 +263,44 @@
 		} else {
 			selSelectedEmployees.insertBefore(opt, options[insertIndex]);
 		}
-	}
+	} */
 </script>
 </head>
-<body onload="body_load()">
+<body>
 	<div class="page-content">
 		<div class="content-nav">会议预定 > 预定会议</div>
-		<form>
+		<form name="form1" action="BookMeetingServlet" method="post">
 			<fieldset>
 				<legend>会议信息</legend>
 				<table class="formtable">
 					<tr>
 						<td>会议名称：</td>
-						<td><input type="text" id="meetingname" maxlength="20" /></td>
+						<td><input type="text" id="meetingname" name="meetingname"
+							maxlength="20" />
+						</td>
 					</tr>
 					<tr>
 						<td>预计参加人数：</td>
-						<td><input type="text" id="numofattendents" /></td>
+						<td><input type="text" id="meetingparticipatenumber"
+							name="meetingpnumber" />
+						</td>
 					</tr>
 					<tr>
 						<td>预计开始时间：</td>
-						<td><input type="date" id="startdate" /> <input type="time"
-							id="starttime" /></td>
+						<td><input class="Wdate" type="text" name="starttime"
+							onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+						</td>
+
 					</tr>
 					<tr>
 						<td>预计结束时间：</td>
-						<td><input type="date" id="enddate" /> <input type="time"
-							id="endtime" /></td>
+						<td><input class="Wdate" type="text" name="endtime"
+							onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"></td>
+
 					</tr>
 					<tr>
 						<td>会议室名称：</td>
-						<td><select name="deptid">
+						<td><select id="deptid" name="meetingroomid">
 								<c:forEach var="meetingroom"
 									items="${requestScope.meetingroomsList}">
 									<c:if test="${meetingroom.roomnumber== param.deptid}">
@@ -207,28 +310,31 @@
 										<option value="${meetingroom.roomname}">${meetingroom.roomname}</option>
 									</c:if>
 								</c:forEach>
-						</select></td>
+						</select>
+						</td>
 					</tr>
 					<tr>
 						<td>会议说明：</td>
-						<td><textarea id="description" rows="5"></textarea></td>
+						<td><textarea id="description" name="meetingillustrate"
+								rows="5"></textarea>
+						</td>
 					</tr>
 					<tr>
 						<td>选择参会人员：</td>
 						<td>
-							<div id="divfrom">
-								<select id="selDepartments" name="deptid"onchange="fillEmployees()">
-										<c:forEach var="department"
-											items="${requestScope.departmentsList}">
-											<c:if test="${department.departmentid== param.deptid}">
-												<option value="${department.departmentname}" selected>${department.departmentname}</option>
-											</c:if>
-											<c:if test="${department.departmentid!= param.deptid}">
-												<option value="${department.departmentname}">${department.departmentname}</option>
-											</c:if>
-										</c:forEach>
-								</select>
-							 	<select id="selEmployees" multiple="true">
+							<div id="divfrom" name=meetingrname>
+								<select id="selDepartments" name="deptid"
+									onchange="showEmployees()">
+									<c:forEach var="department"
+										items="${requestScope.departmentsList}">
+										<c:if test="${department.departmentid== param.deptid}">
+											<option value="${department.departmentname}" selected>${department.departmentname}</option>
+										</c:if>
+										<c:if test="${department.departmentid!= param.deptid}">
+											<option value="${department.departmentname}">${department.departmentname}</option>
+										</c:if>
+									</c:forEach>
+								</select> <select id="selEmployees" multiple="true">
 								</select>
 								<!--  <select id="selDepartments" onchange="fillEmployees()">
 								</select> <select id="selEmployees" multiple="true">
@@ -242,12 +348,14 @@
 							<div id="divto">
 								<select id="selSelectedEmployees" multiple="true">
 								</select>
-							</div></td>
+							</div>
+						</td>
 					</tr>
 					<tr>
 						<td class="command" colspan="2"><input type="submit"
-							class="clickbutton" value="预定会议" /> <input type="reset"
-							class="clickbutton" value="重置" /></td>
+							class="clickbutton" value="预定会议" /> <input
+							type="reset" class="clickbutton" value="重置" />
+						</td>
 					</tr>
 				</table>
 			</fieldset>

@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import util.ConnectionFactory;
+import vo.Employee;
 import vo.Meeting_dada;
 
 public class MeetingDAO_dada {
@@ -217,6 +218,7 @@ public class MeetingDAO_dada {
 			ConnectionFactory.closeConnection();
 		}
 	}
+<<<<<<< HEAD
 	//取消会议
 	public void cancelMeetingById(String meetingid, String reason){
 		try{
@@ -230,4 +232,39 @@ public class MeetingDAO_dada {
 			ConnectionFactory.closeConnection();
 		}
 	}
+=======
+	
+	public void insert(Meeting_dada meeting) {
+		conn = ConnectionFactory.getConnection();
+		String sql = "insert into meeting"
+				+ "(Meeting_name,Meeting_rname,Meeting_pnumber,Meeting_stime,Meeting_etime,Meeting_illustrate,Meeting_booker,Meeting_state,Meeting_bookdate)"
+				+ " values(?,?,?,?,?,?,?,?,?)";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, meeting.getMeetingname());
+			pstmt.setString(2, meeting.getMeetingroomname());
+			pstmt.setString(3, meeting.getMeetingparticipatenumber());
+			String a = meeting.getMeetingstarttime().toString();
+			pstmt.setString(4, a);
+			String b = meeting.getMeetingendtime().toString();
+			pstmt.setString(5, b);			
+			pstmt.setString(6, meeting.getMeetingillustrate());
+			pstmt.setString(7, meeting.getMeetingbooker());
+			pstmt.setString(8, meeting.getMeetingstate());
+			String c = meeting.getMeetingbookdate().toString();
+			pstmt.setString(9, c);
+//			// 注册成功后，默认为正在审核，status为0
+//			pstmt.setString(7, "0");
+//			// 注册时，默认为员工角色，role值为2
+//			pstmt.setString(8, "2");
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection();
+		}
+	}
+
+>>>>>>> origin/预定会议
 }

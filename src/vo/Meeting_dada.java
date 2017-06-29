@@ -23,7 +23,12 @@ public class Meeting_dada {
 			String meetingparticipatenumber,Date meetingstarttime,
 			Date meetingendtime,String meetingillustrate,
 			String meetingbooker,String meetingstate,
+<<<<<<< HEAD
 			Date meetingbookdate, String meetingcancelreason){
+=======
+			Date meetingbookdate){
+		this.meetingname = meetingname;
+>>>>>>> origin/预定会议
 		this.meetingroomname = meetingroomname;
 		this.meetingparticipatenumber = meetingparticipatenumber;
 		this.meetingstarttime = meetingstarttime;
