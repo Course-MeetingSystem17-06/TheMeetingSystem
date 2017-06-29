@@ -10,7 +10,8 @@
 <script type="text/javascript">
 	//使用ajax方法访问，验证账户名是否存在
 	function validate() {
-		$
+		
+	$
 				.ajax({
 					type : "POST",
 					url : "ValidateUsernameServlet",
@@ -100,7 +101,8 @@
 				<legend>员工信息</legend>
 				<tr>
 					<td>提示信息:</td>
-					<td><font color="red">${requestScope.msg}</font></td>
+					<td><font color="red">${requestScope.msg}</font>
+					</td>
 				</tr>
 				<table class="formtable" style="width: 50%">
 					<tr>
@@ -109,40 +111,46 @@
 						<td><input type="text" id="employeename" name="employeename"
 							maxlength="20" value="${param.employeename}"
 							onchange="checknull(this.value,this.id)" />
-							<div id="employeename_mes" class=0></div></td>
+							<div id="employeename_mes" class=0></div>
+						</td>
 					</tr>
 					<tr>
 						<td>账户名：</td>
 						<td><input type="text" id="username" name="username"
 							maxlength="20" value="${param.username}" onchange="validate()" />
 							<div id="validateMessage"></div>
-							<div id="username_mes" class=0></div></td>
+							<div id="username_mes" class=0></div>
+						</td>
 					</tr>
 					<tr>
 						<td>密码：</td>
 						<td><input type="password" id="firstpassword" name="password"
 							maxlength="20" placeholder="请输入6位以上的密码"
 							onchange="checknull(this.value,this.id)">
-							<div id="firstpassword_mes" class=0></div></td>
+							<div id="firstpassword_mes" class=0></div>
+						</td>
 					</tr>
 					<tr>
 						<td>确认密码：</td>
 						<td><input type="password" id="secondpassword"
 							name="password" maxlength="20" onchange="check()" />
 							<div id="confirminfo"></div>
-							<div id="secondpassword_mes" class=0></div></td>
+							<div id="secondpassword_mes" class=0></div>
+						</td>
 					</tr>
 					<tr>
 						<td>联系电话：</td>
 						<td><input type="text" id="phone" name="phone" maxlength="20"
 							value="${param.phone}" onchange="checknull(this.value,this.id)" />
-							<div id="phone_mes" class=0></div></td>
+							<div id="phone_mes" class=0></div>
+						</td>
 					</tr>
 					<tr>
 						<td>电子邮件：</td>
 						<td><input type="text" id="email" name="email" maxlength="20"
 							value="${param.email}" onchange="checknull(this.value,this.id)" />
-							<div id="email_mes" class=0></div></td>
+							<div id="email_mes" class=0></div>
+						</td>
 					</tr>
 					<tr>
 						<td>所在部门：</td>
@@ -157,13 +165,15 @@
 										<option value="${department.departmentname}">${department.departmentname}</option>
 									</c:if>
 								</c:forEach>
-						</select></td>
+						</select>
+						</td>
 					</tr>
 					<tr>
 						<td colspan="6" class="command"><input type="submit"
 							class="clickbutton" value="注册" id="register_button"
 							disabled="disabled" /> <input type="reset" class="clickbutton"
-							value="重置" /></td>
+							value="重置" />
+						</td>
 					</tr>
 				</table>
 			</fieldset>

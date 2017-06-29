@@ -120,6 +120,8 @@
 	<servlet-mapping>
 		<servlet-name>SearchEmployeesServlet</servlet-name>
 		<url-pattern>/SearchEmployeesServlet</url-pattern>
+	</servlet-mapping>
+		
 	<servlet>
 		<description></description>
 		<display-name>AddDeleteDepartmentServlet</display-name>
@@ -173,5 +175,16 @@
 	<servlet-mapping>
 		<servlet-name>ViewAllServlet</servlet-name>
 		<url-pattern>/ViewAllServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>SelectEmployeesOfDeptServlet_647</display-name>
+		<servlet-name>SelectEmployeesOfDeptServlet_647</servlet-name>
+		<servlet-class>servlet.SelectEmployeesOfDeptServlet_647</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SelectEmployeesOfDeptServlet_647</servlet-name>
+		<url-pattern>/SelectEmployeesOfDeptServlet_647</url-pattern>
 	</servlet-mapping>
 </web-app>
