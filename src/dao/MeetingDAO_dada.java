@@ -218,7 +218,6 @@ public class MeetingDAO_dada {
 			ConnectionFactory.closeConnection();
 		}
 	}
-<<<<<<< HEAD
 	//取消会议
 	public void cancelMeetingById(String meetingid, String reason){
 		try{
@@ -232,7 +231,6 @@ public class MeetingDAO_dada {
 			ConnectionFactory.closeConnection();
 		}
 	}
-=======
 	
 	public void insert(Meeting_dada meeting) {
 		conn = ConnectionFactory.getConnection();
@@ -266,5 +264,4 @@ public class MeetingDAO_dada {
 		}
 	}
 
->>>>>>> origin/预定会议
 }

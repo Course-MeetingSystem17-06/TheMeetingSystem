@@ -23,12 +23,8 @@ public class Meeting_dada {
 			String meetingparticipatenumber,Date meetingstarttime,
 			Date meetingendtime,String meetingillustrate,
 			String meetingbooker,String meetingstate,
-<<<<<<< HEAD
-			Date meetingbookdate, String meetingcancelreason){
-=======
 			Date meetingbookdate){
 		this.meetingname = meetingname;
->>>>>>> origin/预定会议
 		this.meetingroomname = meetingroomname;
 		this.meetingparticipatenumber = meetingparticipatenumber;
 		this.meetingstarttime = meetingstarttime;
@@ -37,7 +33,6 @@ public class Meeting_dada {
 		this.meetingbooker = meetingbooker;
 		this.meetingstate = meetingstate;
 		this.meetingbookdate = meetingbookdate;
-		this.setMeetingcancelreason(meetingcancelreason);
 	}
 
 	public Integer getMeetingid() {

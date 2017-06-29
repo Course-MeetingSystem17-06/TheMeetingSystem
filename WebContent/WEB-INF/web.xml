@@ -119,10 +119,6 @@
 		<servlet-name>SearchEmployeesServlet</servlet-name>
 		<url-pattern>/SearchEmployeesServlet</url-pattern>
 	</servlet-mapping>
-<<<<<<< HEAD
-=======
-		
->>>>>>> origin/预定会议
 	<servlet>
 		<description></description>
 		<display-name>AddDeleteDepartmentServlet</display-name>
@@ -163,10 +159,6 @@
 		<servlet-name>UpdateMeetingRoomServlet</servlet-name>
 		<url-pattern>/UpdateMeetingRoomServlet</url-pattern>
 	</servlet-mapping>
-<<<<<<< HEAD
-=======
-	
->>>>>>> origin/预定会议
 	<servlet>
 		<description></description>
 		<display-name>ViewAllServlet</display-name>
@@ -177,8 +169,6 @@
 		<servlet-name>ViewAllServlet</servlet-name>
 		<url-pattern>/ViewAllServlet</url-pattern>
 	</servlet-mapping>
-<<<<<<< HEAD
-=======
 	
 	<servlet>
 		<description></description>
@@ -190,7 +180,6 @@
 		<servlet-name>SelectEmployeesOfDeptServlet_647</servlet-name>
 		<url-pattern>/SelectEmployeesOfDeptServlet_647</url-pattern>
 	</servlet-mapping>
->>>>>>> origin/预定会议
 	<servlet>
 		<description></description>
 		<display-name>SearchMeetingsServlet</display-name>
@@ -211,7 +200,6 @@
 		<servlet-name>UpdateMeetingServlet</servlet-name>
 		<url-pattern>/UpdateMeetingServlet</url-pattern>
 	</servlet-mapping>
-<<<<<<< HEAD
 	<servlet>
 		<description></description>
 		<display-name>ViewMyBookedMeetingsServlet</display-name>
@@ -221,8 +209,7 @@
 	<servlet-mapping>
 		<servlet-name>ViewMyBookedMeetingsServlet</servlet-name>
 		<url-pattern>/ViewMyBookedMeetingsServlet</url-pattern>
-=======
-	
+	</servlet-mapping>
 	<servlet>
 		<description></description>
 		<display-name>BookMeetingServlet</display-name>
@@ -232,6 +219,5 @@
 	<servlet-mapping>
 		<servlet-name>BookMeetingServlet</servlet-name>
 		<url-pattern>/BookMeetingServlet</url-pattern>
->>>>>>> origin/预定会议
 	</servlet-mapping>
 </web-app>
