@@ -207,6 +207,16 @@
 	<servlet-mapping>
 		<servlet-name>UpdateMeetingServlet</servlet-name>
 		<url-pattern>/UpdateMeetingServlet</url-pattern>
-
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>BookMeetingServlet</display-name>
+		<servlet-name>BookMeetingServlet</servlet-name>
+		<servlet-class>servlet.BookMeetingServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BookMeetingServlet</servlet-name>
+		<url-pattern>/BookMeetingServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

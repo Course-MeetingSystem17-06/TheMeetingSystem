@@ -1,6 +1,6 @@
 package vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Meeting_dada {
 	private Integer meetingid;
@@ -23,6 +23,7 @@ public class Meeting_dada {
 			Date meetingendtime,String meetingillustrate,
 			String meetingbooker,String meetingstate,
 			Date meetingbookdate){
+		this.meetingname = meetingname;
 		this.meetingroomname = meetingroomname;
 		this.meetingparticipatenumber = meetingparticipatenumber;
 		this.meetingstarttime = meetingstarttime;

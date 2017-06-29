@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*,vo.*" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
 <head>
 <title>CoolMeeting会议管理系统</title>
@@ -42,6 +43,8 @@
 	height: 225px;
 }
 </style>
+<script language="javascript" type="text/javascript"
+	src="My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	function aa() {
 		alert("111");
@@ -84,15 +87,16 @@
 
 		fillEmployees();
 	}
-	
+
 	/////////////////////////////////////////
 	function showEmployees() {
 		//alert("d");
 		createXMLHttpRequest();
-		
+
 		var deptid = document.getElementById("selDepartments").value;
 		var deptid1 = encodeURI(encodeURI(deptid));
-		var url = "SelectEmployeesOfDeptServlet_647?departmentid=" + deptid1 + "";
+		var url = "SelectEmployeesOfDeptServlet_647?departmentid=" + deptid1
+				+ "";
 		xmlHttp.open("GET", url, true);
 		xmlHttp.onreadystatechange = callback;
 		xmlHttp.send(null);
@@ -103,7 +107,7 @@
 		var selEmployees = document.getElementById("selEmployees");
 		if (xmlHttp.readyState == 4) {
 			if (xmlHttp.status == 200) {
-				
+
 				//alert(xmlHttp.responseXML);
 				var elements = xmlHttp.responseXML
 						.getElementsByTagName("option");
@@ -118,15 +122,14 @@
 
 	}
 	function createXMLHttpRequest() {
-	    if (window.ActiveXObject) {
-	        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-	    } 
-	    else if (window.XMLHttpRequest) {
-	        xmlHttp = new XMLHttpRequest();                
-	    }
+		if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		} else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+		}
 	}
-	function clearEmployees(){
-	 	document.getElementById("selEmployees").options.length=0;
+	function clearEmployees() {
+		document.getElementById("selEmployees").options.length = 0;
 	}
 	function selectEmployees() {
 		for ( var i = 0; i < document.getElementById("selEmployees").options.length; i++) {
@@ -145,7 +148,8 @@
 			}
 		}
 		for (i = 0; i < elementsToRemoved.length; i++) {
-			document.getElementById("selSelectedEmployees").removeChild(elementsToRemoved[i]);
+			document.getElementById("selSelectedEmployees").removeChild(
+					elementsToRemoved[i]);
 		}
 	}
 	function addEmployee(optEmployee) {
@@ -168,9 +172,10 @@
 		if (insertIndex == -1) {
 			document.getElementById("selSelectedEmployees").appendChild(opt);
 		} else {
-			document.getElementById("selSelectedEmployees").insertBefore(opt, options[insertIndex]);
+			document.getElementById("selSelectedEmployees").insertBefore(opt,
+					options[insertIndex]);
 		}
-	} 
+	}
 	/*function fillEmployees() {
 	
 		DepartmentDAO
@@ -264,7 +269,7 @@
 <body>
 	<div class="page-content">
 		<div class="content-nav">会议预定 > 预定会议</div>
-		<form>
+		<form name="form1" action="BookMeetingServlet" method="post">
 			<fieldset>
 				<legend>会议信息</legend>
 				<table class="formtable">
@@ -276,25 +281,26 @@
 					</tr>
 					<tr>
 						<td>预计参加人数：</td>
-						<td><input type="text" id="numofattendents"
+						<td><input type="text" id="meetingparticipatenumber"
 							name="meetingpnumber" />
 						</td>
 					</tr>
 					<tr>
 						<td>预计开始时间：</td>
-						<td><input type="date" id="startdate" name="meetingstime" />
-							<input type="time" id="starttime" />
+						<td><input class="Wdate" type="text" name="starttime"
+							onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
 						</td>
+
 					</tr>
 					<tr>
 						<td>预计结束时间：</td>
-						<td><input type="date" id="enddate" name="meetingetime" /> <input
-							type="time" id="endtime" />
-						</td>
+						<td><input class="Wdate" type="text" name="endtime"
+							onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"></td>
+
 					</tr>
 					<tr>
 						<td>会议室名称：</td>
-						<td><select id="deptid" name="deptid">
+						<td><select id="deptid" name="meetingroomid">
 								<c:forEach var="meetingroom"
 									items="${requestScope.meetingroomsList}">
 									<c:if test="${meetingroom.roomnumber== param.deptid}">
@@ -347,7 +353,7 @@
 					</tr>
 					<tr>
 						<td class="command" colspan="2"><input type="submit"
-							class="clickbutton" value="预定会议" onclick="aa()" /> <input
+							class="clickbutton" value="预定会议" /> <input
 							type="reset" class="clickbutton" value="重置" />
 						</td>
 					</tr>
