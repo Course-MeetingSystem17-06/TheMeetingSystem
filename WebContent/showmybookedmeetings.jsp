@@ -29,7 +29,7 @@
 					<td>${emp.meetingendtime}</td>
 					<td>${emp.meetingbookdate}</td>
 					<td><a class="clickbutton"
-						href="UpdateMeetingServlet?code=mybooked&meetingid=${emp.meetingid}&user=${emp.meetingbooker}">查看/撤销</a>
+						href="UpdateMeetingServlet?code=mybooked&meetingid=${emp.meetingid}&user=${emp.meetingbooker}">查看/撤销</a></td>
 				</tr>
 			</c:forEach>
 		</table>

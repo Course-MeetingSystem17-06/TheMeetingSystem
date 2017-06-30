@@ -9,7 +9,7 @@
 </style>
 <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
-	function goToOnePage(meetingname, meetingroomname, status) {
+	function goToOnePage(meetingname, meetingroomname, meetingbooker, meetingbookdatestart, meetingbookdateend, meetingstarttime, meetingendtime) {
 		var pageNum = document.getElementById("pageNum").value;
 		if (pageNum == "") {
 			window.location.href = "#";
@@ -54,17 +54,20 @@
 							value="${param.meetingbookdatestart}" />
 						</td>
 						<td>到</td>
-						<td><input id=meetingbookdateend name="meetingbookdateend" class="Wdate" type="text"
+						<td><input id=meetingbookdateend name="meetingbookdateend"
+							class="Wdate" type="text"
 							onClick="WdatePicker({minDate:'#F{$dp.$D(\'meetingbookdatestart\')}'})"
 							value="${param.meetingbookdateend}" />
 						</td>
 						<td>会议日期： 从</td>
-						<td><input id=meetingstarttime name="meetingstarttime" class="Wdate" type="text"
+						<td><input id=meetingstarttime name="meetingstarttime"
+							class="Wdate" type="text"
 							onClick="WdatePicker({maxDate:'#F{$dp.$D(\'meetingendtime\')}'})"
 							value="${param.meetingstarttime}" />
 						</td>
 						<td>到</td>
-						<td><input id=meetingendtime name="meetingendtime" class="Wdate" type="text"
+						<td><input id=meetingendtime name="meetingendtime"
+							class="Wdate" type="text"
 							onClick="WdatePicker({minDate:'#F{$dp.$D(\'meetingstarttime\')}'})"
 							value="${param.meetingendtime}" />
 						</td>
@@ -89,36 +92,36 @@
 					</div>
 					<div class="header-nav">
 						<input type="button" class="clickbutton" value="首页"
-							onclick="window.location.href='SearchEmployeesServlet?employeename=${param.employeename}&username=${param.username}&status=${param.status}&pageNum=1'" />
+							onclick="window.location.href='SearchMeetingsServlet?meetingname=${param.meetingname}&meetingroomname=${param.meetingroomname}&meetingbooker=${param.meetingbooker}&meetingbookdatestart=${param.meetingbookdatestart}&meetingbookdateend=${param.meetingbookdateend}&meetingstarttime=${param.meetingstarttime}&meetingendtime=${param.meetingendtime}&pageNum=1'" />
 						<c:choose>
 							<c:when test="${requestScope.pageNum ne '1'}">
 								<input type="button" class="clickbutton" value="上页"
-									onclick="window.location.href='SearchEmployeesServlet?employeename=${param.employeename}&username=${param.username}&status=${param.status}&pageNum=${requestScope.pageNum-1}'" />
+									onclick="window.location.href='SearchMeetingsServlet?meetingname=${param.meetingname}&meetingroomname=${param.meetingroomname}&meetingbooker=${param.meetingbooker}&meetingbookdatestart=${param.meetingbookdatestart}&meetingbookdateend=${param.meetingbookdateend}&meetingstarttime=${param.meetingstarttime}&meetingendtime=${param.meetingendtime}&pageNum=${requestScope.pageNum-1}'" />
 							</c:when>
 							<c:otherwise>
 								<input disabled="disabled" type="button" class="clickbutton"
 									value="上页"
-									onclick="window.location.href='SearchEmployeesServlet?employeename=${param.employeename}&username=${param.username}&status=${param.status}&pageNum=${requestScope.pageNum-1}'" />
+									onclick="window.location.href='SearchMeetingsServlet?meetingname=${param.meetingname}&meetingroomname=${param.meetingroomname}&meetingbooker=${param.meetingbooker}&meetingbookdatestart=${param.meetingbookdatestart}&meetingbookdateend=${param.meetingbookdateend}&meetingstarttime=${param.meetingstarttime}&meetingendtime=${param.meetingendtime}&pageNum=${requestScope.pageNum-1}'" />
 							</c:otherwise>
 						</c:choose>
 						<c:choose>
 							<c:when
 								test="${requestScope.pageNum ne requestScope.countOfPages}">
 								<input type="button" class="clickbutton" value="下页"
-									onclick="window.location.href='SearchEmployeesServlet?employeename=${param.employeename}&username=${param.username}&status=${param.status}&pageNum=${requestScope.pageNum+1}'" />
+									onclick="window.location.href='SearchMeetingsServlet?meetingname=${param.meetingname}&meetingroomname=${param.meetingroomname}&meetingbooker=${param.meetingbooker}&meetingbookdatestart=${param.meetingbookdatestart}&meetingbookdateend=${param.meetingbookdateend}&meetingstarttime=${param.meetingstarttime}&meetingendtime=${param.meetingendtime}&pageNum=${requestScope.pageNum+1}'" />
 							</c:when>
 							<c:otherwise>
 								<input disabled="disabled" type="button" class="clickbutton"
 									value="下页"
-									onclick="window.location.href='SearchEmployeesServlet?employeename=${param.employeename}&username=${param.username}&status=${param.status}&pageNum=${requestScope.pageNum+1}'" />
+									onclick="window.location.href='SearchMeetingsServlet?meetingname=${param.meetingname}&meetingroomname=${param.meetingroomname}&meetingbooker=${param.meetingbooker}&meetingbookdatestart=${param.meetingbookdatestart}&meetingbookdateend=${param.meetingbookdateend}&meetingstarttime=${param.meetingstarttime}&meetingendtime=${param.meetingendtime}&pageNum=${requestScope.pageNum+1}'" />
 							</c:otherwise>
 						</c:choose>
 						<input type="button" class="clickbutton" value="末页"
-							onclick="window.location.href='SearchEmployeesServlet?employeename=${param.employeename}&username=${param.username}&status=${param.status}&pageNum=${requestScope.countOfPages}'" />
+							onclick="window.location.href='SearchMeetingsServlet?meetingname=${param.meetingname}&meetingroomname=${param.meetingroomname}&meetingbooker=${param.meetingbooker}&meetingbookdatestart=${param.meetingbookdatestart}&meetingbookdateend=${param.meetingbookdateend}&meetingstarttime=${param.meetingstarttime}&meetingendtime=${param.meetingendtime}&pageNum=${requestScope.countOfPages}'" />
 						跳到第<input type="text" id="pageNum" name="pageNum"
 							class="nav-number" value=${param.pageNum}>页 <input
 							type="button" class="clickbutton" value="跳转"
-							onclick="goToOnePage('${param.employeename}','${param.username}','${param.status}')" />
+							onclick="goToOnePage('${param.meetingname}','${param.meetingroomname}','${param.meetingbooker}','${param.meetingbookdatestart}','${param.meetingbookdateend}','${param.meetingstarttime}','${param.meetingendtime}')" />
 					</div>
 				</div>
 			</div>

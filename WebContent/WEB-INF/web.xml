@@ -109,7 +109,7 @@
 		<servlet-name>ApproveServlet</servlet-name>
 		<url-pattern>/ApproveServlet</url-pattern>
 	</servlet-mapping>
-		<servlet>
+	<servlet>
 		<description></description>
 		<display-name>SearchEmployeesServlet</display-name>
 		<servlet-name>SearchEmployeesServlet</servlet-name>
@@ -169,7 +169,6 @@
 		<servlet-name>ViewAllServlet</servlet-name>
 		<url-pattern>/ViewAllServlet</url-pattern>
 	</servlet-mapping>
-	
 	<servlet>
 		<description></description>
 		<display-name>SelectEmployeesOfDeptServlet_647</display-name>
@@ -219,5 +218,15 @@
 	<servlet-mapping>
 		<servlet-name>BookMeetingServlet</servlet-name>
 		<url-pattern>/BookMeetingServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ViewMyNotificationServlet</display-name>
+		<servlet-name>ViewMyNotificationServlet</servlet-name>
+		<servlet-class>servlet.ViewMyNotificationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewMyNotificationServlet</servlet-name>
+		<url-pattern>/ViewMyNotificationServlet</url-pattern>
 	</servlet-mapping>
 </web-app>
