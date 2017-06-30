@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,7 +21,9 @@ import vo.Employee;
 import vo.Meeting_dada;
 import vo.Meetingroom;
 import dao.DepartmentDAO;
+import dao.EmployeeDAO;
 import dao.MeetingDAO_dada;
+import dao.MeetingEmployeeDAO;
 import dao.MeetingroomDAO;
 
 public class BookMeetingServlet extends HttpServlet {
@@ -33,14 +37,14 @@ public class BookMeetingServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// 设置请求的编码格式保证中文编码正确
 		request.setCharacterEncoding("utf-8");
-
-		
-		//Timestamp bt = new Timestamp(System.currentTimeMillis());
+		int id = 0;
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
 
 		// 或许注册页面填写的请求参数
 		String meetingname = request.getParameter("meetingname");
 		String pnumber = request.getParameter("meetingpnumber");
+		String user = request.getParameter("user");
+		String[] options = request.getParameterValues("selSelectedEmployees");
 		Date starttime = null;
 		try {
 			starttime = df.parse(request.getParameter("starttime"));
@@ -67,44 +71,43 @@ public class BookMeetingServlet extends HttpServlet {
 		}// new Date()为获取当前系统时间
 		java.sql.Timestamp bt = new Timestamp(booktime.getTime());
 		Date bookmeetingtime = bt;
-		
-		// Date sqlbookmeetingtime1 = sqlbookmeetingtime;
-		
-		
-		java.sql.Timestamp bt1 =  new Timestamp(starttime.getTime());
-		Date meetingstarttime = bt;
-		
-		
-		java.sql.Timestamp bt2 =  new Timestamp(endtime.getTime());		
-		Date meetingendtime = bt;
-		
+
+
+		java.sql.Timestamp bt1 = new Timestamp(starttime.getTime());
+		Date meetingstarttime = bt1;
+
+		java.sql.Timestamp bt2 = new Timestamp(endtime.getTime());
+		Date meetingendtime = bt2;
 
 		Meeting_dada meeting = new Meeting_dada(meetingname, meetingroomid,
-				pnumber, meetingstarttime, meetingendtime,
-				meetingillustrate, "yaoruda", "1", bookmeetingtime);
+				pnumber, meetingstarttime, meetingendtime, meetingillustrate,
+				user, "1", bookmeetingtime);
 		MeetingDAO_dada dao = new MeetingDAO_dada();
 		dao.insert(meeting);
-		DepartmentDAO departmentdao = new DepartmentDAO();		
+		id = dao.selectmeetingid();
+		DepartmentDAO departmentdao = new DepartmentDAO();
 		List<Department> DepartmentsList = departmentdao.selectAll();
 		request.setAttribute("departmentsList", DepartmentsList);
 		MeetingroomDAO meetingroomdao = new MeetingroomDAO();
-		List<Meetingroom> meetingroomsList = meetingroomdao.selectAllMeetingroom();
+		List<Meetingroom> meetingroomsList = meetingroomdao
+				.selectAllMeetingroom();
 		request.setAttribute("meetingroomsList", meetingroomsList);
+		request.setAttribute("user", user);
 		request.getRequestDispatcher("bookmeeting.jsp").forward(request,
 				response);
-		// int flag = service.regist(employee);
-		//
-		// if (flag == 1) {
-		// request.setAttribute("msg", "注册成功，正在审核。");
-		// request.getRequestDispatcher("login.jsp")
-		// .forward(request, response);
-		// } else {
-		// request.setAttribute("msg", "用户名已存在，请重新注册。");
-		// DepartmentDAO dao = new DepartmentDAO();
-		// List<Department> departmentsList = dao.selectAll();
-		// request.setAttribute("departmentsList", departmentsList);
-		// request.getRequestDispatcher("register.jsp").forward(request,
-		// response);
-		// }
+		
+		EmployeeDAO employeedao = new EmployeeDAO();
+		for ( int i = 0; i < options.length; i++) {
+			String username = options[i];//username
+			Employee e = employeedao.selectByUsername(username);
+			int employeeid = e.getEmployeeid();
+			
+			MeetingEmployeeDAO meetingemployeedao = new MeetingEmployeeDAO();
+			
+			meetingemployeedao.insert(employeeid,id);
+		}
+		
+		
+
 	}
 }

@@ -51,7 +51,7 @@
 					href="ViewAllMeetingRoomsServlet?code=viewallmeetingrooms"
 					target="main">查看会议室</a></li>
 				<li class="sidebar-menuitem"><a
-					href="ViewAllServlet?code=bookmeeting" target="main">预定会议</a></li>
+					href="ViewAllServlet?code=bookmeeting&user=<%=username%>" target="main">预定会议</a></li>
 				<li class="sidebar-menuitem"><a
 					href="SearchMeetingsServlet" target="main">搜索会议</a></li>
 			</ul>

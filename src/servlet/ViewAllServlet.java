@@ -56,12 +56,13 @@ public class ViewAllServlet extends HttpServlet {
 		request.setAttribute("departmentsList", DepartmentsList);
 		// System.out.println("111");
 		String code = request.getParameter("code");
-		
+		String user = request.getParameter("user");
 		//会议室
 		MeetingroomDAO meetingroomdao = new MeetingroomDAO();
 		List<Meetingroom> meetingroomsList = meetingroomdao.selectAllMeetingroom();
 		request.setAttribute("meetingroomsList", meetingroomsList);
 		if (code != null && code.equals("bookmeeting")) {
+			request.setAttribute("user", user);
 			request.getRequestDispatcher("bookmeeting.jsp").forward(request,
 					response);
 		}
