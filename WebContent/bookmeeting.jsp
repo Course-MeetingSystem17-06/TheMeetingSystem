@@ -102,6 +102,19 @@
 		xmlHttp.send(null);
 	}
 
+	function saveEmployees() {
+		createXMLHttpRequest();
+		var options = document.getElementById("selSelectedEmployees").options;
+		for ( var i = 0; i < options.length; i++) {
+			var deptid = options[i].value;//username
+			var deptid1 = encodeURI(encodeURI(deptid));
+			var url = "BookMeetingServlet?Employeeusername=" + deptid1 + "";
+			xmlHttp.open("GET", url, true);
+			xmlHttp.send(null);
+		}
+
+	}
+
 	function callback() {
 		clearEmployees();
 		var selEmployees = document.getElementById("selEmployees");
@@ -132,50 +145,77 @@
 		document.getElementById("selEmployees").options.length = 0;
 	}
 	function selectEmployees() {
-		for ( var i = 0; i < document.getElementById("selEmployees").options.length; i++) {
-			if (document.getElementById("selEmployees").options[i].selected) {
-				addEmployee(document.getElementById("selEmployees").options[i]);
-				document.getElementById("selEmployees").options[i].selected = false;
+		var selEmployees = document.getElementById("selEmployees");
+		var selSelectedEmployees = document
+				.getElementById("selSelectedEmployees");
+		for ( var i = 0; i < selEmployees.options.length; i++) {
+			if (selEmployees.options[i].selected) {
+				var opt = new Option(selEmployees.options[i].text,
+						selEmployees.options[i].value);
+				opt.selected = true;
+				selSelectedEmployees.options.add(opt);
+				selEmployees.options.remove(i);
 			}
 		}
 	}
-	function deSelectEmployees() {
-		var elementsToRemoved = new Array();
-		var options = document.getElementById("selSelectedEmployees").options;
-		for ( var i = 0; i < options.length; i++) {
-			if (options[i].selected) {
-				elementsToRemoved.push(options[i]);
-			}
-		}
-		for (i = 0; i < elementsToRemoved.length; i++) {
-			document.getElementById("selSelectedEmployees").removeChild(
-					elementsToRemoved[i]);
-		}
-	}
-	function addEmployee(optEmployee) {
-		var options = document.getElementById("selSelectedEmployees").options;
-		var i = 0;
-		var insertIndex = -1;
-		while (i < options.length) {
-			if (optEmployee.value == options[i].value) {
-				return;
-			} else if (optEmployee.value < options[i].value) {
-				insertIndex = i;
-				break;
-			}
-			i++;
-		}
-		var opt = document.createElement("option");
-		opt.value = optEmployee.value;
-		opt.text = optEmployee.text;
 
-		if (insertIndex == -1) {
-			document.getElementById("selSelectedEmployees").appendChild(opt);
-		} else {
-			document.getElementById("selSelectedEmployees").insertBefore(opt,
-					options[insertIndex]);
+	function deSelectEmployees() {
+		var selEmployees = document.getElementById("selEmployees");
+		var selSelectedEmployees = document
+				.getElementById("selSelectedEmployees");
+		for ( var i = 0; i < selSelectedEmployees.options.length; i++) {
+			if (selSelectedEmployees.options[i].selected) {
+				selEmployees.options.add(new Option(
+						selSelectedEmployees.options[i].text,
+						selSelectedEmployees.options[i].value));
+				selSelectedEmployees.options.remove(i);
+			}
+		}
+		setSelected();
+	}
+
+	function setSelected() {
+		var selSelectedEmployees = document
+				.getElementById("selSelectedEmployees");
+		for ( var i = 0; i < selSelectedEmployees.options.length; i++) {
+			selSelectedEmployees.options[i].selected = true;
 		}
 	}
+
+	function refreshRooms() {
+		createXMLHttpRequest();
+		var starttime = document.getElementById("starttime").value;
+		var endtime = document.getElementById("endtime").value;
+
+		var url = "RefreshRoomsServlet?starttime=" + escape(starttime)
+				+ "&endtime=" + escape(endtime);
+		xmlHttp.open("GET", url, true);
+		xmlHttp.onreadystatechange = refresh;
+		xmlHttp.send(null);
+	}
+
+	function refresh() {
+		clearMeetingRooms();
+		var roomid = document.getElementById("roomid");
+		if (xmlHttp.readyState == 4) {
+			if (xmlHttp.status == 200) {
+
+				var elements = xmlHttp.responseXML
+						.getElementsByTagName("option");
+				for ( var i = 0; i < elements.length; i++) {
+					var value = elements[i].getElementsByTagName("value")[0].firstChild.nodeValue;
+					var text = elements[i].getElementsByTagName("text")[0].firstChild.nodeValue;
+					roomid.options.add(new Option(text, value), i + 1);
+				}
+			}
+		}
+
+	}
+
+	function clearMeetingRooms() {
+		document.getElementById("roomid").options.length = 1;
+	}
+
 	/*function fillEmployees() {
 	
 		DepartmentDAO
@@ -269,7 +309,8 @@
 <body>
 	<div class="page-content">
 		<div class="content-nav">会议预定 > 预定会议</div>
-		<form name="form1" action="BookMeetingServlet" method="post">
+		<form name="form1"
+			action="BookMeetingServlet?user=${requestScope.user}" method="post">
 			<fieldset>
 				<legend>会议信息</legend>
 				<table class="formtable">
@@ -346,15 +387,16 @@
 									class="clickbutton" value="&lt;" onclick="deSelectEmployees()" />
 							</div>
 							<div id="divto">
-								<select id="selSelectedEmployees" multiple="true">
+								<select id="selSelectedEmployees" name="selSelectedEmployees"
+									multiple="true">
 								</select>
 							</div>
 						</td>
 					</tr>
 					<tr>
 						<td class="command" colspan="2"><input type="submit"
-							class="clickbutton" value="预定会议" /> <input
-							type="reset" class="clickbutton" value="重置" />
+							class="clickbutton" value="预定会议" /> <input type="reset"
+							class="clickbutton" value="重置" />
 						</td>
 					</tr>
 				</table>

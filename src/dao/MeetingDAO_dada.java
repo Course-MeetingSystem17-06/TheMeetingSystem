@@ -299,12 +299,34 @@ public class MeetingDAO_dada {
 		return meetingemployeesList;
 	}
 
+	public int selectmeetingid() {
+		int id = 0;
+		conn = ConnectionFactory.getConnection();
+		Meeting_dada meeting = null;
+		try {
+			PreparedStatement st = null;
+			String sql = "select * from meeting where Meeting_id in (select max(Meeting_id) from meeting)";
+			st = conn.prepareStatement(sql);
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.next() == true) {
+				meeting = new Meeting_dada();
+				id = rs.getInt("Meeting_id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection();
+		}
+		return id++;
+	}
+
 	// 根据预定人id查找此人7天内的可用会议
 	public List<Meeting_dada> selectLatestMeetings(String meetingbooker,
 			String now, String future) {
 		conn = ConnectionFactory.getConnection();
 		String sql = "select * from meeting where Meeting_booker='"
-				+ meetingbooker + "' and Meeting_stime>'" + now + "' and Meeting_stime<'" + future + "' and Meeting_state='1'";
+				+ meetingbooker + "' and Meeting_stime>'" + now
+				+ "' and Meeting_stime<'" + future + "' and Meeting_state='1'";
 		List<Meeting_dada> latestmeetingsList = new ArrayList<Meeting_dada>();
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -325,13 +347,14 @@ public class MeetingDAO_dada {
 		}
 		return latestmeetingsList;
 	}
-	
+
 	// 根据预定人id查找此人未来本应参加但是被取消的会议
 	public List<Meeting_dada> selectCancelMeetings(String meetingbooker,
 			String date) {
 		conn = ConnectionFactory.getConnection();
 		String sql = "select * from meeting where Meeting_booker='"
-				+ meetingbooker + "' and Meeting_stime>'" + date + "' and Meeting_state='2'";
+				+ meetingbooker + "' and Meeting_stime>'" + date
+				+ "' and Meeting_state='2'";
 		List<Meeting_dada> latestmeetingsList = new ArrayList<Meeting_dada>();
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -343,7 +366,8 @@ public class MeetingDAO_dada {
 				meeting.setMeetingroomname(rs.getString("Meeting_rname"));
 				meeting.setMeetingstarttime(rs.getDate("Meeting_stime"));
 				meeting.setMeetingendtime(rs.getDate("Meeting_etime"));
-				meeting.setMeetingcancelreason(rs.getString("Meeting_cancelreason"));
+				meeting.setMeetingcancelreason(rs
+						.getString("Meeting_cancelreason"));
 				latestmeetingsList.add(meeting);
 			}
 		} catch (SQLException e) {
