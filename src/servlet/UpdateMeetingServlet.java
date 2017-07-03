@@ -16,6 +16,7 @@ import vo.Meeting_dada;
 public class UpdateMeetingServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -29,10 +30,10 @@ public class UpdateMeetingServlet extends HttpServlet {
 		String code = request.getParameter("code");
 		String meetingid = request.getParameter("meetingid");
 		String user = request.getParameter("user");
-		
+
 		if (code != null && code.equals("detail")) {
 			MeetingDAO_dada dao = new MeetingDAO_dada();
-			//查找并装入对应的会议信息
+			// 查找并装入对应的会议信息
 			Meeting_dada meeting = dao.selectById(meetingid);
 			request.setAttribute("meetingid", meetingid);
 			request.setAttribute("user", user);
@@ -42,10 +43,11 @@ public class UpdateMeetingServlet extends HttpServlet {
 			request.setAttribute("starttime", meeting.getMeetingstarttime());
 			request.setAttribute("endtime", meeting.getMeetingendtime());
 			request.setAttribute("illustrate", meeting.getMeetingillustrate());
-			//查找并装入对应会议的参会人员集合
-			List<Employee> meetingemployeesList = dao.selectEmployeesByMeetingId(meetingid);
+			// 查找并装入对应会议的参会人员集合
+			List<Employee> meetingemployeesList = dao
+					.selectEmployeesByMeetingId(meetingid);
 			request.setAttribute("meetingemployeesList", meetingemployeesList);
-			//send
+			// send
 			request.getRequestDispatcher("meetingdetail.jsp").forward(request,
 					response);
 		}
@@ -63,7 +65,8 @@ public class UpdateMeetingServlet extends HttpServlet {
 		}
 
 		if (code != null && code.equals("mybooked")) {
-			// 配置“我预定的会议”界面
+			// 配置“我预定的会议”界面的会议详情
+			request.setAttribute("user", user);
 			request.setAttribute("pagetype", "mybooked");
 			MeetingDAO_dada dao = new MeetingDAO_dada();
 			Meeting_dada meeting = dao.selectById(meetingid);
@@ -74,10 +77,11 @@ public class UpdateMeetingServlet extends HttpServlet {
 			request.setAttribute("starttime", meeting.getMeetingstarttime());
 			request.setAttribute("endtime", meeting.getMeetingendtime());
 			request.setAttribute("illustrate", meeting.getMeetingillustrate());
-			//查找并装入对应会议的参会人员集合
-			List<Employee> meetingemployeesList = dao.selectEmployeesByMeetingId(meetingid);
+			// 查找并装入对应会议的参会人员集合
+			List<Employee> meetingemployeesList = dao
+					.selectEmployeesByMeetingId(meetingid);
 			request.setAttribute("meetingemployeesList", meetingemployeesList);
-			//send
+			// send
 			request.getRequestDispatcher("meetingdetail.jsp").forward(request,
 					response);
 		}
@@ -95,27 +99,27 @@ public class UpdateMeetingServlet extends HttpServlet {
 		if (code != null && code.equals("confirmcancel")) {
 			// 确认取消
 			request.setAttribute("meetingid", meetingid);
-			
+
 			String meetingname = request.getParameter("meetingname");
 			request.setAttribute("meetingname", meetingname);
-			
+
 			String reason = request.getParameter("reason_value");
 			request.setAttribute("meetingcancelreason", reason);
-			
+
 			MeetingDAO_dada dao = new MeetingDAO_dada();
 			dao.cancelMeetingById(meetingid, reason);
-			
+
 			request.setAttribute("msg", "已取消会议。");
-			request.setAttribute("result", 1);//取消成功
+			request.setAttribute("result", 1);// 取消成功
 			request.getRequestDispatcher("confirmcancelmeeting.jsp").forward(
 					request, response);
 		}
-		
-		//我的通知界面进入的会议详情
+
+		// 我的通知界面进入的会议详情
 		if (code != null && code.equals("notification")) {
-			//String user = request.getParameter("user");
+			// String user = request.getParameter("user");
 			MeetingDAO_dada dao = new MeetingDAO_dada();
-			//查找并装入对应的会议信息
+			// 查找并装入对应的会议信息
 			Meeting_dada meeting = dao.selectById(meetingid);
 			request.setAttribute("meetingid", meetingid);
 			request.setAttribute("user", user);
@@ -125,11 +129,34 @@ public class UpdateMeetingServlet extends HttpServlet {
 			request.setAttribute("starttime", meeting.getMeetingstarttime());
 			request.setAttribute("endtime", meeting.getMeetingendtime());
 			request.setAttribute("illustrate", meeting.getMeetingillustrate());
-			//查找并装入对应会议的参会人员集合
-			List<Employee> meetingemployeesList = dao.selectEmployeesByMeetingId(meetingid);
+			// 查找并装入对应会议的参会人员集合
+			List<Employee> meetingemployeesList = dao
+					.selectEmployeesByMeetingId(meetingid);
 			request.setAttribute("meetingemployeesList", meetingemployeesList);
-			//send
+			// send
 			request.setAttribute("pagetype", "notification");
+			request.getRequestDispatcher("meetingdetail.jsp").forward(request,
+					response);
+		}
+
+		// "我将来参加的会议"界面进入的会议详情
+		if (code != null && code.equals("attend")) {
+			request.setAttribute("user", user);
+			request.setAttribute("pagetype", "attend");
+			MeetingDAO_dada dao = new MeetingDAO_dada();
+			Meeting_dada meeting = dao.selectById(meetingid);
+			request.setAttribute("meetingid", meetingid);
+			request.setAttribute("name", meeting.getMeetingname());
+			request.setAttribute("participatenumber",
+					meeting.getMeetingparticipatenumber());
+			request.setAttribute("starttime", meeting.getMeetingstarttime());
+			request.setAttribute("endtime", meeting.getMeetingendtime());
+			request.setAttribute("illustrate", meeting.getMeetingillustrate());
+			// 查找并装入对应会议的参会人员集合
+			List<Employee> meetingemployeesList = dao
+					.selectEmployeesByMeetingId(meetingid);
+			request.setAttribute("meetingemployeesList", meetingemployeesList);
+			// send
 			request.getRequestDispatcher("meetingdetail.jsp").forward(request,
 					response);
 		}

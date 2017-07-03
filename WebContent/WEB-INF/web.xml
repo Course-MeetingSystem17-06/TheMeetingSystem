@@ -229,4 +229,14 @@
 		<servlet-name>ViewMyNotificationServlet</servlet-name>
 		<url-pattern>/ViewMyNotificationServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ViewAllAttendMeetingsServlet</display-name>
+		<servlet-name>ViewAllAttendMeetingsServlet</servlet-name>
+		<servlet-class>servlet.ViewAllAttendMeetingsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewAllAttendMeetingsServlet</servlet-name>
+		<url-pattern>/ViewAllAttendMeetingsServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

@@ -15,6 +15,9 @@
 					+ user;
 		} else if (type == "notification") {
 			window.location.href = "ViewMyNotificationServlet?user=" + user;
+		} else if (type == "attend") {
+			window.location.href = "ViewAllAttendMeetingsServlet?code=viewattendmeetings&user="
+					+ user;
 		} else {
 			window.location.href = "SearchMeetingsServlet";
 		}

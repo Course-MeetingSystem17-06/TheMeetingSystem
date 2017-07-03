@@ -23,7 +23,7 @@
 				</li>
 				<li class="sidebar-menuitem active"><a href="ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&user=<%=username%>"
 					target="main">我的预定</a></li>
-				<li class="sidebar-menuitem"><a href="01.html" target="main">我的会议</a>
+				<li class="sidebar-menuitem"><a href="ViewAllAttendMeetingsServlet?code=viewattendmeetings&user=<%=username %>" target="main">我的会议</a>
 				</li>
 			</ul>
 		</div>

@@ -54,7 +54,7 @@ public class EmployeeDAO {
 		Employee employee = null;
 		try {
 			PreparedStatement st = null;
-			String sql = "select * from employee where Employee_username='"
+			String sql = "select * from employee where Employee_name='"
 					+ username + "'";
 			st = conn.prepareStatement(sql);
 			ResultSet rs = st.executeQuery(sql);

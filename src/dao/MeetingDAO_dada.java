@@ -377,4 +377,49 @@ public class MeetingDAO_dada {
 		}
 		return latestmeetingsList;
 	}
+
+	// 查询某人将要参加的所有会议
+	public List<Meeting_dada> selectAttendMeetings(int id) {
+		conn = ConnectionFactory.getConnection();
+		String sql_id = "select * from meetingemployee where Employee_ID ='"
+				+ id + "'";
+		List<Meeting_dada> meetingsList = new ArrayList<Meeting_dada>();
+		try {
+			PreparedStatement ps_id = conn.prepareStatement(sql_id);
+			ResultSet rs_id = ps_id.executeQuery(sql_id);
+			while (rs_id.next()) {
+				Connection conn_info = ConnectionFactory.getConnection();
+				String sql_info = "select * from meeting where Meeting_ID='"
+						+ rs_id.getString("Meeting_ID") + "'";
+				PreparedStatement ps_info = conn_info
+						.prepareStatement(sql_info);
+				ResultSet rs_info = ps_info.executeQuery(sql_info);
+				if (rs_info.next()) {
+					Meeting_dada meeting = new Meeting_dada();
+					meeting.setMeetingid(rs_info.getInt("Meeting_id"));
+					meeting.setMeetingname(rs_info.getString("Meeting_name"));
+					meeting.setMeetingroomname(rs_info
+							.getString("Meeting_rname"));
+					meeting.setMeetingparticipatenumber(rs_info
+							.getString("Meeting_pnumber"));
+					meeting.setMeetingstarttime(rs_info
+							.getDate("Meeting_stime"));
+					meeting.setMeetingendtime(rs_info.getDate("Meeting_etime"));
+					meeting.setMeetingillustrate(rs_info
+							.getString("Meeting_illustrate"));
+					meeting.setMeetingbooker(rs_info
+							.getString("Meeting_booker"));
+					meeting.setMeetingstate(rs_info.getString("Meeting_state"));
+					meeting.setMeetingbookdate(rs_info
+							.getDate("Meeting_bookdate"));
+					meetingsList.add(meeting);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection();
+		}
+		return meetingsList;
+	}
 }
