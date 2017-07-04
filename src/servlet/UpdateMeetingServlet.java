@@ -55,6 +55,7 @@ public class UpdateMeetingServlet extends HttpServlet {
 		if (code != null && code.equals("update")) {
 			// 获取添加会议室页面填写的请求参数
 			request.setAttribute("pagetype", "mybooked");
+			request.setAttribute("user", user);
 			String illustrate = request.getParameter("illustrate");
 			MeetingService_dada service = new MeetingService_dada();
 			service.updateillustrate(meetingid, illustrate);
@@ -87,19 +88,19 @@ public class UpdateMeetingServlet extends HttpServlet {
 		}
 
 		if (code != null && code.equals("cancel")) {
-			// 跳转到确认取消界面
+			// 跳转到确认取消一级界面
 			String meetingname = request.getParameter("meetingname");
 			request.setAttribute("meetingid", meetingid);
 			request.setAttribute("user", user);
 			request.setAttribute("meetingname", meetingname);
 			request.getRequestDispatcher("confirmcancelmeeting.jsp").forward(
-					request, response);
+					request, response);//跳转到确认取消二级界面
 		}
 
 		if (code != null && code.equals("confirmcancel")) {
 			// 确认取消
 			request.setAttribute("meetingid", meetingid);
-
+			request.setAttribute("user", user);
 			String meetingname = request.getParameter("meetingname");
 			request.setAttribute("meetingname", meetingname);
 

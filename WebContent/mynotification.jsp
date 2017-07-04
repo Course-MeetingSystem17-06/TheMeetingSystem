@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*,vo.*"
 	contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
 <title>CoolMeeting会议管理系统</title>
@@ -24,8 +25,10 @@
 				<tr>
 					<td>${emp.meetingname}</td>
 					<td>${emp.meetingroomname}</td>
-					<td>${emp.meetingstarttime}</td>
-					<td>${emp.meetingendtime}</td>
+					<td><fmt:formatDate value="${emp.meetingstarttime}"
+							pattern="yyyy-MM-dd HH:mm:ss" /></td>
+					<td><fmt:formatDate value="${emp.meetingendtime}"
+							pattern="yyyy-MM-dd HH:mm:ss" /></td>
 					<td><a class="clickbutton"
 						href="UpdateMeetingServlet?code=notification&meetingid=${emp.meetingid}&user=${requestScope.user}">查看详情</a></td>
 				</tr>

@@ -14,7 +14,8 @@
 <link rel="stylesheet" type="text/css" href="styles/common02.css" />
 </head>
 <body>
-<%String username=(String)session.getAttribute("employeename"); %>
+<%String username=(String)session.getAttribute("employeename"); %><!-- 姓名 -->
+<%String user=(String)session.getAttribute("username"); %><!-- 用户名 -->
 	<div class="page-sidebar">
 		<div class="sidebar-menugroup">
 			<div class="sidebar-grouptitle">个人中心</div>
@@ -23,7 +24,7 @@
 				</li>
 				<li class="sidebar-menuitem active"><a href="ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&user=<%=username%>"
 					target="main">我的预定</a></li>
-				<li class="sidebar-menuitem"><a href="ViewAllAttendMeetingsServlet?code=viewattendmeetings&user=<%=username %>" target="main">我的会议</a>
+				<li class="sidebar-menuitem"><a href="ViewAllAttendMeetingsServlet?code=viewattendmeetings&user=<%=user %>" target="main">我的会议</a>
 				</li>
 			</ul>
 		</div>

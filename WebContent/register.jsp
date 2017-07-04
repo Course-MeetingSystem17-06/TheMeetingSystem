@@ -8,10 +8,14 @@
 </style>
 <script type="text/javascript" src="js/jquery-1.11.0.js"></script>
 <script type="text/javascript">
+	String.prototype.Trim = function() {
+		return this.replace(/(^\s*)|(\s*$)/g, "");
+	};
+
 	//使用ajax方法访问，验证账户名是否存在
 	function validate() {
-		
-	$
+		checknull($("#username").val(), "username");
+		$
 				.ajax({
 					type : "POST",
 					url : "ValidateUsernameServlet",
@@ -22,7 +26,8 @@
 						var validateMessage = $("#validateMessage");
 						var data = JSON.parse(message);
 						if (data.flag) {
-							if ($("#username").val() == "") {
+							if ($("#username").val() == ""
+									|| $("#username").val().Trim() == "") {
 								validateMessage.html("");
 								return;
 							}
@@ -30,7 +35,6 @@
 							validateMessage.css({
 								color : "green"
 							});
-							document.getElementById('confirminfo').innerHTML = validateMessage.innerHTML;
 							checknull($("#username").val(), "username");
 
 						} else {
@@ -39,7 +43,6 @@
 							validateMessage.css({
 								color : "red"
 							});
-							document.getElementById('confirminfo').innerHTML = validateMessage.innerHTML;
 							checknull($("#username").val(), "username");
 
 						}
@@ -48,11 +51,29 @@
 
 	}
 
-	//验证两次密码是否相同
+	//验证密码
 	function check() {
+		var password = form1.firstpassword.value;
+		var number=0, alpha=0;
+		var len = password.length;
+		if (len != 0){
+			for (var i=0; i<len; i++){
+				if((password[i]>='a'&&password[i]<='z')||(password[i]>='A'&&password[i]<='Z')){
+					alpha++;
+				}else if(password[i]>='0'&&password[i]<='9'){
+					number++;
+				}
+			}
+		}
 		if (form1.firstpassword.value != form1.secondpassword.value) {
 			confirminfo.innerHTML = "<font name=error color=red>两次输入的密码不相符</font>";
-		} else {
+		} else if(len != (number+alpha)){
+			confirminfo.innerHTML = "<font name=error color=red>含有非法字符，密码只能包含数字和字母</font>";
+		} else if(number == 0){
+			confirminfo.innerHTML = "<font name=error color=red>不含数字，请输入数字字母组合</font>";
+		}else if(alpha == 0){
+			confirminfo.innerHTML = "<font name=error color=red>不含字母，请输入字母数字组合</font>";
+		}else{
 			confirminfo.innerHTML = "<font color=green>两次输入的密码相符</font>";
 		}
 		checknull($("#secondpassword").val(), "secondpassword");
@@ -61,7 +82,8 @@
 	function checknull(val, target) {
 		target += "_mes";
 		document.getElementById(target).className = 1;
-		if (val == "") {
+		var val_trim = val.Trim();
+		if (val == "" || val_trim == "") {
 			document.getElementById(target).innerHTML = "<font name=error color=red>输入不能为空</font>";
 		} else {
 			document.getElementById(target).innerHTML = "";
@@ -104,56 +126,66 @@
 					<td><font color="red">${requestScope.msg}</font>
 					</td>
 				</tr>
-				<table class="formtable" style="width: 50%">
+				<table class="formtable">
 					<tr>
-						<td>姓名：</td>
+						<td><font color="#FF0000">* </font>姓名：</td>
 
 						<td><input type="text" id="employeename" name="employeename"
-							maxlength="20" value="${param.employeename}"
-							onchange="checknull(this.value,this.id)" />
+							maxlength="20" value="${param.employeename}" placeholder="请输入姓名"
+							onkeyup="checknull(this.value,this.id)" />
 							<div id="employeename_mes" class=0></div>
 						</td>
 					</tr>
 					<tr>
-						<td>账户名：</td>
+						<td><font color="#FF0000">* </font>账户名：</td>
 						<td><input type="text" id="username" name="username"
-							maxlength="20" value="${param.username}" onchange="validate()" />
+							maxlength="20" value="${param.username}" placeholder="请输入登陆用帐户名"
+							onkeyup="validate()" />
 							<div id="validateMessage"></div>
 							<div id="username_mes" class=0></div>
 						</td>
 					</tr>
 					<tr>
-						<td>密码：</td>
+						<td><font color="#FF0000">* </font>密码：</td>
 						<td><input type="password" id="firstpassword" name="password"
-							maxlength="20" placeholder="请输入6位以上的密码"
-							onchange="checknull(this.value,this.id)">
+							maxlength="20" placeholder="请输入密码"
+							onkeyup="check()" >
 							<div id="firstpassword_mes" class=0></div>
 						</td>
 					</tr>
 					<tr>
-						<td>确认密码：</td>
+						<td></td>
+						<td id="passwordf"><font size="2px" color="#666666">密码格式为6位以上的数字字母组合</font>
+						</td>
+					</tr>
+					<tr>
+						<td><font color="#FF0000">* </font>确认密码：</td>
 						<td><input type="password" id="secondpassword"
-							name="password" maxlength="20" onchange="check()" />
-							<div id="confirminfo"></div>
+							placeholder="请再次输入密码" name="password" maxlength="20"
+							onkeyup="check()" />
+							<div id="confirminfo" display=none ></div>
+							<div id="pconfirminfo"></div>
 							<div id="secondpassword_mes" class=0></div>
 						</td>
 					</tr>
 					<tr>
-						<td>联系电话：</td>
+						<td><font color="#FF0000">* </font>联系电话：</td>
 						<td><input type="text" id="phone" name="phone" maxlength="20"
-							value="${param.phone}" onchange="checknull(this.value,this.id)" />
+							placeholder="请输入联系电话" value="${param.phone}"
+							onkeyup="checknull(this.value,this.id)" />
 							<div id="phone_mes" class=0></div>
 						</td>
 					</tr>
 					<tr>
-						<td>电子邮件：</td>
+						<td><font color="#FF0000">* </font>电子邮件：</td>
 						<td><input type="text" id="email" name="email" maxlength="20"
-							value="${param.email}" onchange="checknull(this.value,this.id)" />
+							placeholder="请输入电子邮箱地址" value="${param.email}"
+							onkeyup="checknull(this.value,this.id)" />
 							<div id="email_mes" class=0></div>
 						</td>
 					</tr>
 					<tr>
-						<td>所在部门：</td>
+						<td><font color="#FF0000">* </font>所在部门：</td>
 
 						<td><select name="deptid">
 								<c:forEach var="department"

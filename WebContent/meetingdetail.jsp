@@ -2,6 +2,7 @@
 <%@ page language="java" import="java.util.*,vo.*"
 	contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
 <title>CoolMeeting会议管理系统</title>
@@ -23,10 +24,10 @@
 		}
 	}
 	function cancel() {
-		document.getElementById("form1").action = "UpdateMeetingServlet?code=cancel&meetingid=${requestScope.meetingid}&meetingname=${requestScope.name}";
+		document.getElementById("form1").action = "UpdateMeetingServlet?code=cancel&meetingid=${requestScope.meetingid}&meetingname=${requestScope.name}&user=${requestScope.user}";
 	}
 	function update() {
-		document.getElementById("form1").action = "UpdateMeetingServlet?code=update&meetingid=${requestScope.meetingid}";
+		document.getElementById("form1").action = "UpdateMeetingServlet?code=update&meetingid=${requestScope.meetingid}&user=${requestScope.user}";
 	}
 </script>
 </head>
@@ -38,25 +39,32 @@
 				<legend>会议信息</legend>
 				<tr>
 					<td>提示信息:</td>
-					<td><font color="red">${requestScope.msg}</font>
-					</td>
+					<td><font color="red">${requestScope.msg}</font></td>
 				</tr>
 				<table class="formtable" style="width: 50%">
 					<tr>
 						<td>会议名称:</td>
-						<td><font id="a111">${requestScope.name}</font></td>
+						<td><font id="a111">${requestScope.name}</font>
+						</td>
 					</tr>
 					<tr>
 						<td>预计参加人数:</td>
-						<td><font>${requestScope.participatenumber}</font></td>
+						<td><font>${requestScope.participatenumber}</font>
+						</td>
 					</tr>
 					<tr>
 						<td>预计开始时间:</td>
-						<td><font>${requestScope.starttime}</font></td>
+						<td><font><fmt:formatDate
+									value="${requestScope.starttime}" pattern="yyyy-MM-dd HH:mm:ss" />
+						</font>
+						</td>
 					</tr>
 					<tr>
 						<td>预计结束时间:</td>
-						<td><font>${requestScope.endtime}</font></td>
+						<td><font><fmt:formatDate
+									value="${requestScope.endtime}" pattern="yyyy-MM-dd HH:mm:ss" />
+						</font>
+						</td>
 					</tr>
 					<tr>
 						<td>备注：</td>
@@ -82,7 +90,8 @@
 										<td>${emp.email}</td>
 									</tr>
 								</c:forEach>
-							</table></td>
+							</table>
+						</td>
 					</tr>
 					<tr>
 						<td colspan="2" class="command"><c:if
@@ -92,7 +101,8 @@
 								<input type="submit" value="确认修改" class="clickbutton"
 									onclick="update()" />
 							</c:if><input type="button" value="返回" class="clickbutton"
-							onclick="back()" /></td>
+							onclick="back()" />
+						</td>
 					</tr>
 				</table>
 			</fieldset>

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -71,6 +73,7 @@ public class MeetingDAO_dada {
 					+ meetingdateendsql;
 			st = conn.prepareStatement(sql);
 			ResultSet rs = st.executeQuery(sql);
+			SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			while (rs.next()) {
 				meeting = new Meeting_dada();
 				meeting.setMeetingid(rs.getInt("Meeting_id"));
@@ -78,15 +81,24 @@ public class MeetingDAO_dada {
 				meeting.setMeetingroomname(rs.getString("Meeting_rname"));
 				meeting.setMeetingparticipatenumber(rs
 						.getString("Meeting_pnumber"));
-				meeting.setMeetingstarttime(rs.getDate("Meeting_stime"));
-				meeting.setMeetingendtime(rs.getDate("Meeting_etime"));
 				meeting.setMeetingillustrate(rs.getString("Meeting_illustrate"));
 				meeting.setMeetingbooker(rs.getString("Meeting_booker"));
 				meeting.setMeetingstate(rs.getString("Meeting_state"));
-				meeting.setMeetingbookdate(rs.getDate("Meeting_bookdate"));
+				String stime = rs.getString("Meeting_stime");
+				meeting.setMeetingstarttime(fmt.parse(stime.substring(0,
+						stime.length() - 2)));
+				String etime = rs.getString("Meeting_etime");
+				meeting.setMeetingendtime(fmt.parse(etime.substring(0,
+						etime.length() - 2)));
+				String btime = rs.getString("Meeting_bookdate");
+				meeting.setMeetingbookdate(fmt.parse(btime.substring(0,
+						btime.length() - 2)));
 				meetingslist.add(meeting);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			ConnectionFactory.closeConnection();
@@ -149,6 +161,7 @@ public class MeetingDAO_dada {
 					+ meetingdateendsql + " limit " + start + " ," + count;
 			st = conn.prepareStatement(sql);
 			ResultSet rs = st.executeQuery(sql);
+			SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			while (rs.next()) {
 				meeting = new Meeting_dada();
 				meeting.setMeetingid(rs.getInt("Meeting_id"));
@@ -156,15 +169,24 @@ public class MeetingDAO_dada {
 				meeting.setMeetingroomname(rs.getString("Meeting_rname"));
 				meeting.setMeetingparticipatenumber(rs
 						.getString("Meeting_pnumber"));
-				meeting.setMeetingstarttime(rs.getDate("Meeting_stime"));
-				meeting.setMeetingendtime(rs.getDate("Meeting_etime"));
 				meeting.setMeetingillustrate(rs.getString("Meeting_illustrate"));
 				meeting.setMeetingbooker(rs.getString("Meeting_booker"));
 				meeting.setMeetingstate(rs.getString("Meeting_state"));
-				meeting.setMeetingbookdate(rs.getDate("Meeting_bookdate"));
+				String stime = rs.getString("Meeting_stime");
+				meeting.setMeetingstarttime(fmt.parse(stime.substring(0,
+						stime.length() - 2)));
+				String etime = rs.getString("Meeting_etime");
+				meeting.setMeetingendtime(fmt.parse(etime.substring(0,
+						etime.length() - 2)));
+				String btime = rs.getString("Meeting_bookdate");
+				meeting.setMeetingbookdate(fmt.parse(btime.substring(0,
+						btime.length() - 2)));
 				meetingslist.add(meeting);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			ConnectionFactory.closeConnection();
@@ -181,6 +203,7 @@ public class MeetingDAO_dada {
 			String sql = "select * from meeting where Meeting_ID='" + ID + "'";
 			st = conn.prepareStatement(sql);
 			ResultSet rs = st.executeQuery(sql);
+			SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			if (rs.next() == true) {
 				meeting = new Meeting_dada();
 				meeting.setMeetingid(rs.getInt("Meeting_id"));
@@ -188,14 +211,23 @@ public class MeetingDAO_dada {
 				meeting.setMeetingroomname(rs.getString("Meeting_rname"));
 				meeting.setMeetingparticipatenumber(rs
 						.getString("Meeting_pnumber"));
-				meeting.setMeetingstarttime(rs.getDate("Meeting_stime"));
-				meeting.setMeetingendtime(rs.getDate("Meeting_etime"));
 				meeting.setMeetingillustrate(rs.getString("Meeting_illustrate"));
 				meeting.setMeetingbooker(rs.getString("Meeting_booker"));
 				meeting.setMeetingstate(rs.getString("Meeting_state"));
-				meeting.setMeetingbookdate(rs.getDate("Meeting_bookdate"));
+				String stime = rs.getString("Meeting_stime");
+				meeting.setMeetingstarttime(fmt.parse(stime.substring(0,
+						stime.length() - 2)));
+				String etime = rs.getString("Meeting_etime");
+				meeting.setMeetingendtime(fmt.parse(etime.substring(0,
+						etime.length() - 2)));
+				String btime = rs.getString("Meeting_bookdate");
+				meeting.setMeetingbookdate(fmt.parse(btime.substring(0,
+						btime.length() - 2)));
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
@@ -331,16 +363,24 @@ public class MeetingDAO_dada {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery(sql);
+			SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			while (rs.next()) {
 				Meeting_dada meeting = new Meeting_dada();
 				meeting.setMeetingid(rs.getInt("Meeting_id"));
 				meeting.setMeetingname(rs.getString("Meeting_name"));
 				meeting.setMeetingroomname(rs.getString("Meeting_rname"));
-				meeting.setMeetingstarttime(rs.getDate("Meeting_stime"));
-				meeting.setMeetingendtime(rs.getDate("Meeting_etime"));
+				String stime = rs.getString("Meeting_stime");
+				meeting.setMeetingstarttime(fmt.parse(stime.substring(0,
+						stime.length() - 2)));
+				String etime = rs.getString("Meeting_etime");
+				meeting.setMeetingendtime(fmt.parse(etime.substring(0,
+						etime.length() - 2)));
 				latestmeetingsList.add(meeting);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			ConnectionFactory.closeConnection();
@@ -359,18 +399,26 @@ public class MeetingDAO_dada {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery(sql);
+			SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			while (rs.next()) {
 				Meeting_dada meeting = new Meeting_dada();
 				meeting.setMeetingid(rs.getInt("Meeting_id"));
 				meeting.setMeetingname(rs.getString("Meeting_name"));
 				meeting.setMeetingroomname(rs.getString("Meeting_rname"));
-				meeting.setMeetingstarttime(rs.getDate("Meeting_stime"));
-				meeting.setMeetingendtime(rs.getDate("Meeting_etime"));
+				String stime = rs.getString("Meeting_stime");
+				meeting.setMeetingstarttime(fmt.parse(stime.substring(0,
+						stime.length() - 2)));
+				String etime = rs.getString("Meeting_etime");
+				meeting.setMeetingendtime(fmt.parse(etime.substring(0,
+						etime.length() - 2)));
 				meeting.setMeetingcancelreason(rs
 						.getString("Meeting_cancelreason"));
 				latestmeetingsList.add(meeting);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			ConnectionFactory.closeConnection();
@@ -394,6 +442,8 @@ public class MeetingDAO_dada {
 				PreparedStatement ps_info = conn_info
 						.prepareStatement(sql_info);
 				ResultSet rs_info = ps_info.executeQuery(sql_info);
+				SimpleDateFormat fmt = new SimpleDateFormat(
+						"yyyy-MM-dd HH:mm:ss");
 				if (rs_info.next()) {
 					Meeting_dada meeting = new Meeting_dada();
 					meeting.setMeetingid(rs_info.getInt("Meeting_id"));
@@ -402,20 +452,82 @@ public class MeetingDAO_dada {
 							.getString("Meeting_rname"));
 					meeting.setMeetingparticipatenumber(rs_info
 							.getString("Meeting_pnumber"));
-					meeting.setMeetingstarttime(rs_info
-							.getDate("Meeting_stime"));
-					meeting.setMeetingendtime(rs_info.getDate("Meeting_etime"));
 					meeting.setMeetingillustrate(rs_info
 							.getString("Meeting_illustrate"));
 					meeting.setMeetingbooker(rs_info
 							.getString("Meeting_booker"));
 					meeting.setMeetingstate(rs_info.getString("Meeting_state"));
-					meeting.setMeetingbookdate(rs_info
-							.getDate("Meeting_bookdate"));
+					String stime = rs_info.getString("Meeting_stime");
+					meeting.setMeetingstarttime(fmt.parse(stime.substring(0,
+							stime.length() - 2)));
+					String etime = rs_info.getString("Meeting_etime");
+					meeting.setMeetingendtime(fmt.parse(etime.substring(0,
+							etime.length() - 2)));
+					String btime = rs_info.getString("Meeting_bookdate");
+					meeting.setMeetingbookdate(fmt.parse(btime.substring(0,
+							btime.length() - 2)));
 					meetingsList.add(meeting);
 				}
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection();
+		}
+		return meetingsList;
+	}
+
+	// 根据某人要参加的（所有会议的）当前会议
+	public List<Meeting_dada> selectAttendMeetingsOfOnePage(int id,
+			int start, int count) {
+		conn = ConnectionFactory.getConnection();
+		String sql_id = "select * from meetingemployee where Employee_ID ='"
+				+ id + "'" + " limit " + start + " ," + count;
+		List<Meeting_dada> meetingsList = new ArrayList<Meeting_dada>();
+		try {
+			PreparedStatement ps_id = conn.prepareStatement(sql_id);
+			ResultSet rs_id = ps_id.executeQuery(sql_id);
+			while (rs_id.next()) {
+				Connection conn_info = ConnectionFactory.getConnection();
+				String sql_info = "select * from meeting where Meeting_ID='"
+						+ rs_id.getString("Meeting_ID") + "'";
+				PreparedStatement ps_info = conn_info
+						.prepareStatement(sql_info);
+				ResultSet rs_info = ps_info.executeQuery(sql_info);
+				SimpleDateFormat fmt = new SimpleDateFormat(
+						"yyyy-MM-dd HH:mm:ss");
+				if (rs_info.next()) {
+					Meeting_dada meeting = new Meeting_dada();
+					meeting.setMeetingid(rs_info.getInt("Meeting_id"));
+					meeting.setMeetingname(rs_info.getString("Meeting_name"));
+					meeting.setMeetingroomname(rs_info
+							.getString("Meeting_rname"));
+					meeting.setMeetingparticipatenumber(rs_info
+							.getString("Meeting_pnumber"));
+					meeting.setMeetingillustrate(rs_info
+							.getString("Meeting_illustrate"));
+					meeting.setMeetingbooker(rs_info
+							.getString("Meeting_booker"));
+					meeting.setMeetingstate(rs_info.getString("Meeting_state"));
+					String stime = rs_info.getString("Meeting_stime");
+					meeting.setMeetingstarttime(fmt.parse(stime.substring(0,
+							stime.length() - 2)));
+					String etime = rs_info.getString("Meeting_etime");
+					meeting.setMeetingendtime(fmt.parse(etime.substring(0,
+							etime.length() - 2)));
+					String btime = rs_info.getString("Meeting_bookdate");
+					meeting.setMeetingbookdate(fmt.parse(btime.substring(0,
+							btime.length() - 2)));
+					meetingsList.add(meeting);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			ConnectionFactory.closeConnection();

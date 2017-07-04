@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import dao.EmployeeDAO;
 import dao.MeetingDAO_dada;
+import vo.Employee;
 import vo.Meeting_dada;
 
 public class MeetingService_dada {
@@ -35,6 +37,27 @@ public class MeetingService_dada {
 		return dao.selectMeetingsOfOnePage(meetingname, meetingroomname,
 				meetingbooker, meetingstarttime, meetingendtime,
 				meetingbookdatestart, meetingbookdateend, start, count);
+	}
+
+	// 查询当前用户将要参加的所有会议记录集合
+	public List<Meeting_dada> searchMyAttendMeetings(String user) {
+		EmployeeDAO edao = new EmployeeDAO();
+		Employee employee = edao.selectByUsername(user);
+		int id = employee.getEmployeeid();
+		MeetingDAO_dada dao = new MeetingDAO_dada();
+		List<Meeting_dada> list = dao.selectAttendMeetings(id);
+		countOfMeetings = list.size();
+		return list;
+	}
+
+	// 查询当前用户将要参加的会议的每一页的数据集合
+	public List<Meeting_dada> searchMyAttendMeetingsOfOnePage(String user, int start,
+			int count) {
+		EmployeeDAO edao = new EmployeeDAO();
+		Employee employee = edao.selectByUsername(user);
+		int id = employee.getEmployeeid();
+		MeetingDAO_dada dao = new MeetingDAO_dada();
+		return dao.selectAttendMeetingsOfOnePage(id, start, count);
 	}
 
 	// 返回总页数
@@ -67,23 +90,26 @@ public class MeetingService_dada {
 
 	// 查询当前用户未来七天的会议集合
 	public List<Meeting_dada> searchMyLatestMeetings(String meetingbooker) {
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date now = new Date();
 		Date future = new Date();
-		future.setTime(now.getTime()+604800000);//向后一周时间
-		
-        String now_s = format.format(now).toString();
-        String future_s = format.format(future).toString();
-        System.out.println(now_s+future_s);
-		List<Meeting_dada> list = dao.selectLatestMeetings(meetingbooker, now_s, future_s);
+		future.setTime(now.getTime() + 604800000);// 向后一周时间
+
+		String now_s = format.format(now).toString();
+		String future_s = format.format(future).toString();
+		System.out.println(now_s + future_s);
+		List<Meeting_dada> list = dao.selectLatestMeetings(meetingbooker,
+				now_s, future_s);
 		return list;
 	}
-	//查询当前用户已取消且未来本应参加的会议
+
+	// 查询当前用户已取消且未来本应参加的会议
 	public List<Meeting_dada> searchMyCancelMeetings(String meetingbooker) {
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date now = new Date();
 		String now_s = format.format(now).toString();
-		List<Meeting_dada> list = dao.selectCancelMeetings(meetingbooker, now_s);
+		List<Meeting_dada> list = dao
+				.selectCancelMeetings(meetingbooker, now_s);
 		return list;
 
 	}

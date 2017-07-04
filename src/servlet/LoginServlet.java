@@ -120,7 +120,9 @@ public class LoginServlet extends HttpServlet {
 			// 把登录成功的员工姓名保存到会话中
 			session.setAttribute("employeename", service.getLoginedEmployee()
 					.getEmployeename());
-
+			// 把登录成功的员工帐户名保存到会话中
+			session.setAttribute("username", service.getLoginedEmployee()
+					.getUsername());
 			// 根据角色跳转到不同页面
 			// 1、管理员 2、普通员工
 			String role = service.getLoginedEmployee().getRole();
