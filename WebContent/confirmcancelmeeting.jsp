@@ -26,26 +26,26 @@
 	<div class="page-content">
 		<div class="content-nav">会议预定 > 撤销会议预定</div>
 		<form id="form1" name="form1"
-			action="UpdateMeetingServlet?code=confirmcancel&meetingid=${requestScope.meetingid}&meetingname=${requestScope.meetingname}"
+			action="UpdateMeetingServlet?code=confirmcancel&meetingid=${requestScope.meetingid}&meetingname=${requestScope.meetingname}&user=${requestScope.user}"
 			method="post">
 			<fieldset>
 				<legend>撤销预定</legend>
 				<tr>
 					<td>提示信息:</td>
-					<td><font color="red">${requestScope.msg}</font></td>
+					<td><font color="red">${requestScope.msg}</font>
+					</td>
 				</tr>
 				<table class="formtable" style="width: 50%">
 					<tr>
 						<td>会议名称:</td>
-						<td><font>${requestScope.meetingname}</font>
-						</td>
+						<td><font>${requestScope.meetingname}</font></td>
 					</tr>
 					<tr>
 						<td>撤销理由：</td>
 						<td><textarea id="reason" name="reason" maxlength="200"
-								rows="5" cols="60" placeholder="200字以内的文字描述" onChange="getTextarea()">${requestScope.meetingcancelreason}</textarea><input
-							type="hidden" id="reason_value" name="reason_value" />
-						</td>
+								rows="5" cols="60" placeholder="200字以内的文字描述"
+								onChange="getTextarea()">${requestScope.meetingcancelreason}</textarea><input
+							type="hidden" id="reason_value" name="reason_value" /></td>
 					</tr>
 					<tr>
 						<td colspan="2" class="command"><input id="confirm"

@@ -2,27 +2,32 @@
 <%@ page language="java" import="java.util.*,vo.*"
 	contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
 <title>CoolMeeting会议管理系统</title>
 <link rel="stylesheet" href="styles/common03.css" />
 <script type="text/javascript">
-	window.onload = function() {
-		var type = "${requestScope.pagetype}";
-		if (type == "mybooked") {
-			document.getElementById("form1").action = "UpdateMeetingServlet?code=cancel&meetingid=${requestScope.meetingid}&meetingname=${requestScope.name}";
-		} else {
-			document.getElementById("form1").action = "UpdateMeetingServlet?code=update&meetingid=${requestScope.meetingid}";
-		}
-	};
 	function back() {
 		var type = "${requestScope.pagetype}";
 		var user = "${requestScope.user}";
 		if (type == "mybooked") {
-			window.location.href = "ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&user="+user;
+			window.location.href = "ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&user="
+					+ user;
+		} else if (type == "notification") {
+			window.location.href = "ViewMyNotificationServlet?user=" + user;
+		} else if (type == "attend") {
+			window.location.href = "ViewAllAttendMeetingsServlet?code=viewattendmeetings&user="
+					+ user;
 		} else {
 			window.location.href = "SearchMeetingsServlet";
 		}
+	}
+	function cancel() {
+		document.getElementById("form1").action = "UpdateMeetingServlet?code=cancel&meetingid=${requestScope.meetingid}&meetingname=${requestScope.name}&user=${requestScope.user}";
+	}
+	function update() {
+		document.getElementById("form1").action = "UpdateMeetingServlet?code=update&meetingid=${requestScope.meetingid}&user=${requestScope.user}";
 	}
 </script>
 </head>
@@ -49,12 +54,16 @@
 					</tr>
 					<tr>
 						<td>预计开始时间:</td>
-						<td><font>${requestScope.starttime}</font>
+						<td><font><fmt:formatDate
+									value="${requestScope.starttime}" pattern="yyyy-MM-dd HH:mm:ss" />
+						</font>
 						</td>
 					</tr>
 					<tr>
 						<td>预计结束时间:</td>
-						<td><font>${requestScope.endtime}</font>
+						<td><font><fmt:formatDate
+									value="${requestScope.endtime}" pattern="yyyy-MM-dd HH:mm:ss" />
+						</font>
 						</td>
 					</tr>
 					<tr>
@@ -64,12 +73,34 @@
 						</td>
 					</tr>
 					<tr>
+						<td>参会人员：</td>
+						<td>
+							<table class="listtable">
+								<caption></caption>
+								<tr class="listheader">
+									<th>姓名</th>
+									<th>联系电话</th>
+									<th>电子邮件</th>
+								</tr>
+								<c:forEach var="emp"
+									items="${requestScope.meetingemployeesList}">
+									<tr>
+										<td>${emp.employeename}</td>
+										<td>${emp.phone}</td>
+										<td>${emp.email}</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</td>
+					</tr>
+					<tr>
 						<td colspan="2" class="command"><c:if
 								test="${requestScope.pagetype eq 'mybooked'}">
-								<input type="submit" value="撤销会议" class="clickbutton" />
-							</c:if> <c:if test="${requestScope.pagetype ne 'mybooked'}">
-								<input type="submit" value="确认修改" class="clickbutton" />
-							</c:if> <input type="button" value="返回" class="clickbutton"
+								<input type="submit" value="撤销会议" class="clickbutton"
+									onclick="cancel()" />
+								<input type="submit" value="确认修改" class="clickbutton"
+									onclick="update()" />
+							</c:if><input type="button" value="返回" class="clickbutton"
 							onclick="back()" />
 						</td>
 					</tr>

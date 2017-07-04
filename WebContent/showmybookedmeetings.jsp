@@ -1,11 +1,13 @@
 <%@ page language="java" import="java.util.*,vo.*"
 	contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
 <title>CoolMeeting会议管理系统</title>
 <link rel="stylesheet" href="styles/common03.css" />
 <script type="text/javascript">
+	
 </script>
 </head>
 <body>
@@ -25,11 +27,18 @@
 				<tr>
 					<td>${emp.meetingname}</td>
 					<td>${emp.meetingroomname}</td>
-					<td>${emp.meetingstarttime}</td>
-					<td>${emp.meetingendtime}</td>
-					<td>${emp.meetingbookdate}</td>
+					<td><fmt:formatDate value="${emp.meetingstarttime}"
+							pattern="yyyy-MM-dd HH:mm:ss" />
+					</td>
+					<td><fmt:formatDate value="${emp.meetingendtime}"
+							pattern="yyyy-MM-dd HH:mm:ss" />
+					</td>
+					<td><fmt:formatDate value="${emp.meetingbookdate}"
+							pattern="yyyy-MM-dd HH:mm:ss" />
+					</td>
 					<td><a class="clickbutton"
 						href="UpdateMeetingServlet?code=mybooked&meetingid=${emp.meetingid}&user=${emp.meetingbooker}">查看/撤销</a>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
