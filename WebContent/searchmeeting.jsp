@@ -50,22 +50,22 @@
 						<td>预定日期： 从</td>
 						<td><input id=meetingbookdatestart
 							name="meetingbookdatestart" class="Wdate" type="text"
-							onClick="WdatePicker({maxDate:'#F{$dp.$D(\'meetingbookdateend\')}'})"
+							onClick="WdatePicker({maxDate:'#F{$dp.$D(\'meetingbookdateend\')}' , dateFmt:'yyyy-MM-dd HH:mm:ss'})"
 							value="${param.meetingbookdatestart}" />
 						</td>
 						<td>到</td>
 						<td><input id=meetingbookdateend name="meetingbookdateend" class="Wdate" type="text"
-							onClick="WdatePicker({minDate:'#F{$dp.$D(\'meetingbookdatestart\')}'})"
+							onClick="WdatePicker({minDate:'#F{$dp.$D(\'meetingbookdatestart\')}' , dateFmt:'yyyy-MM-dd HH:mm:ss'})"
 							value="${param.meetingbookdateend}" />
 						</td>
 						<td>会议日期： 从</td>
 						<td><input id=meetingstarttime name="meetingstarttime" class="Wdate" type="text"
-							onClick="WdatePicker({maxDate:'#F{$dp.$D(\'meetingendtime\')}'})"
+							onClick="WdatePicker({maxDate:'#F{$dp.$D(\'meetingendtime\')}' , dateFmt:'yyyy-MM-dd HH:mm:ss'})"
 							value="${param.meetingstarttime}" />
 						</td>
 						<td>到</td>
 						<td><input id=meetingendtime name="meetingendtime" class="Wdate" type="text"
-							onClick="WdatePicker({minDate:'#F{$dp.$D(\'meetingstarttime\')}'})"
+							onClick="WdatePicker({minDate:'#F{$dp.$D(\'meetingstarttime\')}' , dateFmt:'yyyy-MM-dd HH:mm:ss'})"
 							value="${param.meetingendtime}" />
 						</td>
 					</tr>

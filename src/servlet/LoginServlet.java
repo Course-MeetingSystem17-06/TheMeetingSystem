@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("pwd");
 		String username1 = null;
 		String password1 = null;
-		String code=request.getParameter("code");
+		String code = request.getParameter("code");
 
 		// 获得JSP页面的时间信息
 		String timelength = request.getParameter("timelength");
@@ -72,43 +72,26 @@ public class LoginServlet extends HttpServlet {
 			response.addCookie(usernamecookie);
 			response.addCookie(passwordcookie);
 		}
-		if(code!=null&&code.equals("exit")){
-			 Cookie[] cookies = request.getCookies();
-		      try
-		      {
-		           for(int i=0;i<cookies.length;i++)  
-		           {
-		        	   if(cookies[i].getName().equals("username") || cookies[i].getName().equals("password")){
-		        		      cookies[i].setValue(null);
-		        		      cookies[i].setMaxAge(0);
-		        		      response.addCookie(cookies[i]);
-		        		 }
-		           }
-		      }catch(Exception ex)
-		      {
-		           System.out.println("清空Cookies发生异常！");
-		      } 
-		     
-		    
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+		if (code != null && code.equals("exit")) {
+			Cookie[] cookies = request.getCookies();
+			try {
+				for (int i = 0; i < cookies.length; i++) {
+					if (cookies[i].getName().equals("username")
+							|| cookies[i].getName().equals("password")) {
+						cookies[i].setValue(null);
+						cookies[i].setMaxAge(0);
+						response.addCookie(cookies[i]);
+					}
+				}
+			} catch (Exception ex) {
+				System.out.println("清空Cookies发生异常！");
+			}
+
+			request.getRequestDispatcher("login.jsp")
+					.forward(request, response);
 			return;
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		// 调用Service层的业务逻辑方法
 		EmployeeService service = new EmployeeService();
 		int flag = service.login(username, password);

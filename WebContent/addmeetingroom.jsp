@@ -1,30 +1,32 @@
-
-<%@ page language="java" import="java.util.*,vo.*"
-	contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,vo.*" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <title>CoolMeeting会议管理系统</title>
 <link rel="stylesheet" href="styles/common03.css" />
+<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
 <script type="text/javascript">
 	function getRemark() {
 		var message = document.getElementById("roomremark").value;
 		document.getElementById("roomremark_value").value = message;
 	}
 	//使用ajax方法访问，验证账户名是否存在
-	function validate() {
+	function validate(val, target) {
 		$
 				.ajax({
 					type : "POST",
-					url : "ValidateUsernameServlet",
+					url : "ValidateMeetingroomServlet",
 					data : {
-						username : $("#username").val()
+						data : val, 
+						data1 : target
 					},
 					success : function(message) {
-						var validateMessage = $("#validateMessage");
+						if(target == "roomnumber")
+						var validateMessage = $("#validateMessagenum");
+						else var validateMessage = $("#validateMessagename");
 						var data = JSON.parse(message);
 						if (data.flag) {
-							if ($("#username").val() == "") {
+							if (val == "") {
 								validateMessage.html("");
 								return;
 							}
@@ -32,8 +34,7 @@
 							validateMessage.css({
 								color : "green"
 							});
-							document.getElementById('confirminfo').innerHTML = validateMessage.innerHTML;
-							checknull($("#username").val(), "username");
+							checknull(val, target);
 
 						} else {
 							validateMessage.html("<font name=error>" + data.msg
@@ -41,8 +42,7 @@
 							validateMessage.css({
 								color : "red"
 							});
-							document.getElementById('confirminfo').innerHTML = validateMessage.innerHTML;
-							checknull($("#username").val(), "username");
+							checknull(val,target);
 
 						}
 					}
@@ -50,15 +50,7 @@
 
 	}
 
-	//验证两次密码是否相同
-	function check() {
-		if (form1.firstpassword.value != form1.secondpassword.value) {
-			confirminfo.innerHTML = "<font name=error color=red>两次输入的密码不相符</font>";
-		} else {
-			confirminfo.innerHTML = "<font color=green>两次输入的密码相符</font>";
-		}
-		checknull($("#secondpassword").val(), "secondpassword");
-	}
+
 
 	function checknull(val, target) {
 		target += "_mes";
@@ -71,20 +63,28 @@
 		finalcheck();
 	}
 
+	function LimitTextArea(field) {
+		maxlimit = 200;
+		if (field.value.length > maxlimit) {
+			field.value = field.value.substring(0, maxlimit);
+			alert("字数不得多于200！");
+		}
+	}
+
 	function finalcheck() {
 		var i = 0;
 		var all = document.getElementsByClassName(0);
 		if (all.length != 0) {
-			document.getElementById('register_button').disabled = true;
+			document.getElementById('add_button').disabled = true;
 			return;
 		}
 		var error = document.getElementsByName('error');
 
 		if (error.length != 0) {
-			document.getElementById('register_button').disabled = true;
+			document.getElementById('add_button').disabled = true;
 			return;
 		}
-		document.getElementById('register_button').disabled = false;
+		document.getElementById('add_button').disabled = false;
 	}
 </script>
 </head>
@@ -100,43 +100,49 @@
 				</tr>
 				<table class="formtable" style="width: 50%">
 					<tr>
-						<td>门牌号:</td>
+						<td><font color="red">*</font>门牌号:</td>
 						<td><input id="roomnumber" name="roomnumber" type="text"
-							placeholder="例如：201" maxlength="10"
-							value="${requestScope.roomnumber}" />
+							placeholder="例如：201" maxlength="10" 
+							onchange="validate(this.value,this.id)" />
+							<div id="validateMessagenum"></div>
+							<div id="roomnumber_mes" class=0></div>
 						</td>
 					</tr>
 					<tr>
-						<td>会议室名称:</td>
+						<td><font color="red">*</font>会议室名称:</td>
 						<td><input id="roomname" name="roomname" type="text"
-							placeholder="例如：第一会议室" maxlength="20" value="${param.roomname}" />
+							placeholder="例如：第一会议室" maxlength="20"
+							onchange="validate(this.value,this.id)" />
+							<div id="validateMessagename"></div>
+							<div id="roomname_mes" class=0></div>
 						</td>
 					</tr>
 					<tr>
-						<td>最多容纳人数：</td>
+						<td><font color="red">*</font>最多容纳人数：</td>
 						<td><input id="roommax" name="roommax" type="text"
-							placeholder="填写一个正整数" value="${param.roomcapacity}" />
+							placeholder="填写一个正整数" onchange="checknull(this.value,this.id)" />
+							<div id="roommax_mes" class=0></div>
 						</td>
 					</tr>
 					<tr>
-						<td>当前状态：</td>
+						<td><font color="red">*</font>当前状态：</td>
 						<td><label for="status"> <input value="1"
-								type="radio" id="status" name="status" checked="checked" /> 启用 <input
-								value="0" type="radio" id="status" name="status" /> 停用 <input
+								type="radio" id="status" name="status" checked="checked" /> 启用
+								<input value="0" type="radio" id="status" name="status" /> 停用 <input
 								value="-1" type="radio" id="status" name="status" />删除 </label></td>
 					</tr>
 					<tr>
 						<td>备注：</td>
 						<td><textarea id="roomremark" neme="roomremark"
 								maxlength="200" rows="5" cols="60" placeholder="200字以内的文字描述"
-								onchange="getRemark()"></textarea><input type="hidden"
-							id="roomremark_value" name="roomremark_value" />
+								oninput="LimitTextArea(this)" onchange="getRemark()"></textarea><input
+							type="hidden" id="roomremark_value" name="roomremark_value" />
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2" class="command"><input type="submit"
-							value="添加" class="clickbutton" /> <input type="reset" value="重置"
-							class="clickbutton" />
+						<td colspan="2" class="command"><input id="add_button"
+							type="submit" value="添加" class="clickbutton" disabled="disabled" />
+							<input type="reset" value="重置" class="clickbutton" />
 						</td>
 					</tr>
 				</table>

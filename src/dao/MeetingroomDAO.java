@@ -79,6 +79,35 @@ public class MeetingroomDAO {
 		return meetingroom;
 	}
 
+	public Meetingroom selectByname(String name) {
+		Meetingroom meetingroom = null;
+
+		try {
+			PreparedStatement st = null;
+			String sql = "select * from meetingroom where MeetingRoom_name='"
+					+ name + "'";
+			st = conn.prepareStatement(sql);
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.next() == true) {
+				meetingroom = new Meetingroom();
+				meetingroom.setRoomid(rs.getInt("MeetingRoom_ID"));
+				meetingroom.setRoomnumber(rs.getString("MeetingRoom_number"));
+				// System.out.println("DAO_selectByNamePwd: "+
+				// rs.getString("meetingroom_name"));
+				meetingroom.setRoomname(rs.getString("MeetingRoom_name"));
+				meetingroom.setRoommax(rs.getString("MeetingRoom_max"));
+				meetingroom.setRoomstate(rs.getString("MeetingRoom_state"));
+				meetingroom.setRoomremark(rs.getString("MeetingRoom_remark"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection();
+		}
+		return meetingroom;
+	}
+	
 	// 按会议室id查询会议室
 	public Meetingroom selectById(String ID) {
 		Meetingroom meetingroom = null;
@@ -169,5 +198,7 @@ public class MeetingroomDAO {
 			ConnectionFactory.closeConnection();
 		}
 	}
+	
 
+	
 }

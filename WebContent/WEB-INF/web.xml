@@ -220,4 +220,24 @@
 		<servlet-name>BookMeetingServlet</servlet-name>
 		<url-pattern>/BookMeetingServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ValidateMeetingroomServlet</display-name>
+		<servlet-name>ValidateMeetingroomServlet</servlet-name>
+		<servlet-class>servlet.ValidateMeetingroomServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ValidateMeetingroomServlet</servlet-name>
+		<url-pattern>/ValidateMeetingroomServlet</url-pattern>
+	</servlet-mapping>
+		<servlet>
+		<description></description>
+		<display-name>TimeCheckServlet</display-name>
+		<servlet-name>TimeCheckServlet</servlet-name>
+		<servlet-class>servlet.TimeCheckServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TimeCheckServlet</servlet-name>
+		<url-pattern>/TimeCheckServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

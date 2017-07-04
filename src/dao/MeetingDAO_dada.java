@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +14,7 @@ import java.util.List;
 import util.ConnectionFactory;
 import vo.Employee;
 import vo.Meeting_dada;
+import vo.Meetingroom;
 
 public class MeetingDAO_dada {
 
@@ -100,6 +104,7 @@ public class MeetingDAO_dada {
 			Date meetingstarttime, Date meetingendtime,
 			Date meetingbookdatestart, Date meetingbookdateend, int start,
 			int count) {
+		DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		conn = ConnectionFactory.getConnection();
 
 		List<Meeting_dada> meetingslist = new ArrayList<Meeting_dada>();
@@ -156,15 +161,18 @@ public class MeetingDAO_dada {
 				meeting.setMeetingroomname(rs.getString("Meeting_rname"));
 				meeting.setMeetingparticipatenumber(rs
 						.getString("Meeting_pnumber"));
-				meeting.setMeetingstarttime(rs.getDate("Meeting_stime"));
-				meeting.setMeetingendtime(rs.getDate("Meeting_etime"));
+				meeting.setMeetingstarttime(fmt.parse(rs.getString("Meeting_stime")));
+				meeting.setMeetingendtime(fmt.parse(rs.getString("Meeting_etime")));
 				meeting.setMeetingillustrate(rs.getString("Meeting_illustrate"));
 				meeting.setMeetingbooker(rs.getString("Meeting_booker"));
 				meeting.setMeetingstate(rs.getString("Meeting_state"));
-				meeting.setMeetingbookdate(rs.getDate("Meeting_bookdate"));
+				meeting.setMeetingbookdate(fmt.parse(rs.getString("Meeting_bookdate")));
 				meetingslist.add(meeting);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			ConnectionFactory.closeConnection();
@@ -288,5 +296,23 @@ public class MeetingDAO_dada {
 		return id++;
 		
 	}
-
+	
+	//检测时间冲突
+	public int timeconflictexam(Date time, String roomname) throws SQLException{
+		conn = ConnectionFactory.getConnection();
+		ResultSet rs = null;
+		String sql = "select * from meeting where Meeting_rname = '" + roomname + "' and '"+time+"' >=Meeting_stime and '"+time+"'<=Meeting_etime";
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(sql);
+			rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (rs.next() == false) return 0;
+		else return 1;
+	}
+	
+	
 }

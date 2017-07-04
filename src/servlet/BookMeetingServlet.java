@@ -40,7 +40,7 @@ public class BookMeetingServlet extends HttpServlet {
 		int id = 0;
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
 
-		// 或许注册页面填写的请求参数
+		// 或取注册页面填写的请求参数
 		String meetingname = request.getParameter("meetingname");
 		String pnumber = request.getParameter("meetingpnumber");
 		String user = request.getParameter("user");
@@ -72,7 +72,6 @@ public class BookMeetingServlet extends HttpServlet {
 		java.sql.Timestamp bt = new Timestamp(booktime.getTime());
 		Date bookmeetingtime = bt;
 
-
 		java.sql.Timestamp bt1 = new Timestamp(starttime.getTime());
 		Date meetingstarttime = bt1;
 
@@ -95,19 +94,21 @@ public class BookMeetingServlet extends HttpServlet {
 		request.setAttribute("user", user);
 		request.getRequestDispatcher("bookmeeting.jsp").forward(request,
 				response);
-		
+		//存儲參會人員 
 		EmployeeDAO employeedao = new EmployeeDAO();
-		for ( int i = 0; i < options.length; i++) {
-			String username = options[i];//username
+		for (int i = 0; i < options.length; i++) {
+			String username = options[i];// username
 			Employee e = employeedao.selectByUsername(username);
 			int employeeid = e.getEmployeeid();
-			
+
 			MeetingEmployeeDAO meetingemployeedao = new MeetingEmployeeDAO();
-			
-			meetingemployeedao.insert(employeeid,id);
+
+			meetingemployeedao.insert(employeeid, id);
 		}
 		
 		
-
+		
+		
+	
 	}
 }
