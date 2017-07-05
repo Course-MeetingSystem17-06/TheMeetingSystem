@@ -110,7 +110,7 @@ public class LoginServlet extends HttpServlet {
 			// 1、管理员 2、普通员工
 			String role = service.getLoginedEmployee().getRole();
 			if (role.equals("1")) {
-				request.getRequestDispatcher("adminindex.jsp").forward(request,
+				request.getRequestDispatcher("n_index.jsp").forward(request,
 						response);
 			}
 			if (role.equals("2")) {
