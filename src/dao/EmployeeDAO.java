@@ -186,7 +186,20 @@ public class EmployeeDAO {
 			ConnectionFactory.closeConnection();
 		}
 	}
-
+	
+	public void updatedepartment(String name, String newname) {
+		conn = ConnectionFactory.getConnection();
+		String sql = "update employee set Employee_department='" + newname
+				+ "'where Employee_department='" + name +"'";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection();
+		}
+	}
 	// 根据姓名、用户名、状态， 查询所有员工信息，返回到集合中。
 	public List<Employee> selectEmployeesByNameStatus(String employeename,
 			String username, String status) {

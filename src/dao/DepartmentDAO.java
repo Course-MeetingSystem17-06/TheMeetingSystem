@@ -41,6 +41,26 @@ public class DepartmentDAO {
 		}
 		return departmentsList;
 	}
+	
+	public String  selectById(int id) {
+		String departmentname = null;
+		conn = ConnectionFactory.getConnection();
+		try {
+			Statement st = null;
+			String sql = "select * from department where Depart_ID='"+id+"'";
+			st = conn.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				departmentname = rs.getString("Depart_name");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection();
+		}
+		return departmentname;
+	}
 
 	public void insert(String departmentname) {
 		conn = ConnectionFactory.getConnection();
@@ -72,6 +92,20 @@ public class DepartmentDAO {
 		}
 	}
 
+	public void edit(int departmentid, String departmentname) {
+		conn = ConnectionFactory.getConnection();
+		String sql = "update department set Depart_name='"+departmentname+"' where Depart_ID='"+departmentid+"'";
+		//String sql1 = "update employee set Employee_department='"+departmentname+"' where Depart_ID='"+departmentid+"'"
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection();
+		}
+	}
 	/**
 	 * @param args
 	 */

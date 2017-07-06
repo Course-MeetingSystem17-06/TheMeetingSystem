@@ -59,6 +59,15 @@ public class MeetingService_dada {
 		MeetingDAO_dada dao = new MeetingDAO_dada();
 		return dao.selectAttendMeetingsOfOnePage(id, start, count);
 	}
+	// 查询当前用户预定的会议的每一页的数据集合
+	public List<Meeting_dada> searchMyBookedMeetingsOfOnePage(String user, int start,
+			int count) {
+//		EmployeeDAO edao = new EmployeeDAO();
+//		Employee employee = edao.selectByUsername(user);
+//		int id = employee.getEmployeeid();
+		MeetingDAO_dada dao = new MeetingDAO_dada();
+		return dao.selectBookedMeetingsOfOnePage(user, start, count);
+	}
 
 	// 返回总页数
 	public int getCountOfPages() {
@@ -85,6 +94,7 @@ public class MeetingService_dada {
 	public List<Meeting_dada> searchMyBookedMeetings(String meetingbooker) {
 		List<Meeting_dada> list = dao.selectMeetingsByFilter("", "",
 				meetingbooker, null, null, null, null);
+		countOfMeetings = list.size();
 		return list;
 	}
 
