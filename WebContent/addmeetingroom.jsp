@@ -91,9 +91,9 @@
 		<div class="subfiled">
 			<h2>会议预定 > 添加会议室</h2>
 		</div>
-		<form name="form1" action="AddMeetingroomServlet" method="post">
+		<form class="fm" name="form1" action="AddMeetingroomServlet" method="post">
 			<div class="kv-item clearfix">
-				<label></label>
+				<label>提示信息：</label>
 				<div class="kv-item-content">
 					<font color="red">${requestScope.msg}</font>
 				</div>

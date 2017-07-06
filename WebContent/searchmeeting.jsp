@@ -150,41 +150,39 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="table">
-					<div class="table-box">
-						<table>
-							<thead>
-								<tr class="listheader">
-									<th>会议名称</th>
-									<th>会议室名称</th>
-									<th>会议开始时间</th>
-									<th>会议结束时间</th>
-									<th>会议预定时间</th>
-									<th>预定者</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<c:forEach var="emp" items="${requestScope.meetingsList}">
-								<tr>
-									<td class="red bold">${emp.meetingname}</td>
-									<td>${emp.meetingroomname}</td>
-									<td class="orange bold"><fmt:formatDate
-											value="${emp.meetingstarttime}" pattern="yyyy-MM-dd HH:mm:ss" />
-									</td>
-									<td><fmt:formatDate value="${emp.meetingendtime}"
-											pattern="yyyy-MM-dd HH:mm:ss" />
-									</td>
-									<td><fmt:formatDate value="${emp.meetingbookdate}"
-											pattern="yyyy-MM-dd HH:mm:ss" />
-									</td>
-									<td>${emp.meetingbooker}</td>
-									<td><a class="clickbutton"
-										href="UpdateMeetingServlet?code=detail&meetingid=${emp.meetingid}">查看详情</a>
-									</td>
-								</tr>
-							</c:forEach>
-						</table>
+					<div class="table">
+						<div class="table-box">
+							<table>
+								<thead>
+									<tr class="listheader">
+										<th>会议名称</th>
+										<th>会议室名称</th>
+										<th>会议开始时间</th>
+										<th>会议结束时间</th>
+										<th>会议预定时间</th>
+										<th>预定者</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<c:forEach var="emp" items="${requestScope.meetingsList}">
+									<tr>
+										<td class="red bold">${emp.meetingname}</td>
+										<td>${emp.meetingroomname}</td>
+										<td class="orange bold"><fmt:formatDate
+												value="${emp.meetingstarttime}"
+												pattern="yyyy-MM-dd HH:mm:ss" /></td>
+										<td><fmt:formatDate value="${emp.meetingendtime}"
+												pattern="yyyy-MM-dd HH:mm:ss" /></td>
+										<td><fmt:formatDate value="${emp.meetingbookdate}"
+												pattern="yyyy-MM-dd HH:mm:ss" /></td>
+										<td>${emp.meetingbooker}</td>
+										<td><a class="clickbutton"
+											href="UpdateMeetingServlet?code=detail&meetingid=${emp.meetingid}">查看详情</a>
+										</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
 					</div>
 				</div>
 			</c:if>

@@ -14,7 +14,7 @@
 		<frame src="n_manage.jsp" name="leftFrame" noresize="noresize"
 			marginwidth="0px" marginheight="0" frameborder="0" scrolling="auto"
 			/>
-		<frame src="SearchEmployeesServlet" name="main" marginwidth="0px"
+		<frame src="ViewAllDepartmentsServlet?code=viewalldepartments" name="main" marginwidth="0px"
 			marginheight="40px" frameborder="0" scrolling="auto" />
 	</frameset>
 <noframes></noframes>

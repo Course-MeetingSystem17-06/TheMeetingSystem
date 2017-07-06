@@ -5,7 +5,7 @@
 <html>
 <head>
 <title>CoolMeeting会议管理系统</title>
-<link rel="stylesheet" href="styles/common03.css" />
+<link rel="stylesheet" href="styles/form_input.css" />
 <script type="text/javascript">
 	window.onload = function() {
 		var result = "${requestScope.result}";
@@ -24,37 +24,36 @@
 </head>
 <body>
 	<div class="page-content">
-		<div class="content-nav">会议预定 > 撤销会议预定</div>
-		<form id="form1" name="form1"
+		<div class="subfiled">
+			<h2>会议预定 > 撤销会议预定</h2>
+		</div>
+		<form class="fm" id="form1" name="form1"
 			action="UpdateMeetingServlet?code=confirmcancel&meetingid=${requestScope.meetingid}&meetingname=${requestScope.meetingname}&user=${requestScope.user}"
 			method="post">
-			<fieldset>
-				<legend>撤销预定</legend>
-				<tr>
-					<td>提示信息:</td>
-					<td><font color="red">${requestScope.msg}</font>
-					</td>
-				</tr>
-				<table class="formtable" style="width: 50%">
-					<tr>
-						<td>会议名称:</td>
-						<td><font>${requestScope.meetingname}</font></td>
-					</tr>
-					<tr>
-						<td>撤销理由：</td>
-						<td><textarea id="reason" name="reason" maxlength="200"
-								rows="5" cols="60" placeholder="200字以内的文字描述"
-								onChange="getTextarea()">${requestScope.meetingcancelreason}</textarea><input
-							type="hidden" id="reason_value" name="reason_value" /></td>
-					</tr>
-					<tr>
-						<td colspan="2" class="command"><input id="confirm"
-							type="submit" value="确认撤销" class="clickbutton" /> <input
-							type="button" value="返回" class="clickbutton" onclick="back()" />
-						</td>
-					</tr>
-				</table>
-			</fieldset>
+			<div class="kv-item clearfix">
+				<label>提示信息：</label>
+				<div class="kv-item-content">
+					<font color="red">${requestScope.msg}</font>
+				</div>
+			</div>
+			<div class="kv-item clearfix">
+				<label>会议名称：</label>
+				<div class="kv-item-content">
+					<font>${requestScope.meetingname}</font>
+				</div>
+			</div>
+			<div class="kv-item clearfix">
+				<label><font color="red">*</font>撤销理由：</label>
+				<div class="kv-item-content">
+					<textarea id="reason" name="reason" maxlength="200" rows="5"
+						cols="60" placeholder="200字以内的文字描述" onChange="getTextarea()">${requestScope.meetingcancelreason}</textarea>
+					<input type="hidden" id="reason_value" name="reason_value" />
+				</div>
+			</div>
+			<div class="button">
+				<input id="confirm" type="submit" value="确认撤销" class="clickbutton" />
+				<input type="button" value="返回" class="clickbutton" onclick="back()" />
+			</div>
 		</form>
 	</div>
 

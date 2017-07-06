@@ -4,7 +4,7 @@
 <html>
 <head>
 <title>CoolMeeting会议管理系统</title>
-<link rel="stylesheet" href="styles/common03.css" />
+<link rel="stylesheet" href="styles/form_input.css" />
 <style type="text/css">
 #divfrom {
 	float: left;
@@ -63,7 +63,6 @@
 
 	/////////////////////////////////////////
 	function showEmployees() {
-		//alert("d");
 		createXMLHttpRequest();
 
 		var deptid = document.getElementById("selDepartments").value;
@@ -94,10 +93,8 @@
 		if (xmlHttp.readyState == 4) {
 			if (xmlHttp.status == 200) {
 
-				//alert(xmlHttp.responseXML);
 				var elements = xmlHttp.responseXML
 						.getElementsByTagName("option");
-				//alert(elements[0].getElementsByTagName("value")[0].firstChild.nodeValue);
 				for ( var i = 0; i < elements.length; i++) {
 					var value = elements[i].getElementsByTagName("value")[0].firstChild.nodeValue;
 					var text = elements[i].getElementsByTagName("text")[0].firstChild.nodeValue;
@@ -262,7 +259,6 @@
 			return 1;
 		}
 
-		
 	}
 
 	function LimitTextArea(field) {
@@ -274,16 +270,13 @@
 	}
 
 	function finalcheck() {
-		alert("finalcheck");
 		var i = 0;
 		var all = document.getElementsByClassName(0);
-		alert(all.length);
 		if (all.length != 0) {
 			document.getElementById('book_button').disabled = true;
 			return;
 		}
 		var error = document.getElementsByName('error');
-		alert(error.length);
 		if (error.length != 0) {
 			document.getElementById('book_button').disabled = true;
 			return;
@@ -294,112 +287,122 @@
 </head>
 <body>
 	<div class="page-content">
-		<div class="content-nav">会议预定 > 预定会议</div>
-		<form name="form1"
+		<div class="subfiled">
+			<h2>会议预定 > 预定会议</h2>
+		</div>
+		<form class="fm" name="form1"
 			action="BookMeetingServlet?user=${requestScope.user}" method="post">
-			<fieldset>
-				<legend>会议信息</legend>
-				<tr>
-					<td>提示信息:</td>
-					<td><font color="red">${requestScope.msg}</font></td>
-				</tr>
-				<table class="formtable">
-					<tr>
-						<td><font color="red">*</font>会议名称：</td>
-						<td><input type="text" id="meetingname" name="meetingname"
-							maxlength="20" onchange="checknull(this.value,this.id)" />
-							<div id="meetingname_mes" class=0></div>
-						</td>
-					</tr>
-					<tr>
-						<td><font color="red">*</font>预计参加人数：</td>
-						<td><input type="text" id="meetingparticipatenumber"
-							name="meetingpnumber" onchange="checknull(this.value,this.id)" />
-							<div id="meetingparticipatenumber_mes" class=0></div>
-						</td>
-					</tr>
-					<tr>
-						<td><font color="red">*</font>预计开始时间：</td>
-						<td><input class="Wdate" type="text" id="starttime"
-							name="starttime"
+			<div class="kv-item clearfix">
+				<label>提示信息：</label>
+				<div class="kv-item-content">
+					<font color="red">${requestScope.msg}</font>
+				</div>
+			</div>
+			<div class="kv-item clearfix">
+				<label><font color="red">*</font>会议名称：</label>
+				<div class="kv-item-content">
+					<input type="text" id="meetingname" name="meetingname"
+						maxlength="20" onchange="checknull(this.value,this.id)" />
+					<div id="meetingname_mes" class=0></div>
+				</div>
+			</div>
+			<div class="kv-item clearfix">
+				<label><font color="red">*</font>预计参加人数：</label>
+				<div class="kv-item-content">
+					<input type="text" id="meetingparticipatenumber"
+						name="meetingpnumber" onchange="checknull(this.value,this.id)" />
+					<div id="meetingparticipatenumber_mes" class=0></div>
+				</div>
+			</div>
+			<div class="kv-item clearfix">
+				<label><font color="red">*</font>预计开始时间：</label>
+				<div class="kv-item-content  time-select-wrap">
+					<div class="time-select">
+						<input type="text" id="starttime" name="starttime"
 							onClick="WdatePicker({maxDate:'#F{$dp.$D(\'endtime\')}' , dateFmt:'yyyy-MM-dd HH:mm:ss'})"
-							onchange="checktime(this.value,this.id)">
-							<div id="starttime_mes" class=0></div>
-						</td>
-
-					</tr>
-					<tr>
-						<td><font color="red">*</font>预计结束时间：</td>
-						<td><input class="Wdate" type="text" id="endtime"
-							name="endtime"
+							onchange="checktime(this.value,this.id)"><i
+							class="date-icon"></i>
+					</div>
+					<div id="starttime_mes" class=0></div>
+				</div>
+			</div>
+			<div class="kv-item clearfix">
+				<label><font color="red">*</font>预计结束时间：</label>
+				<div class="kv-item-content  time-select-wrap">
+					<div class="time-select">
+						<input type="text" id="endtime" name="endtime"
 							onClick="WdatePicker({minDate:'#F{$dp.$D(\'starttime\')}' , dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+							onchange="checktime(this.value,this.id)"><i
+							class="date-icon"></i>
+					</div>
+					<div id="endtime_mes" class=0></div>
+				</div>
+			</div>
+			<div class="kv-item clearfix">
+				<label><font color="red">*</font>会议室名称：</label>
+				<div class="kv-item-content">
+					<div class="iselect-wrapper">
+						<select class="iselect" id="deptid" name="meetingroomid"
 							onchange="checktime(this.value,this.id)">
-							<div id="endtime_mes" class=0></div>
-						</td>
-
-					</tr>
-					<tr>
-						<td><font color="red">*</font>会议室名称：</td>
-						<td><select id="deptid" name="meetingroomid"
-							onchange="checktime(this.value,this.id)">
-								<c:forEach var="meetingroom"
-									items="${requestScope.meetingroomsList}">
-									<c:if test="${meetingroom.roomnumber== param.deptid}">
-										<option value="${meetingroom.roomname}" selected>${meetingroom.roomname}(可容纳${meetingroom.roommax}人)</option>
-									</c:if>
-									<c:if test="${meetingroom.roomnumber!= param.deptid}">
-										<option value="${meetingroom.roomname}">${meetingroom.roomname}(可容纳${meetingroom.roommax}人)</option>
-									</c:if>
-								</c:forEach>
+							<c:forEach var="meetingroom"
+								items="${requestScope.meetingroomsList}">
+								<c:if test="${meetingroom.roomnumber== param.deptid}">
+									<option value="${meetingroom.roomname}" selected>${meetingroom.roomname}(可容纳${meetingroom.roommax}人)</option>
+								</c:if>
+								<c:if test="${meetingroom.roomnumber!= param.deptid}">
+									<option value="${meetingroom.roomname}">${meetingroom.roomname}(可容纳${meetingroom.roommax}人)</option>
+								</c:if>
+							</c:forEach>
 						</select>
-						<div id="checktime"></div><div id="deptid_mes" class=1></div>
-						</td>
-					</tr>
-					<tr>
-						<td>会议说明：</td>
-						<td><textarea id="description" name="meetingillustrate"
-								placeholder="不多于200字" oninput="LimitTextArea(this)" rows="5"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td><font color="red">*</font>选择参会人员：</td>
-						<td>
-							<div id="divfrom" name=meetingrname>
-								<select id="selDepartments" name="deptid"
-									onclick="showEmployees()">
-									<c:forEach var="department"
-										items="${requestScope.departmentsList}">
-										<c:if test="${department.departmentid== param.deptid}">
-											<option value="${department.departmentname}" selected>${department.departmentname}</option>
-										</c:if>
-										<c:if test="${department.departmentid!= param.deptid}">
-											<option value="${department.departmentname}">${department.departmentname}</option>
-										</c:if>
-									</c:forEach>
-								</select> <select id="selEmployees" multiple="true">
-								</select>
-							</div>
-							<div id="divoperator">
-								<input type="button" class="clickbutton" value="&gt;"
-									onclick="selectEmployees()" /> <input type="button"
-									class="clickbutton" value="&lt;" onclick="deSelectEmployees()" />
-							</div>
-							<div id="divto">
-								<select id="selSelectedEmployees" name="selSelectedEmployees"
-									multiple="true"">
-								</select>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="command" colspan="2"><input id="book_button"
-							type="submit" class="clickbutton" value="预定会议"
-							disabled="disabled" /> <input type="reset" class="clickbutton"
-							value="重置" />
-						</td>
-					</tr>
-				</table>
-			</fieldset>
+					</div>
+					<div id="checktime"></div>
+					<div id="deptid_mes" class=1></div>
+				</div>
+			</div>
+
+			<div class="kv-item clearfix">
+				<label>会议说明：</label>
+				<div class="kv-item-content">
+					<textarea id="description" name="meetingillustrate"
+						placeholder="不多于200字" oninput="LimitTextArea(this)" rows="5"></textarea>
+				</div>
+			</div>
+
+			<div class="kv-item clearfix">
+				<label><font color="red">*</font>选择参会人员：</label>
+				<div class="kv-item-content">
+					<div id="divfrom" name=meetingrname>
+						<select id="selDepartments" name="deptid"
+							onclick="showEmployees()">
+							<c:forEach var="department"
+								items="${requestScope.departmentsList}">
+								<c:if test="${department.departmentid== param.deptid}">
+									<option value="${department.departmentname}" selected>${department.departmentname}</option>
+								</c:if>
+								<c:if test="${department.departmentid!= param.deptid}">
+									<option value="${department.departmentname}">${department.departmentname}</option>
+								</c:if>
+							</c:forEach>
+						</select> <select id="selEmployees" multiple="true">
+						</select>
+					</div>
+					<div id="divoperator">
+						<input type="button" class="clickbutton" value="&gt;"
+							onclick="selectEmployees()" /> <input type="button"
+							class="clickbutton" value="&lt;" onclick="deSelectEmployees()" />
+					</div>
+					<div id="divto">
+						<select id="selSelectedEmployees" name="selSelectedEmployees"
+							multiple="true"">
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="button">
+				<input id="book_button" type="submit"
+					class="sapar-btn sapar-btn-recom" value="预定会议" disabled="disabled" />
+				<input type="reset" class="sapar-btn sapar-btn-recom" value="重置" />
+			</div>
 		</form>
 	</div>
 	</div>

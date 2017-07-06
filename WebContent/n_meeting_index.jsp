@@ -15,7 +15,7 @@
 		<frame src="n_meeting.jsp" name="leftFrame" noresize="noresize"
 			marginwidth="0px" marginheight="0" frameborder="0" scrolling="auto"
 			/>
-		<frame src="addmeetingroom.jsp" name="main" marginwidth="0px"
+		<frame src="ViewAllServlet?code=bookmeeting&user=<%=username%>" name="main" marginwidth="0px"
 			marginheight="40px" frameborder="0" scrolling="auto" />
 	</frameset>
 <noframes></noframes>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <title>CoolMeeting会议管理系统</title>
-<link rel="stylesheet" href="styles/common03.css" />
+<link rel="stylesheet" href="styles/form_input.css" />
 <script type="text/javascript">
 	function back() {
 		var type = "${requestScope.pagetype}";
@@ -33,55 +33,62 @@
 </head>
 <body>
 	<div class="page-content">
-		<div class="content-nav">会议预定 > 修改会议预定</div>
-		<form id="form1" 　name="form1" action="" method="post">
-			<fieldset>
-				<legend>会议信息</legend>
-				<tr>
-					<td>提示信息:</td>
-					<td><font color="red">${requestScope.msg}</font></td>
-				</tr>
-				<table class="formtable" style="width: 50%">
-					<tr>
-						<td>会议名称:</td>
-						<td><font id="a111">${requestScope.name}</font>
-						</td>
-					</tr>
-					<tr>
-						<td>预计参加人数:</td>
-						<td><font>${requestScope.participatenumber}</font>
-						</td>
-					</tr>
-					<tr>
-						<td>预计开始时间:</td>
-						<td><font><fmt:formatDate
-									value="${requestScope.starttime}" pattern="yyyy-MM-dd HH:mm:ss" />
-						</font>
-						</td>
-					</tr>
-					<tr>
-						<td>预计结束时间:</td>
-						<td><font><fmt:formatDate
-									value="${requestScope.endtime}" pattern="yyyy-MM-dd HH:mm:ss" />
-						</font>
-						</td>
-					</tr>
-					<tr>
-						<td>备注：</td>
-						<td><textarea id="illustrate" name="illustrate"
-								maxlength="200" rows="5" cols="60" placeholder="200字以内的文字描述"">${requestScope.illustrate}</textarea>
-						</td>
-					</tr>
-					<tr>
-						<td>参会人员：</td>
-						<td>
-							<table class="listtable">
-								<caption></caption>
-								<tr class="listheader">
-									<th>姓名</th>
-									<th>联系电话</th>
-									<th>电子邮件</th>
-								</tr>
+		<div class="subfiled">
+			<h2>会议预定 > 修改会议预定</h2>
+		</div>
+		<form class="fm" id="form1" name="form1" action="" method="post">
+			<div class="kv-item clearfix">
+				<label>提示信息：</label>
+				<div class="kv-item-content">
+					<font color="red">${requestScope.msg}</font>
+				</div>
+			</div>
+			<div class="kv-item clearfix">
+				<label>会议名称：</label>
+				<div class="kv-item-content">
+					<font id="a111">${requestScope.name}</font>
+				</div>
+			</div>
+			<div class="kv-item clearfix">
+				<label>预计参加人数：</label>
+				<div class="kv-item-content">
+					<font>${requestScope.participatenumber}</font>
+				</div>
+			</div>
+			<div class="kv-item clearfix">
+				<label>预计开始时间：</label>
+				<div class="kv-item-content">
+					<font><fmt:formatDate value="${requestScope.starttime}"
+							pattern="yyyy-MM-dd HH:mm:ss" /> </font>
+				</div>
+			</div>
+			<div class="kv-item clearfix">
+				<label>预计结束时间：</label>
+				<div class="kv-item-content">
+					<font><fmt:formatDate value="${requestScope.endtime}"
+							pattern="yyyy-MM-dd HH:mm:ss" /> </font>
+				</div>
+			</div>
+			<div class="kv-item clearfix">
+				<label>备注：</label>
+				<div class="kv-item-content">
+					<textarea id="illustrate" name="illustrate" maxlength="200"
+						rows="5" cols="60" placeholder="200字以内的文字描述"">${requestScope.illustrate}</textarea>
+				</div>
+			</div>
+			<div class="kv-item clearfix">
+				<label>参会人员：</label>
+				<div class="kv-item-content">
+					<div class="table">
+						<div class="table-box">
+							<table>
+								<thead>
+									<tr class="listheader">
+										<th>姓名</th>
+										<th>联系电话</th>
+										<th>电子邮件</th>
+									</tr>
+								</thead>
 								<c:forEach var="emp"
 									items="${requestScope.meetingemployeesList}">
 									<tr>
@@ -91,21 +98,20 @@
 									</tr>
 								</c:forEach>
 							</table>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2" class="command"><c:if
-								test="${requestScope.pagetype eq 'mybooked'}">
-								<input type="submit" value="撤销会议" class="clickbutton"
-									onclick="cancel()" />
-								<input type="submit" value="确认修改" class="clickbutton"
-									onclick="update()" />
-							</c:if><input type="button" value="返回" class="clickbutton"
+						</div>
+					</div>
+					<div class="button">
+						<c:if test="${requestScope.pagetype eq 'mybooked'}">
+							<input type="submit" value="撤销会议"
+								class="sapar-btn sapar-btn-recom" onclick="cancel()" />
+							<input type="submit" value="确认修改"
+								class="sapar-btn sapar-btn-recom" onclick="update()" />
+						</c:if>
+						<input type="button" value="返回" class="sapar-btn sapar-btn-recom"
 							onclick="back()" />
-						</td>
-					</tr>
-				</table>
-			</fieldset>
+					</div>
+				</div>
+			</div>
 		</form>
 	</div>
 
