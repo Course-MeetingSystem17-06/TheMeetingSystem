@@ -5,6 +5,7 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+<%String username=(String)session.getAttribute("employeename"); %><!-- 姓名 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
