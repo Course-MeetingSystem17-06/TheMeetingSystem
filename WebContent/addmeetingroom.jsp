@@ -128,8 +128,7 @@
 						<td><font color="red">*</font>当前状态：</td>
 						<td><label for="status"> <input value="1"
 								type="radio" id="status" name="status" checked="checked" /> 启用
-								<input value="0" type="radio" id="status" name="status" /> 停用 <input
-								value="-1" type="radio" id="status" name="status" />删除 </label></td>
+								<input value="0" type="radio" id="status" name="status" /> 停用 </label></td>
 					</tr>
 					<tr>
 						<td>备注：</td>

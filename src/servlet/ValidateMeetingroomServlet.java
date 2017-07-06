@@ -51,7 +51,9 @@ public class ValidateMeetingroomServlet extends HttpServlet {
 		boolean flag = true;
 		String message = "";
 		MeetingroomDAO dao = new MeetingroomDAO();
-		if("target"=="roomnumber") e = dao.selectBynum(request.getParameter("data"));	
+		String a = request.getParameter("data1");
+		if(request.getParameter("data1").equals("roomnumber")==true) 
+			e = dao.selectBynum(request.getParameter("data"));	
 		else e = dao.selectByname(request.getParameter("data"));
 		if (e == null) {
 			message = "正确";

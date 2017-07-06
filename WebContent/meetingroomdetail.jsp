@@ -6,6 +6,7 @@
 <head>
 <title>CoolMeeting会议管理系统</title>
 <link rel="stylesheet" href="styles/common03.css" />
+<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
 <script type="text/javascript">
 	window.onload = function() {
 		var message = document.getElementById("roomremark_value").value;
@@ -26,6 +27,73 @@
 	function back(){
 		window.location.href="ViewAllMeetingRoomsServlet?code=viewallmeetingrooms";
 	}
+	
+	function validate(val, target) {
+		checknull(val,target);
+		$
+				.ajax({
+					type : "POST",
+					url : "ValidateMeetingroomServlet",
+					data : {
+						data : val, 
+						data1 : target
+					},
+					success : function(message) {
+						if(target == "roomnumber")
+						var validateMessage = $("#validateMessagenum");
+						else var validateMessage = $("#validateMessagename");
+						var data = JSON.parse(message);
+						if (data.flag) {
+							if (val == "") {
+								validateMessage.html("");
+								return;
+							}
+							validateMessage.html(data.msg);
+							validateMessage.css({
+								color : "green"
+							});
+							checknull(val, target);
+
+						} else {
+							validateMessage.html("<font name=error>" + data.msg
+									+ "</font>");
+							validateMessage.css({
+								color : "red"
+							});
+							checknull(val,target);
+
+						}
+					}
+				});
+
+	}
+	
+	function checknull(val, target) {
+		target += "_mes";
+		document.getElementById(target).className = 1;
+		if (val == "") {
+			document.getElementById(target).innerHTML = "<font name=error color=red>输入不能为空</font>";
+		} else {
+			document.getElementById(target).innerHTML = "";
+		}
+		//finalcheck();
+	}
+	
+	function finalcheck() {
+		var i = 0;
+		var all = document.getElementsByClassName(0);
+		if (all.length != 0) {
+			document.getElementById('change_button').disabled = true;
+			return;
+		}
+		var error = document.getElementsByName('error');
+
+		if (error.length != 0) {
+			document.getElementById('change_button').disabled = true;
+			return;
+		}
+		document.getElementById('change_button').disabled = false;
+	}
 </script>
 </head>
 <body>
@@ -45,20 +113,26 @@
 						<td>门牌号:</td>
 						<td><input id="roomnumber" name="roomnumber" type="text"
 							placeholder="例如：201" maxlength="10"
-							value="${requestScope.roomnumber}" />
+							value="${requestScope.roomnumber}" onchange="validate(this.value,this.id)" />
+							<div id="validateMessagenum"></div>
+							<div id="roomnumber_mes" class=0></div>
 						</td>
 					</tr>
 					<tr>
 						<td>会议室名称:</td>
 						<td><input id="roomname" name="roomname" type="text"
 							placeholder="例如：第一会议室" maxlength="20"
-							value="${requestScope.roomname}" />
+							value="${requestScope.roomname}"onchange="validate(this.value,this.id)" />
+							<div id="validateMessagename"></div>
+							<div id="roomname_mes" class=0></div>
 						</td>
 					</tr>
 					<tr>
 						<td>最多容纳人数：</td>
 						<td><input id="roommax" name="roommax" type="text"
-							placeholder="填写一个正整数" value="${requestScope.roommax}" />
+							placeholder="填写一个正整数" value="${requestScope.roommax}" onchange="checknull(this.value,this.id)" />
+							<div id="validateMessagenum"></div>
+							<div id="roommax_mes" class=0></div>
 						</td>
 					</tr>
 					<tr>
@@ -78,7 +152,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2" class="command"><input type="submit"
+						<td colspan="2" class="command"><input type="submit" id="change_button"
 							value="确认修改" class="clickbutton" /> <input type=button
 							value="返回" class="clickbutton" onclick="back()"/>
 						</td>

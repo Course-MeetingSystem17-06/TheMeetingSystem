@@ -22,7 +22,7 @@
 			<ul class="sidebar-menu">
 				<li class="sidebar-menuitem"><a href="ViewMyNotificationServlet?user=<%=username%>" target="main">最新通知</a>
 				</li>
-				<li class="sidebar-menuitem active"><a href="ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&user=<%=username%>"
+				<li class="sidebar-menuitem active"><a href="ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&meetingbooker=<%=username%>"
 					target="main">我的预定</a></li>
 				<li class="sidebar-menuitem"><a href="ViewAllAttendMeetingsServlet?code=viewattendmeetings&user=<%=user %>" target="main">我的会议</a>
 				</li>

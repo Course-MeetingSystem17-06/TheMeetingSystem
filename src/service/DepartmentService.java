@@ -19,4 +19,13 @@ public class DepartmentService {
 	public void deleteDepartment(int departmentid){
 		dao.delete(departmentid);
 	}
+	
+	public void editDepartment(int departmentid, String departmentname){
+		dao.edit(departmentid, departmentname);
+	}
+	
+	public String selectById(int departmentid){
+		String departmentname = dao.selectById(departmentid);
+		return departmentname;
+	}
 }

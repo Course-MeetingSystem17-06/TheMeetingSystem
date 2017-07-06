@@ -208,9 +208,11 @@
 	//使用ajax方法访问，验证账户名是否存在
 	function checktime(val, target) {
 		//validateMessage.html("");
-		var target1 = target;
-		target1 += "_mes";
-		document.getElementById(target1).className = 1;
+		checknull(val, target);
+		//var target1 = target;
+		//target1 += "_mes";
+		//document.getElementById(target1).className = 1;
+		//finalcheck();
 		if (document.getElementById("endtime_mes").className == 1) {
 			$.ajax({
 				type : "POST",
@@ -240,6 +242,7 @@
 							color : "red"
 						});
 					}
+					finalcheck();
 				}
 			});
 		}
@@ -255,10 +258,11 @@
 			return 0;
 		} else {
 			document.getElementById(target).innerHTML = "";
+			finalcheck();
 			return 1;
 		}
 
-		finalcheck();
+		
 	}
 
 	function LimitTextArea(field) {
@@ -270,14 +274,16 @@
 	}
 
 	function finalcheck() {
+		alert("finalcheck");
 		var i = 0;
 		var all = document.getElementsByClassName(0);
+		alert(all.length);
 		if (all.length != 0) {
 			document.getElementById('book_button').disabled = true;
 			return;
 		}
 		var error = document.getElementsByName('error');
-
+		alert(error.length);
 		if (error.length != 0) {
 			document.getElementById('book_button').disabled = true;
 			return;
@@ -346,7 +352,7 @@
 									</c:if>
 								</c:forEach>
 						</select>
-						<div id="checktime"></div><div id="deptid_mes" class=0></div>
+						<div id="checktime"></div><div id="deptid_mes" class=1></div>
 						</td>
 					</tr>
 					<tr>

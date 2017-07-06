@@ -553,4 +553,57 @@ public class MeetingDAO_dada {
 		}
 		return meetingsList;
 	}
+	
+	public List<Meeting_dada> selectBookedMeetingsOfOnePage(String user,
+			int start, int count) {
+		//conn = ConnectionFactory.getConnection();
+//		String sql_id = "select * from meeting where Meeting_booker ='"
+//				+ user + "'" + " limit " + start + " ," + count;
+		List<Meeting_dada> meetingsList = new ArrayList<Meeting_dada>();
+		try {
+//			PreparedStatement ps_id = conn.prepareStatement(sql_id);
+//			ResultSet rs_id = ps_id.executeQuery(sql_id);
+//			while (rs_id.next()) {
+				Connection conn_info = ConnectionFactory.getConnection();
+				String sql_info = "select * from meeting where Meeting_booker='" +user+ "'" + " limit " + start + " ," + count;
+				PreparedStatement ps_info = conn_info
+						.prepareStatement(sql_info);
+				ResultSet rs_info = ps_info.executeQuery(sql_info);
+				SimpleDateFormat fmt = new SimpleDateFormat(
+						"yyyy-MM-dd HH:mm:ss");
+				while (rs_info.next()) {
+					Meeting_dada meeting = new Meeting_dada();
+					meeting.setMeetingid(rs_info.getInt("Meeting_id"));
+					meeting.setMeetingname(rs_info.getString("Meeting_name"));
+					meeting.setMeetingroomname(rs_info
+							.getString("Meeting_rname"));
+					meeting.setMeetingparticipatenumber(rs_info
+							.getString("Meeting_pnumber"));
+					meeting.setMeetingillustrate(rs_info
+							.getString("Meeting_illustrate"));
+					meeting.setMeetingbooker(rs_info
+							.getString("Meeting_booker"));
+					meeting.setMeetingstate(rs_info.getString("Meeting_state"));
+					String stime = rs_info.getString("Meeting_stime");
+					meeting.setMeetingstarttime(fmt.parse(stime.substring(0,
+							stime.length() - 2)));
+					String etime = rs_info.getString("Meeting_etime");
+					meeting.setMeetingendtime(fmt.parse(etime.substring(0,
+							etime.length() - 2)));
+					String btime = rs_info.getString("Meeting_bookdate");
+					meeting.setMeetingbookdate(fmt.parse(btime.substring(0,
+							btime.length() - 2)));
+					meetingsList.add(meeting);
+				}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection();
+		}
+		return meetingsList;
+	}
 }
