@@ -56,7 +56,6 @@
 								<td><input type="submit" style="margin-left: 30px;border: none;" value="登录"
 									class="btn" />
 								</td>
-								
 								<td><input type="button" style="margin-left: 20px;border: none;" value="注册"
 									class="btn"
 									onclick="window.location.href='ViewAllDepartmentsServlet?code=regist'" />

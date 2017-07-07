@@ -44,7 +44,7 @@
 		</div>
 		<div id="bd" style="height: 775px;">
 			<div class="wrap">
-				<iframe src="n_manage_index.jsp" id="iframe" width="100%"
+				<iframe src="n_personal_index.jsp" id="iframe" width="100%"
 					height="100%" frameborder="0"></iframe>
 			</div>
 		</div>

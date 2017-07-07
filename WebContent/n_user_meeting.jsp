@@ -29,7 +29,7 @@
 						<p>功能导航</p>
 					</h2>
 					<ul class="nav">
-						<li class="room"><div class="nav-header">
+						<li class="room current"><div class="nav-header">
 								<a href="ViewAllMeetingRoomsServlet?code=viewallmeetingrooms"
 									target="main"><span>查看会议室</span><i class="icon"></i> </a>
 							</div>

@@ -20,7 +20,7 @@
 	<frame src="n_personal.jsp" name="leftFrame" noresize="noresize"
 		marginwidth="0px" marginheight="0" frameborder="0" scrolling="auto" />
 	<frame
-		src="ViewAllAttendMeetingsServlet?code=viewattendmeetings&user=<%=user%>"
+		src="ViewMyNotificationServlet?user=<%=username%>"
 		name="main" marginwidth="0px" marginheight="40px" frameborder="0"
 		scrolling="auto" />
 </frameset>
