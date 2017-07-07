@@ -34,10 +34,12 @@
 						<tr>
 							<td class="red bold">${emp.meetingname}</td>
 							<td>${emp.meetingroomname}</td>
-							<td class="orange bold"><fmt:formatDate value="${emp.meetingstarttime}"
-									pattern="yyyy-MM-dd HH:mm:ss" /></td>
+							<td class="orange bold"><fmt:formatDate
+									value="${emp.meetingstarttime}" pattern="yyyy-MM-dd HH:mm:ss" />
+							</td>
 							<td><fmt:formatDate value="${emp.meetingendtime}"
-									pattern="yyyy-MM-dd HH:mm:ss" /></td>
+									pattern="yyyy-MM-dd HH:mm:ss" />
+							</td>
 							<td><a class="clickbutton"
 								href="UpdateMeetingServlet?code=notification&meetingid=${emp.meetingid}&user=${requestScope.user}">查看详情</a>
 							</td>
@@ -46,7 +48,8 @@
 				</table>
 			</div>
 		</div>
-		<div style="margin-bottom: 7px;margin-top: 10px;" class="subfiled-style2">
+		<div style="margin-bottom: 7px; margin-top: 10px;"
+			class="subfiled-style2">
 			<h2>已取消的会议:</h2>
 		</div>
 		<div class="table">
@@ -66,8 +69,12 @@
 						<tr>
 							<td class="red bold">${emp.meetingname}</td>
 							<td>${emp.meetingroomname}</td>
-							<td class="orange bold">${emp.meetingstarttime}</td>
-							<td>${emp.meetingendtime}</td>
+							<td class="orange bold"><fmt:formatDate
+									value="${emp.meetingstarttime}" pattern="yyyy-MM-dd HH:mm:ss" />
+							</td>
+							<td><fmt:formatDate value="${emp.meetingendtime}"
+									pattern="yyyy-MM-dd HH:mm:ss" />
+							</td>
 							<td>${emp.meetingcancelreason}</td>
 							<td><a class="clickbutton"
 								href="UpdateMeetingServlet?code=notification&meetingid=${emp.meetingid}&user=${requestScope.user}">查看详情</a>
