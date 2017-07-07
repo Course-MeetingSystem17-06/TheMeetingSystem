@@ -283,6 +283,23 @@
 		}
 		document.getElementById('book_button').disabled = false;
 	}
+	
+	function aaa(){
+		var all = document.getElementsByClassName(1);
+		if(all.length != 0){
+			document.getElementById("meetingname_mes").className = 0;
+			document.getElementById("meetingname_mes").innerHTML = "";
+			document.getElementById("meetingparticipatenumber_mes").className = 0;
+			document.getElementById("meetingparticipatenumber_mes").innerHTML = "";
+			document.getElementById("starttime_mes").className = 0;
+			document.getElementById("starttime_mes").innerHTML = "";
+			document.getElementById("endtime_mes").className = 0;
+			document.getElementById("endtime_mes").innerHTML = "";
+			document.getElementById("deptid_mes").innerHTML = "";
+			document.getElementById("checktime").innerHTML = "";
+		}
+		document.getElementById('book_button').disabled = true;	
+	}
 </script>
 </head>
 <body>
@@ -290,7 +307,7 @@
 		<div class="subfiled">
 			<h2>会议预定 > 预定会议</h2>
 		</div>
-		<form class="fm" name="form1"
+		<form class="fm" name="form1" 
 			action="BookMeetingServlet?user=${requestScope.user}" method="post">
 			<div class="kv-item clearfix">
 				<label>提示信息：</label>
@@ -356,7 +373,7 @@
 						</select>
 					</div>
 					<div id="checktime"></div>
-					<div id="deptid_mes" class=1></div>
+					<div id="deptid_mes" ></div>
 				</div>
 			</div>
 
@@ -401,7 +418,7 @@
 			<div class="button">
 				<input id="book_button" type="submit"
 					class="sapar-btn sapar-btn-recom" value="预定会议" disabled="disabled" />
-				<input type="reset" class="sapar-btn sapar-btn-recom" value="重置" />
+				<input type="reset" class="sapar-btn sapar-btn-recom" value="重置" onclick="aaa()"/>
 			</div>
 		</form>
 	</div>
