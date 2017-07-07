@@ -32,6 +32,7 @@
 					var val_trim = val.Trim();
 					if (val == "" || val_trim == "") {
 						validateMessage.html("");
+						checknull(val, target);
 						return;
 					}
 					validateMessage.html(data.msg);
