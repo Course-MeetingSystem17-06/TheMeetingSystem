@@ -32,9 +32,9 @@
 					</thead>
 					<c:forEach var="emp" items="${requestScope.latestmeetingsList}">
 						<tr>
-							<td>${emp.meetingname}</td>
+							<td class="red bold">${emp.meetingname}</td>
 							<td>${emp.meetingroomname}</td>
-							<td><fmt:formatDate value="${emp.meetingstarttime}"
+							<td class="orange bold"><fmt:formatDate value="${emp.meetingstarttime}"
 									pattern="yyyy-MM-dd HH:mm:ss" /></td>
 							<td><fmt:formatDate value="${emp.meetingendtime}"
 									pattern="yyyy-MM-dd HH:mm:ss" /></td>
@@ -64,9 +64,9 @@
 					</thead>
 					<c:forEach var="emp" items="${requestScope.cancelmeetingsList}">
 						<tr>
-							<td>${emp.meetingname}</td>
+							<td class="red bold">${emp.meetingname}</td>
 							<td>${emp.meetingroomname}</td>
-							<td>${emp.meetingstarttime}</td>
+							<td class="orange bold">${emp.meetingstarttime}</td>
 							<td>${emp.meetingendtime}</td>
 							<td>${emp.meetingcancelreason}</td>
 							<td><a class="clickbutton"

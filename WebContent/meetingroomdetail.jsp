@@ -27,7 +27,9 @@
 	function back() {
 		window.location.href = "ViewAllMeetingRoomsServlet?code=viewallmeetingrooms";
 	}
-
+	String.prototype.Trim = function() {
+		return this.replace(/(^\s*)|(\s*$)/g, "");
+	};
 	function validate(val, target) {
 		checknull(val, target);
 		$.ajax({
@@ -44,7 +46,8 @@
 					var validateMessage = $("#validateMessagename");
 				var data = JSON.parse(message);
 				if (data.flag) {
-					if (val == "") {
+					var val_trim = val.Trim();
+					if (val == "" || val_trim == "") {
 						validateMessage.html("");
 						return;
 					}
@@ -71,7 +74,8 @@
 	function checknull(val, target) {
 		target += "_mes";
 		document.getElementById(target).className = 1;
-		if (val == "") {
+		var val_trim = val.Trim();
+		if (val == "" || val_trim == "") {
 			document.getElementById(target).innerHTML = "<font name=error color=red>输入不能为空</font>";
 		} else {
 			document.getElementById(target).innerHTML = "";

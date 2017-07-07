@@ -162,7 +162,7 @@
 							<c:forEach var="emp" items="${requestScope.employeesList}">
 								<tr>
 									<td class="orange bold">${emp.employeename}</td>
-									<td>${emp.username}</td>
+									<td class="red bold">${emp.username}</td>
 									<td>${emp.phone}</td>
 									<td>${emp.email}</td>
 									<c:if test="${emp.status eq '2' }">

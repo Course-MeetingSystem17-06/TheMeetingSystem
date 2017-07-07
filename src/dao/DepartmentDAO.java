@@ -61,7 +61,26 @@ public class DepartmentDAO {
 		}
 		return departmentname;
 	}
-
+	public String  selectByName(String name) {
+		String departmentname = null;
+		conn = ConnectionFactory.getConnection();
+		try {
+			Statement st = null;
+			String sql = "select * from department where Depart_name='"+name+"'";
+			st = conn.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				departmentname = rs.getString("Depart_name");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection();
+		}
+		return departmentname;
+	}
+	
 	public void insert(String departmentname) {
 		conn = ConnectionFactory.getConnection();
 		String sql = "insert into department" + "(Depart_name)" + " values(?)";

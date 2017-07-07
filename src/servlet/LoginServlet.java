@@ -110,11 +110,11 @@ public class LoginServlet extends HttpServlet {
 			// 1、管理员 2、普通员工
 			String role = service.getLoginedEmployee().getRole();
 			if (role.equals("1")) {
-				request.getRequestDispatcher("n_index.jsp").forward(request,
+				request.getRequestDispatcher("n_admin_index.jsp").forward(request,
 						response);
 			}
 			if (role.equals("2")) {
-				request.getRequestDispatcher("employeeindex.jsp").forward(
+				request.getRequestDispatcher("n_user_index.jsp").forward(
 						request, response);
 			}
 		} else {
@@ -129,7 +129,7 @@ public class LoginServlet extends HttpServlet {
 			if (flag == 3) {
 				request.setAttribute("msg", "用户名或密码错误，请重试。");
 			}
-			request.getRequestDispatcher("login.jsp")
+			request.getRequestDispatcher("n_login.jsp")
 					.forward(request, response);
 		}
 	}

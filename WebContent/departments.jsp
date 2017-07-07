@@ -7,6 +7,48 @@
 <title>CoolMeeting会议管理系统</title>
 <script type="text/javascript" src="js/jquery-1.11.0.js"></script>
 <script type="text/javascript">
+String.prototype.Trim = function() {
+	return this.replace(/(^\s*)|(\s*$)/g, "");
+};
+function validate(val) {
+	$.ajax({
+		type : "POST",
+		url : "ValidateDepartmentServlet",
+		data : {
+			data : val
+			},
+		success : function(message) {
+				var validateMessage = $("#validateMessage");
+			var data = JSON.parse(message);
+			if (data.flag) {
+				var val_trim = val.Trim();
+				if (val == "" || val_trim == "") {
+					document.getElementById('change_button').disabled = true;
+					validateMessage.html("不能为空");
+					validateMessage.css({
+						color : "red"
+					});
+					return;
+				}
+				document.getElementById('change_button').disabled = false;
+				validateMessage.html(data.msg);
+				validateMessage.css({
+					color : "green"
+				});
+
+			} else {
+				document.getElementById('change_button').disabled = true;
+				validateMessage.html("<font name=error>" + data.msg
+						+ "</font>");
+				validateMessage.css({
+					color : "red"
+				});
+
+			}
+		}
+	});
+}
+
 	function edit(id, departmentid, i) {
 		if (i == 1) {
 			var currentBtn = document.getElementById(id);
@@ -54,9 +96,11 @@
 			<div class="kv-item">
 				<label>部门名称：</label>
 				<div class="kv-item-content">
-					<input type="text" name="departmentname" maxlength="20" /> <input
-						type="hidden" name="code" value="add"> <input
-						type="submit" class="sapar-btn sapar-btn-recom" value="添加" />
+					<input onchange="validate(this.value)" type="text"
+						name="departmentname" maxlength="20" /> <input type="hidden"
+						name="code" value="add"> <input type="submit"
+						class="sapar-btn sapar-btn-recom" value="添加" id="change_button" />
+					<div id="validateMessage"></div>
 				</div>
 			</div>
 		</form>
@@ -79,10 +123,10 @@
 								<td class="orange bold">${emp.departmentid}</td>
 								<td><span class="departmentname"
 									id="departmentname${emp.departmentid}" style="">${emp.departmentname
-										}</span> <input class="inputpartmentname" id="editdepartmentname${emp.departmentid}"
+										}</span> <input class="inputpartmentname"
+									id="editdepartmentname${emp.departmentid}"
 									name="editdepartmentname" type="text" maxlength="10"
-									value="${emp.departmentname}" style="display: none;" />
-								</td>
+									value="${emp.departmentname}" style="display: none;" /></td>
 								<td><a class="clickbutton"
 									onclick="edit(this.id, ${emp.departmentid}, 1)"
 									id="edit${emp.departmentid}" style="">编辑</a> <a

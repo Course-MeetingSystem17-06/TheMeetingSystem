@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="2.5">
 	<display-name>Login</display-name>
 	<welcome-file-list>
-		<welcome-file>login.jsp</welcome-file>
+		<welcome-file>n_login.jsp</welcome-file>
 	</welcome-file-list>
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
@@ -257,5 +257,15 @@
 	<servlet-mapping>
 		<servlet-name>ViewAllAttendMeetingsServlet</servlet-name>
 		<url-pattern>/ViewAllAttendMeetingsServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ValidateDepartmentServlet</display-name>
+		<servlet-name>ValidateDepartmentServlet</servlet-name>
+		<servlet-class>servlet.ValidateDepartmentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ValidateDepartmentServlet</servlet-name>
+		<url-pattern>/ValidateDepartmentServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

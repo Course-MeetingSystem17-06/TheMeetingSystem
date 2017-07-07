@@ -7,14 +7,12 @@
 <title>CoolMeeting会议管理系统</title>
 <link rel="stylesheet" href="styles/form.css" />
 <script type="text/javascript">
-	function goToOnePage(meetingname, meetingroomname, meetingbooker,
-			meetingbookdatestart, meetingbookdateend, meetingstarttime,
-			meetingendtime) {
+	function goToOnePage() {
 		var pageNum = document.getElementById("pageNum").value;
 		if (pageNum == "") {
 			window.location.href = "#";
 		} else {
-			window.location.href = "ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&meetingbooker=${requestScope.meetingbooker}&pageNum="
+			window.location.href = "ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&user=${requestScope.user}&pageNum="
 					+ pageNum;
 		}
 	}
@@ -38,17 +36,17 @@
 							<div style="float: right" class="header-nav">
 								<input type="button" class="sapar-btn sapar-btn-recom"
 									value="首页"
-									onclick="window.location.href='ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&meetingbooker=${requestScope.meetingbooker}&pageNum=1'" />
+									onclick="window.location.href='ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&user=${requestScope.user}&pageNum=1'" />
 								<c:choose>
 									<c:when test="${requestScope.pageNum ne '1'}">
 										<input type="button" class="sapar-btn sapar-btn-recom"
 											value="上页"
-											onclick="window.location.href='ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&meetingbooker=${requestScope.meetingbooker}&pageNum=${requestScope.pageNum-1}'" />
+											onclick="window.location.href='ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&user=${requestScope.user}&pageNum=${requestScope.pageNum-1}'" />
 									</c:when>
 									<c:otherwise>
 										<input disabled="disabled" type="button"
 											class="sapar-btn sapar-btn-recom" value="上页"
-											onclick="window.location.href='ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&meetingbooker=${requestScope.meetingbooker}&pageNum=${requestScope.pageNum-1}'" />
+											onclick="window.location.href='ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&user=${requestScope.user}&pageNum=${requestScope.pageNum-1}'" />
 									</c:otherwise>
 								</c:choose>
 								<c:choose>
@@ -56,20 +54,21 @@
 										test="${requestScope.pageNum ne requestScope.countOfPages}">
 										<input type="button" class="sapar-btn sapar-btn-recom"
 											value="下页"
-											onclick="window.location.href='ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&meetingbooker=${requestScope.meetingbooker}&pageNum=${requestScope.pageNum+1}'" />
+											onclick="window.location.href='ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&user=${requestScope.user}&pageNum=${requestScope.pageNum+1}'" />
 									</c:when>
 									<c:otherwise>
 										<input disabled="disabled" type="button"
 											class="sapar-btn sapar-btn-recom" value="下页"
-											onclick="window.location.href='ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&meetingbooker=${requestScope.meetingbooker}&pageNum=${requestScope.pageNum+1}'" />
+											onclick="window.location.href='ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&user=${requestScope.user}&pageNum=${requestScope.pageNum+1}'" />
 									</c:otherwise>
 								</c:choose>
 								<input type="button" class="sapar-btn sapar-btn-recom"
 									value="末页"
-									onclick="window.location.href='ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&meetingbooker=${requestScope.meetingbooker}&pageNum=${requestScope.countOfPages}'" />
+									onclick="window.location.href='ViewMyBookedMeetingsServlet?code=viewMyBookedmeetings&user=${requestScope.user}&pageNum=${requestScope.countOfPages}'" />
 								跳到第<input type="text" id="pageNum" name="pageNum"
-									class="nav-number" value=${param.pageNum}>页 <input
-									type="button" class="sapar-btn sapar-btn-recom" value="跳转" />
+									class="jump" value=${param.pageNum}>页 <input
+									type="button" class="sapar-btn sapar-btn-recom" value="跳转" 
+									onclick="goToOnePage()"/>
 							</div>
 						</div>
 						<div class="subfiled-style2">
@@ -90,9 +89,9 @@
 									</thead>
 									<c:forEach var="emp" items="${requestScope.meetingsList}">
 										<tr>
-											<td>${emp.meetingname}</td>
+											<td class="red bold">${emp.meetingname}</td>
 											<td>${emp.meetingroomname}</td>
-											<td><fmt:formatDate value="${emp.meetingstarttime}"
+											<td class="orange bold"><fmt:formatDate value="${emp.meetingstarttime}"
 													pattern="yyyy-MM-dd HH:mm:ss" />
 											</td>
 											<td><fmt:formatDate value="${emp.meetingendtime}"
@@ -101,7 +100,7 @@
 											<td><fmt:formatDate value="${emp.meetingbookdate}"
 													pattern="yyyy-MM-dd HH:mm:ss" />
 											</td>
-											<td><a class="sapar-btn sapar-btn-recom"
+											<td><a class="clickbutton"
 												href="UpdateMeetingServlet?code=mybooked&meetingid=${emp.meetingid}&user=${emp.meetingbooker}">查看/撤销</a>
 											</td>
 										</tr>

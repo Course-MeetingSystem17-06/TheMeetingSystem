@@ -11,6 +11,9 @@
 <title>会议管理系统</title>
 <link rel="stylesheet" href="styles/common04.css" />
 </head>
+<%
+	String username = (String) session.getAttribute("employeename");
+%><!-- 姓名 -->
 <body>
 	<h1 id="aaa"></h1>
 	<div id="container">
@@ -22,16 +25,15 @@
 					<li class="current" data-src="n_personal_index.jsp"><a
 						href="javascript:;">个人中心</a>
 					</li>
-					<li class="" data-src="n_manage_index.jsp"><a
-						href="javascript:;">人员管理</a></li>
-					<li class="" data-src="n_meeting_index.jsp"><a
+					<li class="" data-src="n_user_meeting_index.jsp"><a
 						href="javascript:;">会议预定</a></li>
 				</ul>
-
+				<h1 class="h1name">会议管理系统</h1>
 				<div class="toolbar">
 					<div class="login-info">
 						<div class="welcome">
-							<span>欢迎您,</span><a href="javascript:;" class="user-name">Admin</a>
+							<span>欢迎您,<strong><%=username%></strong>
+							</span>
 						</div>
 					</div>
 					<div class="tool clearfix">

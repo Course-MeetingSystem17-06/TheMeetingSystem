@@ -6,6 +6,9 @@
 <link rel="stylesheet" href="styles/form_input.css" />
 <script type="text/javascript" src="js/jquery-1.11.0.js"></script>
 <script type="text/javascript">
+	String.prototype.Trim = function() {
+		return this.replace(/(^\s*)|(\s*$)/g, "");
+	};
 	function getRemark() {
 		var message = document.getElementById("roomremark").value;
 		document.getElementById("roomremark_value").value = message;
@@ -26,7 +29,8 @@
 					var validateMessage = $("#validateMessagename");
 				var data = JSON.parse(message);
 				if (data.flag) {
-					if (val == "") {
+					var val_trim = val.Trim();
+					if (val == "" || val_trim == "") {
 						validateMessage.html("");
 						return;
 					}
@@ -53,7 +57,8 @@
 	function checknull(val, target) {
 		target += "_mes";
 		document.getElementById(target).className = 1;
-		if (val == "") {
+		var val_trim = val.Trim();
+		if (val == "" || val_trim == "") {
 			document.getElementById(target).innerHTML = "<font name=error color=red>输入不能为空</font>";
 		} else {
 			document.getElementById(target).innerHTML = "";
@@ -91,7 +96,8 @@
 		<div class="subfiled">
 			<h2>会议预定 > 添加会议室</h2>
 		</div>
-		<form class="fm" name="form1" action="AddMeetingroomServlet" method="post">
+		<form class="fm" name="form1" action="AddMeetingroomServlet"
+			method="post">
 			<div class="kv-item clearfix">
 				<label>提示信息：</label>
 				<div class="kv-item-content">

@@ -27,8 +27,8 @@
 						</thead>
 						<c:forEach var="emp" items="${requestScope.employeesList}">
 							<tr>
-								<td>${emp.employeename }</td>
-								<td>${emp.username}</td>
+								<td class="orange bold">${emp.employeename }</td>
+								<td class="red bold">${emp.username}</td>
 								<td>${emp.phone }</td>
 								<td>${emp.email }</td>
 								<td><input style="margin: 5px;" type="button" class="sapar-btn sapar-btn-recom" value="通过"

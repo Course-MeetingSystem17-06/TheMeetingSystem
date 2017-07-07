@@ -28,7 +28,7 @@ $('.exit').click(function(){/*主页面右侧退出按钮click,调取$('.exitDia
 $('.exitDialog input[type=button]').click(function(e) {/*定义exitDialog中*/
     $('.exitDialog').Dialog('close');
 	if($(this).hasClass('ok')){
-		window.location.href = "login.html"	;
+		window.location.href = "n_login.jsp";
 	}
 });
 

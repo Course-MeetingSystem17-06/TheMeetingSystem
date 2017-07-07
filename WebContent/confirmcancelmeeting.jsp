@@ -51,8 +51,8 @@
 				</div>
 			</div>
 			<div class="button">
-				<input id="confirm" type="submit" value="确认撤销" class="clickbutton" />
-				<input type="button" value="返回" class="clickbutton" onclick="back()" />
+				<input id="confirm" type="submit" value="确认撤销" class="sapar-btn sapar-btn-recom" />
+				<input type="button" value="返回" class="sapar-btn sapar-btn-recom" onclick="back()" />
 			</div>
 		</form>
 	</div>

@@ -48,15 +48,15 @@ public class ViewMyBookedMeetingsServlet extends HttpServlet {
 			// 查询的数量
 			int count = pageSize;
 			if(code != null && code.equals("viewMyBookedmeetings")){
-				String meetingbooker = request.getParameter("meetingbooker");
-				request.setAttribute("meetingbooker", meetingbooker);
+				String user = request.getParameter("user");
+				request.setAttribute("user", user);
 				
 				// 获得所有记录数量，先调用DAO中的search方法
-				service.searchMyBookedMeetings(meetingbooker);
+				service.searchMyBookedMeetings(user);
 				int countOfMeetings = service.getCountOfMeetings();
 				// 页数
 				int countOfPages = service.getCountOfPages();
-				List<Meeting_dada> list1 = service.searchMyBookedMeetingsOfOnePage(meetingbooker, start, count);
+				List<Meeting_dada> list1 = service.searchMyBookedMeetingsOfOnePage(user, start, count);
 				request.setAttribute("meetingsList", list1);
 
 				// 使用search标记调用了SearchEmployeesServlet,即显示结果表格

@@ -23,9 +23,9 @@
 				<form action="LoginServlet" method="post" class="login-input">
 					<fieldset>
 						<tr>
-							<td><font color="red">${requestScope.msg}</font></td>
+							<td><font size="2px" color="red">${requestScope.msg}</font></td>
 						</tr>
-						<table class="formtable">
+						<table  style="margin-top: -5px" class="formtable">
 							<tr>
 								<td><p class="user ue-clear">
 										<label>用户名</label> <input id="accountname" name="username"
