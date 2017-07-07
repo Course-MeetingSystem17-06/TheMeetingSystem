@@ -24,7 +24,7 @@ public class ViewMyNotificationServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// String code = request.getParameter("code");
-		String user = request.getParameter("user");
+		String user = new String(request.getParameter("user").getBytes("iso-8859-1"), "utf-8"); 
 		request.setAttribute("user", user);
 		MeetingService_dada service = new MeetingService_dada();
 		// 获取近7天的会议

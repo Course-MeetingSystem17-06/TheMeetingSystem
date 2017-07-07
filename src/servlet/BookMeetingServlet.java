@@ -43,7 +43,7 @@ public class BookMeetingServlet extends HttpServlet {
 		// 或取注册页面填写的请求参数
 		String meetingname = request.getParameter("meetingname");
 		String pnumber = request.getParameter("meetingpnumber");
-		String user = request.getParameter("user");
+		String user =new String(request.getParameter("user").getBytes("iso-8859-1"), "utf-8");  
 		String[] options = request.getParameterValues("selSelectedEmployees");
 		Date starttime = null;
 		try {

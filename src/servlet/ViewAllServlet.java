@@ -56,7 +56,7 @@ public class ViewAllServlet extends HttpServlet {
 		request.setAttribute("departmentsList", DepartmentsList);
 		// System.out.println("111");
 		String code = request.getParameter("code");
-		String user = request.getParameter("user");
+		String user = new String(request.getParameter("user").getBytes("iso-8859-1"), "utf-8");  
 		//会议室
 		MeetingroomDAO meetingroomdao = new MeetingroomDAO();
 		List<Meetingroom> meetingroomsList = meetingroomdao.selectavailableMeetingroom();

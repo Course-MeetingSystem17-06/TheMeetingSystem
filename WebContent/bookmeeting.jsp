@@ -358,8 +358,8 @@
 			<div class="kv-item clearfix">
 				<label><font color="red">*</font>会议室名称：</label>
 				<div class="kv-item-content">
-					<div class="iselect-wrapper">
-						<select class="iselect" id="deptid" name="meetingroomid"
+					<div class="">
+						<select class="" id="deptid" name="meetingroomid"
 							onchange="checktime(this.value,this.id)">
 							<c:forEach var="meetingroom"
 								items="${requestScope.meetingroomsList}">

@@ -48,7 +48,7 @@ public class ViewMyBookedMeetingsServlet extends HttpServlet {
 			// 查询的数量
 			int count = pageSize;
 			if(code != null && code.equals("viewMyBookedmeetings")){
-				String user = request.getParameter("user");
+				String user = new String(request.getParameter("user").getBytes("iso-8859-1"), "utf-8"); 
 				request.setAttribute("user", user);
 				
 				// 获得所有记录数量，先调用DAO中的search方法
