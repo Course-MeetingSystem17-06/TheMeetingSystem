@@ -68,8 +68,9 @@
 					number++;
 				}
 			}
-		}
-		if (form1.firstpassword.value != form1.secondpassword.value) {
+		}if(len <= 6){
+			confirminfo.innerHTML = "<font name=error color=red>请输入大于六位的密码</font>";
+		} else if (form1.firstpassword.value != form1.secondpassword.value) {
 			confirminfo.innerHTML = "<font name=error color=red>两次输入的密码不相符</font>";
 		} else if (len != (number + alpha)) {
 			confirminfo.innerHTML = "<font name=error color=red>含有非法字符，密码只能包含数字和字母</font>";
