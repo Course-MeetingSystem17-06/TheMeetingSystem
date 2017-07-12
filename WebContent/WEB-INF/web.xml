@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="2.5">
 	<display-name>Login</display-name>
 	<welcome-file-list>
-		<welcome-file>login.jsp</welcome-file>
+		<welcome-file>n_login.jsp</welcome-file>
 	</welcome-file-list>
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
@@ -19,7 +19,6 @@
 		<dispatcher>ERROR</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-
 	<filter>
 		<filter-name>LoginedFilter</filter-name>
 		<filter-class>filter.LoginedFilter</filter-class>
@@ -38,7 +37,6 @@
 		<dispatcher>INCLUDE</dispatcher>
 		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
-
 	<filter>
 		<filter-name>LoginCookieFilter</filter-name>
 		<filter-class>filter.LoginCookieFilter</filter-class>
@@ -111,7 +109,7 @@
 		<servlet-name>ApproveServlet</servlet-name>
 		<url-pattern>/ApproveServlet</url-pattern>
 	</servlet-mapping>
-		<servlet>
+	<servlet>
 		<description></description>
 		<display-name>SearchEmployeesServlet</display-name>
 		<servlet-name>SearchEmployeesServlet</servlet-name>
@@ -120,6 +118,7 @@
 	<servlet-mapping>
 		<servlet-name>SearchEmployeesServlet</servlet-name>
 		<url-pattern>/SearchEmployeesServlet</url-pattern>
+	</servlet-mapping>
 	<servlet>
 		<description></description>
 		<display-name>AddDeleteDepartmentServlet</display-name>
@@ -130,7 +129,6 @@
 		<servlet-name>AddDeleteDepartmentServlet</servlet-name>
 		<url-pattern>/AddDeleteDepartmentServlet</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<description></description>
 		<display-name>AddMeetingroomServlet</display-name>
@@ -141,7 +139,6 @@
 		<servlet-name>AddMeetingroomServlet</servlet-name>
 		<url-pattern>/AddMeetingroomServlet</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<description></description>
 		<display-name>ViewAllMeetingRoomsServlet</display-name>
@@ -152,7 +149,6 @@
 		<servlet-name>ViewAllMeetingRoomsServlet</servlet-name>
 		<url-pattern>/ViewAllMeetingRoomsServlet</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<description></description>
 		<display-name>UpdateMeetingRoomServlet</display-name>
@@ -162,5 +158,114 @@
 	<servlet-mapping>
 		<servlet-name>UpdateMeetingRoomServlet</servlet-name>
 		<url-pattern>/UpdateMeetingRoomServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ViewAllServlet</display-name>
+		<servlet-name>ViewAllServlet</servlet-name>
+		<servlet-class>servlet.ViewAllServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewAllServlet</servlet-name>
+		<url-pattern>/ViewAllServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>SelectEmployeesOfDeptServlet_647</display-name>
+		<servlet-name>SelectEmployeesOfDeptServlet_647</servlet-name>
+		<servlet-class>servlet.SelectEmployeesOfDeptServlet_647</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SelectEmployeesOfDeptServlet_647</servlet-name>
+		<url-pattern>/SelectEmployeesOfDeptServlet_647</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>SearchMeetingsServlet</display-name>
+		<servlet-name>SearchMeetingsServlet</servlet-name>
+		<servlet-class>servlet.SearchMeetingsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchMeetingsServlet</servlet-name>
+		<url-pattern>/SearchMeetingsServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>UpdateMeetingServlet</display-name>
+		<servlet-name>UpdateMeetingServlet</servlet-name>
+		<servlet-class>servlet.UpdateMeetingServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateMeetingServlet</servlet-name>
+		<url-pattern>/UpdateMeetingServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ViewMyBookedMeetingsServlet</display-name>
+		<servlet-name>ViewMyBookedMeetingsServlet</servlet-name>
+		<servlet-class>servlet.ViewMyBookedMeetingsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewMyBookedMeetingsServlet</servlet-name>
+		<url-pattern>/ViewMyBookedMeetingsServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>BookMeetingServlet</display-name>
+		<servlet-name>BookMeetingServlet</servlet-name>
+		<servlet-class>servlet.BookMeetingServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BookMeetingServlet</servlet-name>
+		<url-pattern>/BookMeetingServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ValidateMeetingroomServlet</display-name>
+		<servlet-name>ValidateMeetingroomServlet</servlet-name>
+		<servlet-class>servlet.ValidateMeetingroomServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ValidateMeetingroomServlet</servlet-name>
+		<url-pattern>/ValidateMeetingroomServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>TimeCheckServlet</display-name>
+		<servlet-name>TimeCheckServlet</servlet-name>
+		<servlet-class>servlet.TimeCheckServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TimeCheckServlet</servlet-name>
+		<url-pattern>/TimeCheckServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<display-name>ViewMyNotificationServlet</display-name>
+		<servlet-name>ViewMyNotificationServlet</servlet-name>
+		<servlet-class>servlet.ViewMyNotificationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewMyNotificationServlet</servlet-name>
+		<url-pattern>/ViewMyNotificationServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ViewAllAttendMeetingsServlet</display-name>
+		<servlet-name>ViewAllAttendMeetingsServlet</servlet-name>
+		<servlet-class>servlet.ViewAllAttendMeetingsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewAllAttendMeetingsServlet</servlet-name>
+		<url-pattern>/ViewAllAttendMeetingsServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ValidateDepartmentServlet</display-name>
+		<servlet-name>ValidateDepartmentServlet</servlet-name>
+		<servlet-class>servlet.ValidateDepartmentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ValidateDepartmentServlet</servlet-name>
+		<url-pattern>/ValidateDepartmentServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

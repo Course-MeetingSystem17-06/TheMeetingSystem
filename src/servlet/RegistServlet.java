@@ -61,13 +61,13 @@ public class RegistServlet extends HttpServlet {
 		
 		if(flag==1){
 			request.setAttribute("msg", "注册成功，正在审核。");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("n_login.jsp").forward(request, response);
 		}else{
 			request.setAttribute("msg", "用户名已存在，请重新注册。");
 			DepartmentDAO dao=new DepartmentDAO();		
 			List<Department> departmentsList=dao.selectAll();
 			request.setAttribute("departmentsList", departmentsList);
-			request.getRequestDispatcher("register.jsp").forward(request, response);
+			request.getRequestDispatcher("n_register.jsp").forward(request, response);
 		}
 	}
 }

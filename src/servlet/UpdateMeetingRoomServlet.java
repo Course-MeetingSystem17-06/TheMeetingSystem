@@ -41,30 +41,38 @@ public class UpdateMeetingRoomServlet extends HttpServlet {
 			request.getRequestDispatcher("meetingroomdetail.jsp").forward(
 					request, response);
 		}
-		
-		if(code != null && code.equals("update")){
+
+		if (code != null && code.equals("update")) {
 			// 获取添加会议室页面填写的请求参数
 			String roomnumber = request.getParameter("roomnumber");
 			String roomname = request.getParameter("roomname");
 			String roommax = request.getParameter("roommax");
 			String roomstate = request.getParameter("status");
 			String roomremark = request.getParameter("roomremark_value");
-
-			Meetingroom meetingroom = new Meetingroom(roomnumber, roomname,
-					roommax, roomstate, roomremark);
-			meetingroom.setRoomid(Integer.parseInt(roomid));
-			MeetingroomService service = new MeetingroomService();
-			int flag = service.update(meetingroom);
-
-			if (flag == 1) {
-				request.setAttribute("msg", "修改成功。");
-				request.getRequestDispatcher("UpdateMeetingRoomServlet?code=detail&roomid="+roomid).forward(request,
-						response);
-
+			if (roomstate.equals("-1")) {
+				MeetingroomDAO dao = new MeetingroomDAO();
+				dao.delete(roomnumber);
+				request.getRequestDispatcher(
+						"ViewAllMeetingRoomsServlet?code=viewallmeetingrooms").forward(request, response);
 			} else {
-				request.setAttribute("msg", "门牌号重复，请确认后重新添加会议室。");
-				request.getRequestDispatcher("addmeetingroom.jsp").forward(request,
-						response);
+				Meetingroom meetingroom = new Meetingroom(roomnumber, roomname,
+						roommax, roomstate, roomremark);
+				meetingroom.setRoomid(Integer.parseInt(roomid));
+				MeetingroomService service = new MeetingroomService();
+				int flag = service.update(meetingroom);
+
+				if (flag == 1) {
+					request.setAttribute("msg", "修改成功。");
+					request.getRequestDispatcher(
+							"UpdateMeetingRoomServlet?code=detail&roomid="
+									+ roomid).forward(request, response);
+
+				} else {
+					request.setAttribute("msg", "门牌号重复，请确认后重新提交。");
+					request.getRequestDispatcher(
+							"UpdateMeetingRoomServlet?code=detail&roomid="
+									+ roomid).forward(request, response);
+				}
 			}
 		}
 	}

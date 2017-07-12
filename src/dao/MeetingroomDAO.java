@@ -48,6 +48,37 @@ public class MeetingroomDAO {
 		return meetingroomlist;
 
 	}
+	
+	public List<Meetingroom> selectavailableMeetingroom() {
+		conn = ConnectionFactory.getConnection();
+		List<Meetingroom> meetingroomlist = new ArrayList<Meetingroom>();
+		Meetingroom meetingroom = null;
+		try {
+			PreparedStatement psd = null;
+			String sql = "select * from meetingroom where MeetingRoom_state='"+1+"'";
+			psd = conn.prepareStatement(sql);
+			ResultSet rs = psd.executeQuery(sql);
+			while (rs.next()) {
+				meetingroom = new Meetingroom();
+				meetingroom.setRoomid(rs.getInt("MeetingRoom_ID"));
+				meetingroom.setRoomnumber(rs.getString("MeetingRoom_number"));
+				// System.out.println("DAO_selectByNamePwd: "+
+				// rs.getString("meetingroom_name"));
+				meetingroom.setRoomname(rs.getString("MeetingRoom_name"));
+				meetingroom.setRoommax(rs.getString("MeetingRoom_max"));
+				meetingroom.setRoomstate(rs.getString("MeetingRoom_state"));
+				meetingroom.setRoomremark(rs.getString("MeetingRoom_remark"));
+				meetingroomlist.add(meetingroom);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection();
+		}
+		return meetingroomlist;
+
+	}
 
 	// 按会议室number查询会议室
 	public Meetingroom selectBynum(String number) {
@@ -79,6 +110,35 @@ public class MeetingroomDAO {
 		return meetingroom;
 	}
 
+	public Meetingroom selectByname(String name) {
+		Meetingroom meetingroom = null;
+
+		try {
+			PreparedStatement st = null;
+			String sql = "select * from meetingroom where MeetingRoom_name='"
+					+ name + "'";
+			st = conn.prepareStatement(sql);
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.next() == true) {
+				meetingroom = new Meetingroom();
+				meetingroom.setRoomid(rs.getInt("MeetingRoom_ID"));
+				meetingroom.setRoomnumber(rs.getString("MeetingRoom_number"));
+				// System.out.println("DAO_selectByNamePwd: "+
+				// rs.getString("meetingroom_name"));
+				meetingroom.setRoomname(rs.getString("MeetingRoom_name"));
+				meetingroom.setRoommax(rs.getString("MeetingRoom_max"));
+				meetingroom.setRoomstate(rs.getString("MeetingRoom_state"));
+				meetingroom.setRoomremark(rs.getString("MeetingRoom_remark"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection();
+		}
+		return meetingroom;
+	}
+	
 	// 按会议室id查询会议室
 	public Meetingroom selectById(String ID) {
 		Meetingroom meetingroom = null;
@@ -151,6 +211,7 @@ public class MeetingroomDAO {
 			e.printStackTrace();
 		} finally {
 			ConnectionFactory.closeConnection();
+			
 		}
 	}
 
@@ -169,5 +230,20 @@ public class MeetingroomDAO {
 			ConnectionFactory.closeConnection();
 		}
 	}
-
+	
+	//删除
+	public void delete(String roomnumber) {
+		conn = ConnectionFactory.getConnection();
+		String sql = "delete from Meetingroom where MeetingRoom_number='"+roomnumber+"'";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection();
+		}
+	}
+	
 }
